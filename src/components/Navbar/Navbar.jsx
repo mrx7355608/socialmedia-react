@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
     return (
-        <div className="navbar bg-gray-800 text-gray-200 px-7 shadow-md z-10">
+        <div className="navbar bg-gray-800 text-gray-200 px-7 shadow-md z-10 sticky top-0">
             <div className="flex-1">
                 <img src="/logo.png" alt="logo" className="fit-cover w-8" />
                 <Link to="/" className="text-xl ml-1 font-semibold">

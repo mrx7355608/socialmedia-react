@@ -29,7 +29,7 @@ export default function Sidebar() {
         },
     ];
     return (
-        <div className="hidden lg:flex flex-col p-4 bg-gray-900 h-screen w-1/4">
+        <div className="hidden lg:flex fixed left-0 flex-col p-4 bg-gray-900 h-screen w-1/4">
             <UserPictureAndName user={user} />
             {links.map((link, index) => {
                 return (

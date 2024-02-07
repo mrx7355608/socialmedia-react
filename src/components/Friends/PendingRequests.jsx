@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import UserPictureAndName from "../UserProfilePictureAndName";
 
 export default function PendingRequestsList() {
@@ -19,7 +20,7 @@ export default function PendingRequestsList() {
         },
     ];
     return (
-        <div className="hidden w-full p-3 lg:flex flex-col gap-3">
+        <div className="hidden w-full p-3 lg:flex flex-col gap-3 mb-6">
             <h1 className="text-gray-200 text-lg font-bold">
                 Pending Requests
             </h1>
@@ -27,6 +28,13 @@ export default function PendingRequestsList() {
             {pendingRequests.map((req) => {
                 return <UserPictureAndName user={req} key={req._id} />;
             })}
+            <Link
+                to="/pending-requests"
+                className="text-center text-blue-300 hover:underline"
+            >
+                {" "}
+                View More...
+            </Link>
         </div>
     );
 }
