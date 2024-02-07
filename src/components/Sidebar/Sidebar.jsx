@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import UserPictureAndName from "../UserProfilePictureAndName";
 
 export default function Sidebar() {
+    const user = {
+        profilePicture: "/logo.png",
+        name: "Fawad Imran",
+    };
     const links = [
         {
             path: "/",
@@ -25,7 +30,7 @@ export default function Sidebar() {
     ];
     return (
         <div className="hidden lg:flex flex-col p-4 bg-gray-900 h-screen w-1/4">
-            <UserPictureAndName />
+            <UserPictureAndName user={user} />
             {links.map((link, index) => {
                 return (
                     <Link to={link.path} key={index}>
@@ -40,19 +45,6 @@ export default function Sidebar() {
                     </Link>
                 );
             })}
-        </div>
-    );
-}
-
-function UserPictureAndName() {
-    return (
-        <div className="p-3 rounded-lg">
-            <img
-                src="/logo.png"
-                alt="user profile picture"
-                className="w-8 fit-cover inline mr-3 rounded-full border border-gray-300"
-            />
-            <span className="text-gray-300 font-medium">Fawad Imran</span>
         </div>
     );
 }
