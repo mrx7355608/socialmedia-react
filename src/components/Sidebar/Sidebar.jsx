@@ -24,7 +24,7 @@ export default function Sidebar() {
         },
     ];
     return (
-        <div className="flex flex-col p-4 bg-gray-900 h-screen w-1/4">
+        <div className="hidden lg:flex flex-col p-4 bg-gray-900 h-screen w-1/4">
             <UserPictureAndName />
             {links.map((link, index) => {
                 return (
