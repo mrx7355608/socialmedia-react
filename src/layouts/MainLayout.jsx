@@ -1,16 +1,24 @@
-import React from "react";
 import MobileMenu from "../components/Navbar/MobileMenu";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useUserContext } from "../contexts/user";
 
 export default function MainLayout() {
+    const { user } = useUserContext();
+
     return (
         <>
-            <Navbar />
-            <MobileMenu />
-            <Sidebar />
-            <Outlet />
+            {user ? (
+                <Navigate to="/auth/login" />
+            ) : (
+                <>
+                    <Navbar />
+                    <MobileMenu />
+                    <Sidebar />
+                    <Outlet />
+                </>
+            )}
         </>
     );
 }
