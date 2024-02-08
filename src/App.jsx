@@ -3,9 +3,8 @@ import Home from "./pages/Home/Home";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Login/Login";
-import UserProvider, { useUserContext } from "./contexts/user";
-import useAuthFetch from "./hooks/useAuthFetch";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useUserContext } from "./contexts/user";
 import Loading from "./components/Loading";
 
 const router = createBrowserRouter([
@@ -32,24 +31,28 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    const { loading, user } = useAuthFetch("http://localhost:8000/user");
     const { setUser } = useUserContext();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user) {
-            setUser(user);
-        }
-    }, [user]);
+        fetch("http://localhost:8000/user", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                if (data.ok) {
+                    setUser(data.data);
+                }
+            })
+            .finally(() => setLoading(false));
+    }, []);
 
     if (loading) {
         return <Loading />;
     }
 
-    return (
-        <UserProvider>
-            <RouterProvider router={router} />
-        </UserProvider>
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;
