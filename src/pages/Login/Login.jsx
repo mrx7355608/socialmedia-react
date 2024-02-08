@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SocialLoginButtons from "./SocialLoginButtons";
+import SocialLoginButtons from "../../components/SocialLoginButtons";
 
 export default function Login() {
     const [error, setError] = useState("");
@@ -16,13 +16,13 @@ export default function Login() {
                     </p>
                 )}
                 <input
-                    type="text"
+                    type="email"
                     className="input input-bordered w-full bg-transparent border-2 mb-4"
                     name="email"
                     placeholder="Email address"
                 />
                 <input
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     className="input input-bordered w-full bg-transparent border-2 mb-1"
                     name="password"
