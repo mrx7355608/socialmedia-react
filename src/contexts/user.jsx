@@ -10,7 +10,7 @@ export const useUserContext = () => useContext(UserContext);
 
 // eslint-disable-next-line
 export default function UserProvider({ children }) {
-    const [user, setUser] = useState(userInitialState);
+    const [user, setUser] = useState(null);
     return (
         <UserContext.Provider value={{ user, setUser }}>
             {children}
