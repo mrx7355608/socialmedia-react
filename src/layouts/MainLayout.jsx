@@ -9,7 +9,7 @@ export default function MainLayout() {
 
     return (
         <>
-            {user ? (
+            {!user ? (
                 <Navigate to="/auth/login" />
             ) : (
                 <>
