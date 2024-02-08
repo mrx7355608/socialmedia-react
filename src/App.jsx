@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Login/Login";
+import UserProvider from "./contexts/user";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+    return (
+        <UserProvider>
+            <RouterProvider router={router} />
+        </UserProvider>
+    );
 }
 
 export default App;
