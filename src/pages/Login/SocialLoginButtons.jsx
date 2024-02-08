@@ -1,7 +1,13 @@
 export default function SocialLoginButtons() {
+    const continueWithGoogle = () => {
+        window.open("http://localhost:8000/auth/google", "_self");
+    };
     return (
         <div className="flex-1 max-w-md">
-            <button className="btn btn-outline w-full font-medium rounded-full relative hover:bg-gray-800 hover:text-gray-200">
+            <button
+                onClick={continueWithGoogle}
+                className="btn btn-outline w-full font-medium rounded-full relative hover:bg-gray-800 hover:text-gray-200"
+            >
                 <img
                     src="/google.png"
                     alt="fb-icon"
