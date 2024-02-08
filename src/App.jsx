@@ -5,7 +5,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Login/Login";
 import { useState, useEffect } from "react";
 import { useUserContext } from "./contexts/user";
-import Loading from "./components/Loading";
+import FullPageSpinner from "./components/FullPageSpinner";
 
 const router = createBrowserRouter([
     {
@@ -49,7 +49,7 @@ function App() {
     }, []);
 
     if (loading) {
-        return <Loading />;
+        return <FullPageSpinner />;
     }
 
     return <RouterProvider router={router} />;

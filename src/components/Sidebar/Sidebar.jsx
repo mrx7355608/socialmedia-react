@@ -1,7 +1,27 @@
 import { Link } from "react-router-dom";
 import UserPictureAndName from "../UserProfilePictureAndName";
+import { useState } from "react";
+import Spinner from "../Spinner";
+import { useUserContext } from "../../contexts/user";
 
 export default function Sidebar() {
+    const [loading, setLoading] = useState(false);
+    const { setUser } = useUserContext();
+
+    const logout = () => {
+        setLoading(true);
+        fetch("http://localhost:8000/auth/logout", {
+            method: "POST",
+            credentials: "include",
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                if (!data.ok) throw new Error(data.error);
+                setUser(null);
+            })
+            .catch((err) => console.log(err.message))
+            .finally(() => setLoading(false));
+    };
     const user = {
         profilePicture: "/logo.png",
         name: "Fawad Imran",
@@ -45,6 +65,19 @@ export default function Sidebar() {
                     </Link>
                 );
             })}
+            <div
+                onClick={logout}
+                className="flex items-center p-3 rounded-lg hover:bg-gray-800 hover:cursor-pointer"
+            >
+                <img
+                    src="/logout.png"
+                    alt="logout button"
+                    className="w-4 inline mr-3"
+                />
+                <span className=" text-gray-300">
+                    {loading ? <Spinner /> : "Logout"}
+                </span>
+            </div>
         </div>
     );
 }
