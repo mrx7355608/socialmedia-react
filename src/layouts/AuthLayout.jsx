@@ -1,12 +1,21 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useUserContext } from "../contexts/user";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthLayout() {
     const { user } = useUserContext();
-    console.log(user);
+    const navigateTo = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigateTo("/");
+        }
+    }, [user]);
+
     return (
         <div className="h-screen flex items-center justify-center">
-            {!user ? <Outlet /> : <Navigate to="/" />}
+            <Outlet />
         </div>
     );
 }
