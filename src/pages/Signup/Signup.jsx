@@ -2,6 +2,7 @@ import { useState } from "react";
 import SocialLoginButtons from "../../components/SocialLoginButtons";
 import useSignup from "./useSignup";
 import Spinner from "../../components/Spinner";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
     const { loading, apiError } = useSignup();
@@ -80,6 +81,12 @@ export default function Signup() {
                 >
                     {loading ? <Spinner /> : "Signup"}
                 </button>
+                <p className="text-gray-400 w-full text-center mt-4">
+                    Already have an account?{" "}
+                    <Link to="/auth/login" className="font-medium text-primary">
+                        Login
+                    </Link>
+                </p>
             </form>
             <hr className="w-full my-8 lg:w-48 lg:rotate-90 border-gray-800 max-w-md" />
             <SocialLoginButtons />

@@ -14,7 +14,7 @@ export default function AuthLayout() {
     }, [user]);
 
     return (
-        <div className="h-screen flex items-center justify-center">
+        <div className="min-h-screen flex items-center justify-center">
             <Outlet />
         </div>
     );

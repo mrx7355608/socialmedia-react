@@ -1,7 +1,9 @@
 import { useState } from "react";
 import SocialLoginButtons from "../../components/SocialLoginButtons";
+import { Link } from "react-router-dom";
 
 export default function Login() {
+    // eslint-disable-next-line
     const [error, setError] = useState("");
 
     return (
@@ -33,6 +35,15 @@ export default function Login() {
                 <button className="btn btn-primary w-full font-medium rounded-full">
                     Login
                 </button>
+                <p className="text-gray-400 w-full text-center mt-4">
+                    Don&#39;t have an account?{" "}
+                    <Link
+                        to="/auth/signup"
+                        className="font-medium text-primary"
+                    >
+                        Signup
+                    </Link>
+                </p>
             </form>
             <hr className="w-full my-8 lg:w-48 lg:rotate-90 border-gray-800 max-w-md" />
             <SocialLoginButtons />
