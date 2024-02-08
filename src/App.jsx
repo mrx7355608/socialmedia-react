@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { useUserContext } from "./contexts/user";
 import FullPageSpinner from "./components/FullPageSpinner";
 import Signup from "./pages/Signup/Signup";
-import CompleteSignup from "./pages/Signup/CompleteSignup";
 
 const router = createBrowserRouter([
     {
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
             {
                 path: "signup",
                 element: <Signup />,
-            },
-            {
-                path: "complete-signup",
-                element: <CompleteSignup />,
             },
         ],
     },
