@@ -15,15 +15,6 @@ export default function Form({ changePage, setNewUser }) {
         confirm_password: "",
     });
 
-    const onChangeHandler = (e) => {
-        const { name, value } = e.target;
-        setSignupData({ ...signupData, [name]: value });
-    };
-
-    const onSubmitHandler = async (e) => {
-        e.preventDefault();
-        await signup(signupData, changePage, setNewUser);
-    };
     return (
         <div className="flex flex-col lg:flex-row w-3/4 gap-0 items-center justify-center py-8 mx-auto">
             <form
@@ -91,4 +82,17 @@ export default function Form({ changePage, setNewUser }) {
             <SocialLoginButtons />
         </div>
     );
+
+    function onChangeHandler(e) {
+        const { name, value } = e.target;
+        setSignupData({ ...signupData, [name]: value });
+    }
+    async function onSubmitHandler(e) {
+        e.preventDefault();
+        const signedUpUserData = await signup(signupData);
+        if (signedUpUserData) {
+            setNewUser(signedUpUserData);
+            changePage();
+        }
+    }
 }

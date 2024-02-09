@@ -4,27 +4,30 @@ export default function useSignup() {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
 
-    const signup = async (signupData, changePage, setNewUser) => {
+    const signup = async (signupData) => {
+        setLoading(true);
+        const url = "http://localhost:8000/auth/signup";
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(signupData),
+            credentials: "include",
+        };
         try {
-            setLoading(true);
-            const resp = await fetch("http://localhost:8000/auth/signup", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(signupData),
-                credentials: "include",
-            });
+            // Make request to server
+            const resp = await fetch(url, options);
             const apiResult = await resp.json();
             setLoading(false);
-            if (!apiResult.ok) {
+            if (apiResult.ok === false) {
                 setApiError(apiResult.error);
-            } else {
-                setNewUser(apiResult.data);
-                changePage();
+                return null;
             }
+            // return data of newly created user
+            return apiResult.data;
         } catch (err) {
-            setApiError(err.message);
+            setApiError("An un-expected error occured");
             setLoading(false);
         }
     };
