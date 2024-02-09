@@ -5,7 +5,7 @@ import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line
-export default function Form({ changePage, setNewUser }) {
+export default function Form({ changePage, setSignedUpUser }) {
     const { loading, apiError, signup } = useSignup();
     const [signupData, setSignupData] = useState({
         firstname: "",
@@ -91,7 +91,7 @@ export default function Form({ changePage, setNewUser }) {
         e.preventDefault();
         const signedUpUserData = await signup(signupData);
         if (signedUpUserData) {
-            setNewUser(signedUpUserData);
+            setSignedUpUser(signedUpUserData);
             changePage();
         }
     }
