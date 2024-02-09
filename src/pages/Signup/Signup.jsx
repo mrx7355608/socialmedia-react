@@ -6,9 +6,11 @@ import Form from "./Form";
 
 export default function Signup() {
     const [currentPage, setCurrentPage] = useState(0);
+
     const changePage = () => {
         setCurrentPage(currentPage + 1);
     };
+
     const elems = [
         <Form key={0} changePage={changePage} />,
         <UpdateProfilePicture key={1} changePage={changePage} />,

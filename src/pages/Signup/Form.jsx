@@ -5,8 +5,8 @@ import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line
-export default function Form({ changePage }) {
-    const { loading, apiError } = useSignup();
+export default function Form({ changePage, setNewUser }) {
+    const { loading, apiError, signup } = useSignup();
     const [signupData, setSignupData] = useState({
         firstname: "",
         lastname: "",
@@ -20,11 +20,9 @@ export default function Form({ changePage }) {
         setSignupData({ ...signupData, [name]: value });
     };
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log(signupData);
-        // signup(signupData);
-        changePage();
+        await signup(signupData, changePage, setNewUser);
     };
     return (
         <div className="flex flex-col lg:flex-row w-3/4 gap-0 items-center justify-center py-8 mx-auto">
