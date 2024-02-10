@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home/Home";
+import { useState, useEffect, lazy } from "react";
+import { useUserContext } from "./contexts/user";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import Login from "./pages/Login/Login";
-import { useState, useEffect } from "react";
-import { useUserContext } from "./contexts/user";
-import FullPageSpinner from "./components/FullPageSpinner";
-import Signup from "./pages/Signup/Signup";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const Login = lazy(() => import("./pages/Login/Login"));
+const Signup = lazy(() => import("./pages/Signup/Signup"));
+const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
 
 const router = createBrowserRouter([
     {
