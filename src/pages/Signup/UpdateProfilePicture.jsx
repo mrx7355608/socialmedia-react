@@ -1,11 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import useUpdateProfilePicture from "./useUpdateProfilePicture";
+import Spinner from "../../components/Spinner";
 
 // eslint-disable-next-line
-export default function UpdateProfilePicture({ changePage }) {
+export default function UpdateProfilePicture({ changePage, signedUpUser }) {
+    const { loading, uploadProfilePicture } = useUpdateProfilePicture();
+    const [profilePicturePreview, setPreview] = useState(
+        signedUpUser.profilePicture
+    );
     const profileRef = useRef();
-    const selectProfilePicture = () => {
-        profileRef.current.click();
-    };
 
     return (
         <div className="mx-auto flex items-center justify-center w-1/2 shadow-xl bg-gray-800 h-max p-6 rounded-lg">
@@ -13,28 +16,17 @@ export default function UpdateProfilePicture({ changePage }) {
                 <h1 className="text-3xl text-gray-200 font-bold mb-10 mt-4">
                     Change Profile picture
                 </h1>
+                <img
+                    src={profilePicturePreview}
+                    alt="user profile picture"
+                    className="w-28 h-28 rounded-full border-4 border-gray-400 object-cover"
+                />
                 <input
                     ref={profileRef}
                     type="file"
-                    name="profilePicture"
-                    className="hidden"
+                    className="file-input file-input-bordered file-input-accent w-full max-w-xs mt-8"
+                    onChange={onChangeHandler}
                 />
-                <img
-                    src="/logo.png"
-                    alt="user profile picture"
-                    className="w-28 rounded-full border-4 border-gray-400"
-                />
-                <div className="flex gap-4 items-center justify-center">
-                    <button
-                        onClick={selectProfilePicture}
-                        className="btn btn-outline btn-warning w-full mb-8 mt-7 max-w-xs"
-                    >
-                        Select
-                    </button>
-                    <button className="btn btn-warning w-full mb-8 mt-7 max-w-xs">
-                        Update
-                    </button>
-                </div>
                 <div className="flex justify-between w-full mt-3">
                     <button
                         onClick={changePage}
@@ -43,13 +35,24 @@ export default function UpdateProfilePicture({ changePage }) {
                         Skip
                     </button>
                     <button
-                        onClick={changePage}
+                        onClick={changeProfilePicture}
                         className="btn btn-outline btn-accent"
                     >
-                        Continue
+                        {loading ? <Spinner /> : "Continue"}
                     </button>
                 </div>
             </div>
         </div>
     );
+
+    function onChangeHandler(e) {
+        setPreview(URL.createObjectURL(e.target.files[0]));
+    }
+    async function changeProfilePicture() {
+        const newProfilePicture = profileRef.current.files[0];
+        const isUploaded = await uploadProfilePicture(newProfilePicture);
+        if (isUploaded) {
+            changePage();
+        }
+    }
 }
