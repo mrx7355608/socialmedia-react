@@ -6,7 +6,7 @@ import { useUserContext } from "../../contexts/user";
 
 export default function Sidebar() {
     const [loading, setLoading] = useState(false);
-    const { setUser } = useUserContext();
+    const { user, setUser } = useUserContext();
 
     const logout = () => {
         setLoading(true);
@@ -22,10 +22,7 @@ export default function Sidebar() {
             .catch((err) => console.log(err.message))
             .finally(() => setLoading(false));
     };
-    const user = {
-        profilePicture: "/logo.png",
-        name: "Fawad Imran",
-    };
+
     const links = [
         {
             path: "/",

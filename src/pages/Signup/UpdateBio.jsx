@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Spinner from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../../contexts/user";
 
 // eslint-disable-next-line
-export default function UpdateBio() {
+export default function UpdateBio({ signedUpUser }) {
     const [bio, setBio] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigateTo = useNavigate();
+    // const navigateTo = useNavigate();
+    const { setUser } = useUserContext();
 
     const updateBio = async () => {
         setLoading(true);
@@ -20,9 +22,7 @@ export default function UpdateBio() {
         });
         const result = await resp.json();
         setLoading(false);
-        if (result.ok) {
-            navigateTo("/");
-        }
+        setUser(signedUpUser);
     };
 
     return (

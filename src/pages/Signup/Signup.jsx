@@ -20,7 +20,11 @@ export default function Signup() {
             signedUpUser={signedUpUser}
         />,
         <AddFriends key={2} changePage={changePage} />,
-        <UpdateBio key={3} changePage={changePage} />,
+        <UpdateBio
+            key={3}
+            changePage={changePage}
+            signedUpUser={signedUpUser}
+        />,
     ];
     return <div className="w-full">{elems[currentPage]}</div>;
 
