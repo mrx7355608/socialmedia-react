@@ -4,7 +4,8 @@ import Spinner from "../../components/Spinner";
 
 // eslint-disable-next-line
 export default function UpdateProfilePicture({ changePage, signedUpUser }) {
-    const { loading, uploadProfilePicture } = useUpdateProfilePicture();
+    const { loading, apiError, uploadProfilePicture } =
+        useUpdateProfilePicture();
     const [profilePicturePreview, setPreview] = useState(
         signedUpUser.profilePicture
     );
@@ -16,6 +17,11 @@ export default function UpdateProfilePicture({ changePage, signedUpUser }) {
                 <h1 className="text-3xl text-gray-200 font-bold mb-10 mt-4">
                     Change Profile picture
                 </h1>
+                {apiError && (
+                    <p className="font-medium mb-5 w-full max-w-md p-3 rounded-lg bg-red-200 text-red-900">
+                        {apiError}
+                    </p>
+                )}
                 <img
                     src={profilePicturePreview}
                     alt="user profile picture"

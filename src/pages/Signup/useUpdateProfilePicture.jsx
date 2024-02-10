@@ -27,7 +27,10 @@ export default function useUpdateProfilePicture() {
     }
 
     async function uploadProfilePicture(pictureFile) {
-        const cloudinaryURL = await uploadToCloudinary(pictureFile);
+        if (!pictureFile) {
+            return setApiError("No image selected");
+        }
+        const uploadedPictureURL = await uploadToCloudinary(pictureFile);
 
         // Upload to server
         const url = "http://localhost:8000/user";
@@ -37,7 +40,7 @@ export default function useUpdateProfilePicture() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ profilePicture: cloudinaryURL }),
+            body: JSON.stringify({ profilePicture: uploadedPictureURL }),
         };
         try {
             // Upload image on cloudinary
