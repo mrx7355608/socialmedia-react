@@ -21,7 +21,7 @@ export default function PendingRequestsList() {
             {loading && <Spinner />}
             <ErrorBox error={error} />
             <List content={pendingRequests} />
-            <ViewMoreButton pendingRequests={pendingRequests} />
+            {!loading && <ViewMoreButton pendingRequests={pendingRequests} />}
         </div>
     );
 }
@@ -29,7 +29,7 @@ export default function PendingRequestsList() {
 function ViewMoreButton({ pendingRequests }) {
     return (
         <>
-            {pendingRequests && pendingRequests.length > 4 ? (
+            {pendingRequests && pendingRequests.length > 0 ? (
                 <Link
                     to="/pending-requests"
                     className="text-center text-blue-300 hover:underline"

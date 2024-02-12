@@ -19,7 +19,7 @@ export default function FriendList() {
             {loading && <Spinner />}
             <ErrorBox error={error} />
             <List content={friends} />
-            <ViewMoreButton friends={friends} />
+            {!loading && <ViewMoreButton friends={friends} />}
         </div>
     );
 }
@@ -27,7 +27,7 @@ export default function FriendList() {
 function ViewMoreButton({ friends }) {
     return (
         <>
-            {friends && friends.length > 5 ? (
+            {friends && friends.length > 0 ? (
                 <Link
                     to="/friends"
                     className="text-center text-blue-300 hover:underline"
