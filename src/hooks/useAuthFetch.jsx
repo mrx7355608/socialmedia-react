@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function useAuthFetch(url) {
     const [error, setError] = useState("");
-    const [user, setUser] = useState(null);
+    const [resp, setResp] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -16,11 +16,11 @@ export default function useAuthFetch(url) {
                 if (!data.ok) {
                     throw new Error(data.error);
                 }
-                setUser(data);
+                setResp(data.data);
             })
             .catch((err) => setError(err.message))
             .finally(() => setLoading(false));
     }, []);
 
-    return { error, loading, user };
+    return { error, loading, resp };
 }
