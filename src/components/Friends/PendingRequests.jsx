@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import UserPictureAndName from "../UserProfilePictureAndName";
 import useAuthFetch from "../../hooks/useAuthFetch";
 import Spinner from "../Spinner";
+import ErrorBox from "./ErrorBox";
+import List from "./List";
+import { arrayProp } from "../../utils/propTypes";
 
 export default function PendingRequestsList() {
     const {
@@ -17,15 +19,16 @@ export default function PendingRequestsList() {
             </h1>
             <hr />
             {loading && <Spinner />}
-            {error && (
-                <p className="font-medium text-red-900 bg-red-200 w-full p-3 rounded-lg">
-                    {error}
-                </p>
-            )}
-            {pendingRequests &&
-                pendingRequests.map((req) => {
-                    return <UserPictureAndName user={req} key={req._id} />;
-                })}
+            <ErrorBox error={error} />
+            <List content={pendingRequests} />
+            <ViewMoreButton pendingRequests={pendingRequests} />
+        </div>
+    );
+}
+
+function ViewMoreButton({ pendingRequests }) {
+    return (
+        <>
             {pendingRequests && pendingRequests.length > 4 ? (
                 <Link
                     to="/pending-requests"
@@ -37,6 +40,10 @@ export default function PendingRequestsList() {
             ) : (
                 <p className="text-gray-400">No requests to show</p>
             )}
-        </div>
+        </>
     );
 }
+
+ViewMoreButton.propTypes = {
+    pendingRequests: arrayProp,
+};

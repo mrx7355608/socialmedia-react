@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import UserPictureAndName from "../UserProfilePictureAndName";
 import useAuthFetch from "../../hooks/useAuthFetch";
 import Spinner from "../Spinner";
+import ErrorBox from "./ErrorBox";
+import List from "./List";
+import { arrayProp } from "../../utils/propTypes";
 
 export default function FriendList() {
     const {
@@ -15,15 +17,16 @@ export default function FriendList() {
             <h1 className="text-gray-200 text-lg font-bold">Friends</h1>
             <hr />
             {loading && <Spinner />}
-            {error && (
-                <p className="font-medium text-red-900 bg-red-200 w-full p-3 rounded-lg">
-                    {error}
-                </p>
-            )}
-            {friends &&
-                friends.map((friend, idx) => {
-                    return <UserPictureAndName user={friend} key={idx} />;
-                })}
+            <ErrorBox error={error} />
+            <List content={friends} />
+            <ViewMoreButton friends={friends} />
+        </div>
+    );
+}
+
+function ViewMoreButton({ friends }) {
+    return (
+        <>
             {friends && friends.length > 5 ? (
                 <Link
                     to="/friends"
@@ -35,6 +38,10 @@ export default function FriendList() {
             ) : (
                 <p className="text-gray-400">No friends to show</p>
             )}
-        </div>
+        </>
     );
 }
+
+ViewMoreButton.propTypes = {
+    friends: arrayProp,
+};
