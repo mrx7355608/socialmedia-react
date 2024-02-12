@@ -3,7 +3,6 @@ import SocialLoginButtons from "../../components/SocialLoginButtons";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-    // eslint-disable-next-line
     const [error, setError] = useState("");
 
     return (

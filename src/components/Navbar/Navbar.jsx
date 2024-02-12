@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useUserContext } from "../../contexts/user";
 
 export default function Navbar() {
+    const { user } = useUserContext();
+
     return (
         <div className="navbar bg-gray-800 text-gray-200 px-7 shadow-md z-10 sticky top-0">
             <div className="flex-1">
@@ -21,7 +24,7 @@ export default function Navbar() {
                     <div className="w-10 rounded-full">
                         <img
                             alt="user-profile-picture"
-                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                            src={user.profilePicture}
                         />
                     </div>
                 </div>
