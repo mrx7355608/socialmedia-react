@@ -21,7 +21,7 @@ export default function Search() {
     if (error) {
         return (
             <div className="flex items-center justify-center mx-auto w-1/2 min-h-screen">
-                <p className="text-red-500 font-medium">{error}</p>
+                <p className="text-red-400 text-lg">{error}</p>
             </div>
         );
     }
@@ -32,7 +32,7 @@ export default function Search() {
                 Showing results for {searchParams.get("name")}
             </h1>
             {resp.map((friend) => {
-                return <AddFriendCard user={friend} key={friend._id} />;
+                return <AddFriendCard friend={friend} key={friend._id} />;
             })}
         </div>
     );
