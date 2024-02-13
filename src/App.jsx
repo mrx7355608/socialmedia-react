@@ -8,6 +8,9 @@ const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
 const Search = lazy(() => import("./pages/Search/Search"));
+const PendingRequests = lazy(() =>
+    import("./pages/Pending_Requests/PendingRequests")
+);
 const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
 
 const router = createBrowserRouter([
@@ -22,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "search",
                 element: <Search />,
+            },
+            {
+                path: "pending-requests",
+                element: <PendingRequests />,
             },
         ],
     },

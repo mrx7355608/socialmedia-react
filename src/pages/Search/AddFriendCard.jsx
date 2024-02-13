@@ -34,9 +34,10 @@ export default function AddFriendCard({ friend }) {
                     )}
                 </div>
             </div>
-            {user.pending_requests.includes(friend._id) ||
-            user.friends.includes(friend._id) ||
-            user._id === friend._id ? null : (
+            {user &&
+            (user.pending_requests.includes(friend._id) ||
+                user.friends.includes(friend._id) ||
+                user._id === friend._id) ? null : (
                 <button
                     onClick={onClickHandler}
                     className={`btn btn-accent ${loading && "disabled"}`}
