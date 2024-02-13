@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useAuthFetch(url) {
+export default function useAuthFetch(url, dependencyArr = []) {
     const [error, setError] = useState("");
     const [resp, setResp] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ export default function useAuthFetch(url) {
             })
             .catch((err) => setError(err.message))
             .finally(() => setLoading(false));
-    }, []);
+    }, dependencyArr);
 
     return { error, loading, resp };
 }

@@ -7,6 +7,7 @@ import AuthLayout from "./layouts/AuthLayout";
 const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
+const Search = lazy(() => import("./pages/Search/Search"));
 const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
+            },
+            {
+                path: "search",
+                element: <Search />,
             },
         ],
     },
