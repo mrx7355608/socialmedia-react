@@ -1,28 +1,42 @@
-import { useState } from "react";
 import SocialLoginButtons from "../../components/SocialLoginButtons";
 import { Link } from "react-router-dom";
+import useLogin from "./useLogin";
+import Spinner from "../../components/Spinner";
+import { useState } from "react";
+import { useUserContext } from "../../contexts/user";
 
 export default function Login() {
-    const [error, setError] = useState("");
+    const { loading, apiError, loginUser } = useLogin();
+    const { setUser } = useUserContext();
+    const [loginData, setLoginData] = useState({
+        email: "",
+        password: "",
+    });
 
     return (
         <div className="flex flex-col lg:flex-row w-3/4 gap-0 items-center justify-center py-8">
-            <form method="post" className="flex-1 p-0 mt-5">
+            <form
+                method="post"
+                className="flex-1 p-0 mt-5"
+                onSubmit={onSubmitHandler}
+            >
                 <h1 className="text-3xl font-bold text-gray-200 mb-12">
                     Login to your account
                 </h1>
-                {error && (
+                {apiError && (
                     <p className="text-red-900 font-medium p-3 bg-red-200 rounded-lg w-full mb-6">
-                        {error}
+                        {apiError}
                     </p>
                 )}
                 <input
+                    onChange={onChangeHandler}
                     type="email"
                     className="input input-bordered w-full bg-transparent border-2 mb-4"
                     name="email"
                     placeholder="Email address"
                 />
                 <input
+                    onChange={onChangeHandler}
                     type="password"
                     placeholder="Password"
                     className="input input-bordered w-full bg-transparent border-2 mb-1"
@@ -32,7 +46,7 @@ export default function Login() {
                     Forgot Password?
                 </p>
                 <button className="btn btn-primary w-full font-medium rounded-full">
-                    Login
+                    {loading ? <Spinner /> : "Login"}
                 </button>
                 <p className="text-gray-400 w-full text-center mt-4">
                     Don&#39;t have an account?{" "}
@@ -48,4 +62,16 @@ export default function Login() {
             <SocialLoginButtons />
         </div>
     );
+
+    async function onChangeHandler(e) {
+        const { name, value } = e.target;
+        setLoginData({ ...loginData, [name]: value });
+    }
+    async function onSubmitHandler(e) {
+        e.preventDefault();
+        const user = await loginUser(loginData);
+        if (user) {
+            setUser(user);
+        }
+    }
 }
