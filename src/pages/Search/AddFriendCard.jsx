@@ -1,9 +1,12 @@
 import Spinner from "../../components/Spinner";
 import { stringProp } from "../../utils/propTypes";
 import useAddFriend from "./useAddFriend";
+import { SuccessToast, ErrorToast } from "../../components/Toasts";
+import { useState } from "react";
 
 export default function AddFriendCard({ user }) {
-    const { loading, sendFriendRequest } = useAddFriend();
+    const { loading, apiError, sendFriendRequest } = useAddFriend();
+    const [showSuccessToast, setShowSuccessToast] = useState(false);
 
     return (
         <div className="flex items-center justify-between p-4 rounded-lg bg-gray-800 w-full">
@@ -28,13 +31,24 @@ export default function AddFriendCard({ user }) {
                 </div>
             </div>
             <button
-                onClick={async () => await sendFriendRequest(user._id)}
+                onClick={onClickHandler}
                 className={`btn btn-accent ${loading && "disabled"}`}
             >
                 {loading ? <Spinner /> : "Add Friend"}
             </button>
+            {apiError && <ErrorToast error={apiError} />}
+            {showSuccessToast && (
+                <SuccessToast success="Request sent successfully!" />
+            )}
         </div>
     );
+
+    async function onClickHandler() {
+        const isSuccess = await sendFriendRequest(user._id);
+        if (isSuccess) {
+            setShowSuccessToast(true);
+        }
+    }
 }
 
 AddFriendCard.propTypes = {
