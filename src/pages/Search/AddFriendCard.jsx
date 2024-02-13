@@ -28,7 +28,7 @@ export default function AddFriendCard({ user }) {
                 </div>
             </div>
             <button
-                onClick={sendFriendRequest}
+                onClick={async () => await sendFriendRequest(user._id)}
                 className={`btn btn-accent ${loading && "disabled"}`}
             >
                 {loading ? <Spinner /> : "Add Friend"}
@@ -39,6 +39,7 @@ export default function AddFriendCard({ user }) {
 
 AddFriendCard.propTypes = {
     user: {
+        _id: stringProp,
         fullname: stringProp,
         bio: stringProp,
         profilePicture: stringProp,
