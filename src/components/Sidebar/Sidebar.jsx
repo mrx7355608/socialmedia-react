@@ -35,6 +35,11 @@ export default function Sidebar() {
             title: "Friends",
         },
         {
+            path: "/pending-requests",
+            iconURL: "/pending.png",
+            title: "Pending Requests",
+        },
+        {
             path: "/profile",
             iconURL: "/profile.png",
             title: "Profile",
