@@ -18,6 +18,14 @@ export default function Search() {
         );
     }
 
+    if (error) {
+        return (
+            <div className="flex items-center justify-center mx-auto w-1/2 min-h-screen">
+                <p className="text-red-500 font-medium">{error}</p>
+            </div>
+        );
+    }
+
     return (
         <div className="flex flex-col items-center justify-start w-1/2 mx-auto">
             <h1 className="font-bold text-gray-200 text-left text-2xl p-4">
