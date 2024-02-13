@@ -57,7 +57,6 @@ export default function PendingRequestCard({ request, updatePendingRequests }) {
             const response = await fetch(url, options);
             const result = await response.json();
             setAcceptLoading(false);
-            console.log(result);
             if (result.ok) {
                 setAcceptSuccess(true);
                 return updatePendingRequests(result.data);
