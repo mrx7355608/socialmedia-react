@@ -8,6 +8,7 @@ const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Login/Login"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
 const Search = lazy(() => import("./pages/Search/Search"));
+const Friends = lazy(() => import("./pages/Friends/Friends"));
 const PendingRequests = lazy(() =>
     import("./pages/Pending_Requests/PendingRequests")
 );
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: "pending-requests",
                 element: <PendingRequests />,
+            },
+            {
+                path: "friends",
+                element: <Friends />,
             },
         ],
     },

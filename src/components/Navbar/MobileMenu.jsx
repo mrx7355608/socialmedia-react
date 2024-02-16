@@ -15,8 +15,8 @@ export default function MobileMenu() {
             iconURL: "/profile.png",
         },
         {
-            path: "/search",
-            iconURL: "/search.png",
+            path: "/pending-requests",
+            iconURL: "/pending.png",
         },
         {
             path: "/settings",
