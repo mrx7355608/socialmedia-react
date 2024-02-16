@@ -56,6 +56,7 @@ export default function AddFriendCard({ friend }) {
         const isSuccess = await sendFriendRequest(friend._id);
         if (isSuccess) {
             setShowSuccessToast(true);
+            setTimeout(() => setShowSuccessToast(false), 4000);
         }
     }
 }

@@ -20,6 +20,7 @@ export default function useAddFriend() {
                 return true;
             }
             setApiError(result.error);
+            setTimeout(() => setApiError(""), 4000);
             return false;
         } catch (err) {
             setApiError("An un-expected error occurred");
