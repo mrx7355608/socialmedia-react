@@ -2,7 +2,7 @@ import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
 
 export default function PostCard({ post }) {
     return (
-        <div className="flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg mb-4 w-full">
+        <div className="flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg mb-4 w-full shadow-lg">
             <div className="w-full flex items-center">
                 <img
                     src={post.author.profilePicture}
@@ -13,7 +13,7 @@ export default function PostCard({ post }) {
                     <p className="text-gray-300 font-medium">
                         {post.author.fullname}
                     </p>
-                    <p className="text-gray-400 font-medium text-sm">
+                    <p className="text-gray-500 font-medium text-xs">
                         Posted on {new Date(post.createdAt).toDateString()}
                     </p>
                 </div>
