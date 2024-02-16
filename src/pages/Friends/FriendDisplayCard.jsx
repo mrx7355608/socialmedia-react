@@ -2,10 +2,12 @@ import { useState } from "react";
 import { funcProp, stringProp } from "../../utils/propTypes";
 import { ErrorToast } from "../../components/Toasts";
 import Spinner from "../../components/Spinner";
+import { useUserContext } from "../../contexts/user";
 
 export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
+    const { user, setUser } = useUserContext();
 
     return (
         <div className="flex items-center justify-between p-4 rounded-lg bg-gray-800 shadow w-full mb-3">
@@ -47,6 +49,7 @@ export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {
 
             if (result.ok) {
                 updateFriendsStateValue(result.data);
+                setUser({ ...user, friends: result.data });
             } else {
                 setApiError(result.error);
             }
