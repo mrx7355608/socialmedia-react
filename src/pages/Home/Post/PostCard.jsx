@@ -4,7 +4,7 @@ import {
     funcProp,
     stringProp,
 } from "../../../utils/propTypes";
-import PostCardMenu from "../Post/PostCardMenu";
+import PostCardMenu from "./PostCardMenu";
 import { useUserContext } from "../../../contexts/user";
 
 export default function PostCard({ post, removePostFromTimeline }) {
@@ -53,7 +53,7 @@ export default function PostCard({ post, removePostFromTimeline }) {
                 </button>
             </div>
 
-            {post.author._id === user._id && (
+            {user && post.author._id === user._id && (
                 <PostCardMenu
                     removePostFromTimeline={removePostFromTimeline}
                     postID={post._id}

@@ -1,6 +1,6 @@
 import useAuthFetch from "../../../hooks/useAuthFetch";
 import Spinner from "../../../components/Spinner";
-import PostCard from "./PostCard";
+import PostCard from "../Post/PostCard";
 import { useEffect, useState } from "react";
 import CreatePostBox from "./CreatePostBox";
 
