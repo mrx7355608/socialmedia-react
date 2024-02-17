@@ -6,6 +6,7 @@ import {
 } from "../../../utils/propTypes";
 import PostCardMenu from "./PostCardMenu";
 import { useUserContext } from "../../../contexts/user";
+import CommentsSection from "../CommentsSection/CommentsSection";
 
 export default function PostCard({ post, removePostFromTimeline }) {
     const { user } = useUserContext();
@@ -43,7 +44,12 @@ export default function PostCard({ post, removePostFromTimeline }) {
                     />
                     Like
                 </button>
-                <button className="btn btn-ghost flex-1">
+                <button
+                    className="btn btn-ghost flex-1"
+                    onClick={() =>
+                        document.getElementById("my_modal_4").showModal()
+                    }
+                >
                     <img
                         src="/comment.png"
                         alt="like icon"
@@ -59,6 +65,7 @@ export default function PostCard({ post, removePostFromTimeline }) {
                     postID={post._id}
                 />
             )}
+            <CommentsSection />
         </div>
     );
 }
