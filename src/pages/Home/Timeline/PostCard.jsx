@@ -1,8 +1,12 @@
 import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
+import PostCardMenu from "../Post/PostCardMenu";
+import { useUserContext } from "../../../contexts/user";
 
 export default function PostCard({ post }) {
+    const { user } = useUserContext();
+
     return (
-        <div className="flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg mb-4 w-full shadow-lg">
+        <div className="relative flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg mb-4 w-full shadow-lg">
             <div className="w-full flex items-center">
                 <img
                     src={post.author.profilePicture}
@@ -43,6 +47,7 @@ export default function PostCard({ post }) {
                     Comment
                 </button>
             </div>
+            {post.author._id === user._id && <PostCardMenu />}
         </div>
     );
 }
