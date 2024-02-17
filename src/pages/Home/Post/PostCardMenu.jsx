@@ -1,9 +1,10 @@
 import EditPostButton from "./EditPostButton";
 import DeletePostButton from "./DeletePostButton";
+import { funcProp, stringProp } from "../../../utils/propTypes";
 
-export default function PostCardMenu() {
+export default function PostCardMenu({ postID, removePostFromTimeline }) {
     return (
-        <div className="dropdown absolute top-1 right-1">
+        <div className="dropdown absolute top-1 right-2">
             <div
                 tabIndex={0}
                 role="button"
@@ -23,9 +24,17 @@ export default function PostCardMenu() {
                     <EditPostButton />
                 </li>
                 <li>
-                    <DeletePostButton />
+                    <DeletePostButton
+                        removePostFromTimeline={removePostFromTimeline}
+                        postID={postID}
+                    />
                 </li>
             </ul>
         </div>
     );
 }
+
+PostCardMenu.propTypes = {
+    postID: stringProp,
+    removePostFromTimeline: funcProp,
+};

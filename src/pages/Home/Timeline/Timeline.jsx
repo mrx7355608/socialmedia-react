@@ -37,7 +37,13 @@ export default function Timeline() {
             <CreatePostBox updateTimeline={updateTimeline} />
             <div className="flex flex-col items-center justify-start min-h-screen">
                 {timeline.map((post) => {
-                    return <PostCard post={post} key={post._id} />;
+                    return (
+                        <PostCard
+                            post={post}
+                            key={post._id}
+                            removePostFromTimeline={removePostFromTimeline}
+                        />
+                    );
                 })}
             </div>
         </>
@@ -47,5 +53,9 @@ export default function Timeline() {
         setTimeline((prev) => {
             return [newPost, ...prev];
         });
+    }
+
+    function removePostFromTimeline(postID) {
+        setTimeline((prev) => prev.filter((p) => p._id !== postID));
     }
 }

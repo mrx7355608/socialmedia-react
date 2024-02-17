@@ -1,8 +1,13 @@
-import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
+import {
+    arrayProp,
+    dateProp,
+    funcProp,
+    stringProp,
+} from "../../../utils/propTypes";
 import PostCardMenu from "../Post/PostCardMenu";
 import { useUserContext } from "../../../contexts/user";
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, removePostFromTimeline }) {
     const { user } = useUserContext();
 
     return (
@@ -47,7 +52,13 @@ export default function PostCard({ post }) {
                     Comment
                 </button>
             </div>
-            {post.author._id === user._id && <PostCardMenu />}
+
+            {post.author._id === user._id && (
+                <PostCardMenu
+                    removePostFromTimeline={removePostFromTimeline}
+                    postID={post._id}
+                />
+            )}
         </div>
     );
 }
@@ -65,4 +76,5 @@ PostCard.propTypes = {
         likes: arrayProp,
         comments: arrayProp,
     },
+    removePostFromTimeline: funcProp,
 };
