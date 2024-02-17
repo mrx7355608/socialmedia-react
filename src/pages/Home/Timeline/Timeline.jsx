@@ -1,11 +1,20 @@
 import useAuthFetch from "../../../hooks/useAuthFetch";
 import Spinner from "../../../components/Spinner";
 import PostCard from "./PostCard";
+import { useEffect, useState } from "react";
+import CreatePostBox from "./CreatePostBox";
 
 export default function Timeline() {
+    const [timeline, setTimeline] = useState([]);
     const { loading, error, resp } = useAuthFetch(
         "http://localhost:8000/posts/timeline"
     );
+
+    useEffect(() => {
+        if (resp) {
+            setTimeline(resp);
+        }
+    }, [resp]);
 
     if (loading) {
         return (
@@ -24,10 +33,19 @@ export default function Timeline() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-start min-h-screen">
-            {resp.map((post) => {
-                return <PostCard post={post} key={post._id} />;
-            })}
-        </div>
+        <>
+            <CreatePostBox updateTimeline={updateTimeline} />
+            <div className="flex flex-col items-center justify-start min-h-screen">
+                {timeline.map((post) => {
+                    return <PostCard post={post} key={post._id} />;
+                })}
+            </div>
+        </>
     );
+
+    function updateTimeline(newPost) {
+        setTimeline((prev) => {
+            return [newPost, ...prev];
+        });
+    }
 }
