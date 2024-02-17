@@ -1,4 +1,4 @@
-export default function CommentBubble() {
+export default function SingleComment() {
     return (
         <div className="chat chat-start mt-2">
             <div className="chat-image avatar">

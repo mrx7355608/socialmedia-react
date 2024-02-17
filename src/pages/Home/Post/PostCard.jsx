@@ -6,7 +6,7 @@ import {
 } from "../../../utils/propTypes";
 import PostCardMenu from "./PostCardMenu";
 import { useUserContext } from "../../../contexts/user";
-import CommentsSection from "../CommentsSection/CommentsSection";
+import CommentsList from "../CommentsSection/List";
 
 export default function PostCard({ post, removePostFromTimeline }) {
     const { user } = useUserContext();
@@ -65,7 +65,7 @@ export default function PostCard({ post, removePostFromTimeline }) {
                     postID={post._id}
                 />
             )}
-            <CommentsSection />
+            <CommentsList postID={post._id} />
         </div>
     );
 }
