@@ -59,10 +59,7 @@ export default function PostCard({ post, removePostFromTimeline }) {
             </div>
 
             {/* Show a menu for  edit and delete buttons */}
-            <PostCardMenu
-                removePostFromTimeline={removePostFromTimeline}
-                postID={post._id}
-            />
+            <PostCardMenu removePostFromTimeline={removePostFromTimeline} />
             {/* Comments section modal */}
             {/* <CommentsList
                 postID={post._id}
