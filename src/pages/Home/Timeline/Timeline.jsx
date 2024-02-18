@@ -1,11 +1,6 @@
-import { useEffect } from "react";
-
 // COMPONENTS
 import Spinner from "../../../components/Spinner";
 import PostCard from "../Post/PostCard";
-
-// HOOKS
-import useAuthFetch from "../../../hooks/useAuthFetch";
 
 // CONTEXTS
 import PostProvider from "../../../contexts/post";
@@ -14,7 +9,9 @@ import useTimeline from "./useTimeline";
 
 export default function Timeline() {
     const { timeline, setTimeline } = useTimelineContext();
-    const { loading, error } = useTimeline(); // Updates timeline context
+
+    // Fetches timeline from server and updates timeline context
+    const { loading, error } = useTimeline();
 
     if (loading) {
         return (
