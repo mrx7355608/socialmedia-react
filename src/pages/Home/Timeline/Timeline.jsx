@@ -1,12 +1,13 @@
 import useAuthFetch from "../../../hooks/useAuthFetch";
 import Spinner from "../../../components/Spinner";
 import PostCard from "../Post/PostCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CreatePostBox from "./CreatePostBox";
 import PostProvider from "../../../contexts/post";
+import { useTimelineContext } from "../../../contexts/timeline";
 
 export default function Timeline() {
-    const [timeline, setTimeline] = useState([]);
+    const { timeline, setTimeline } = useTimelineContext();
     const { loading, error, resp } = useAuthFetch(
         "http://localhost:8000/posts/timeline"
     );
@@ -15,7 +16,7 @@ export default function Timeline() {
         if (resp) {
             setTimeline(resp);
         }
-    }, [resp]);
+    }, [resp, setTimeline]);
 
     if (loading) {
         return (
