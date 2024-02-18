@@ -2,10 +2,12 @@ import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
 import PostCardMenu from "./PostCardMenu";
 import { usePostContext } from "../../../contexts/post";
 import AuthorAndPubilshData from "./AuthorAndPubilshData";
-import { useEffect } from "react";
+import CommentsList from "../CommentsSection/List";
+import { useEffect, useState } from "react";
 
 export default function PostCard({ post }) {
     const { setPost } = usePostContext();
+    const [showComments, setShowComments] = useState(false);
 
     useEffect(() => {
         if (post) {
@@ -39,6 +41,7 @@ export default function PostCard({ post }) {
                 <button
                     className="btn btn-ghost flex-1"
                     onClick={() => {
+                        setShowComments(true);
                         document
                             .getElementById(`my_modal_${post._id}`)
                             .showModal();
@@ -57,11 +60,10 @@ export default function PostCard({ post }) {
             <PostCardMenu />
 
             {/* Comments section modal */}
-            {/* <CommentsList
-                postID={post._id}
-                isModalVisible={isModalVisible}
-                setIsModalVisible={setIsModalVisible}
-            /> */}
+            <CommentsList
+                showComments={showComments}
+                setShowComments={setShowComments}
+            />
         </div>
     );
 }
@@ -77,6 +79,5 @@ PostCard.propTypes = {
         },
         createdAt: dateProp,
         likes: arrayProp,
-        comments: arrayProp,
     },
 };
