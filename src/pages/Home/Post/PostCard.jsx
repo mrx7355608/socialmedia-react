@@ -1,15 +1,10 @@
-import {
-    arrayProp,
-    dateProp,
-    funcProp,
-    stringProp,
-} from "../../../utils/propTypes";
+import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
 import PostCardMenu from "./PostCardMenu";
 import { usePostContext } from "../../../contexts/post";
 import AuthorAndPubilshData from "./AuthorAndPubilshData";
 import { useEffect } from "react";
 
-export default function PostCard({ post, removePostFromTimeline }) {
+export default function PostCard({ post }) {
     const { setPost } = usePostContext();
 
     useEffect(() => {
@@ -27,9 +22,9 @@ export default function PostCard({ post, removePostFromTimeline }) {
             <p className="text-gray-300 mt-5">{post.content}</p>
 
             {/* No. of likes and comments on post */}
-            <p className="mt-7 text-gray-500 text-sm font-medium">
+            {/* <p className="mt-7 text-gray-500 text-sm font-medium">
                 {post.likes.length} Likes {post.comments.length} Comments
-            </p>
+            </p> */}
 
             {/* Like and Comment button */}
             <div className="flex gap-2 w-full mt-4">
@@ -59,7 +54,8 @@ export default function PostCard({ post, removePostFromTimeline }) {
             </div>
 
             {/* Show a menu for  edit and delete buttons */}
-            <PostCardMenu removePostFromTimeline={removePostFromTimeline} />
+            <PostCardMenu />
+
             {/* Comments section modal */}
             {/* <CommentsList
                 postID={post._id}
@@ -83,5 +79,4 @@ PostCard.propTypes = {
         likes: arrayProp,
         comments: arrayProp,
     },
-    removePostFromTimeline: funcProp,
 };

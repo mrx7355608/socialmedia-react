@@ -1,10 +1,9 @@
 import EditPostButton from "./EditPostButton";
 import DeletePostButton from "./DeletePostButton";
-import { funcProp } from "../../../utils/propTypes";
 import { useUserContext } from "../../../contexts/user";
 import { usePostContext } from "../../../contexts/post";
 
-export default function PostCardMenu({ removePostFromTimeline }) {
+export default function PostCardMenu() {
     const { user } = useUserContext();
     const { post } = usePostContext();
 
@@ -31,10 +30,7 @@ export default function PostCardMenu({ removePostFromTimeline }) {
                             <EditPostButton />
                         </li>
                         <li>
-                            <DeletePostButton
-                                removePostFromTimeline={removePostFromTimeline}
-                                postID={post._id}
-                            />
+                            <DeletePostButton />
                         </li>
                     </ul>
                 </div>
@@ -42,7 +38,3 @@ export default function PostCardMenu({ removePostFromTimeline }) {
         </>
     );
 }
-
-PostCardMenu.propTypes = {
-    removePostFromTimeline: funcProp,
-};

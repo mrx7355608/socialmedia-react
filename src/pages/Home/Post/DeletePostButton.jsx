@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { ErrorToast } from "../../../components/Toasts";
-import { funcProp, stringProp } from "../../../utils/propTypes";
 import Spinner from "../../../components/Spinner";
+import { useTimelineContext } from "../../../contexts/timeline";
+import { usePostContext } from "../../../contexts/post";
 
-export default function DeletePostButton({ postID, removePostFromTimeline }) {
+export default function DeletePostButton() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const { setTimeline } = useTimelineContext();
+    const { post } = usePostContext();
 
     return (
         <>
@@ -23,7 +26,7 @@ export default function DeletePostButton({ postID, removePostFromTimeline }) {
     );
 
     async function deletePost() {
-        const url = `http://localhost:8000/posts/${postID}`;
+        const url = `http://localhost:8000/posts/${post._id}`;
         const options = {
             method: "DELETE",
             credentials: "include",
@@ -36,7 +39,7 @@ export default function DeletePostButton({ postID, removePostFromTimeline }) {
 
             if (response.ok) {
                 // Update timeline
-                removePostFromTimeline(postID);
+                removePostFromTimeline(post._id);
             } else {
                 const result = await response.json();
                 setError(result.error);
@@ -47,9 +50,8 @@ export default function DeletePostButton({ postID, removePostFromTimeline }) {
             setLoading(false);
         }
     }
-}
 
-DeletePostButton.propTypes = {
-    postID: stringProp,
-    removePostFromTimeline: funcProp,
-};
+    function removePostFromTimeline(postID) {
+        setTimeline((prev) => prev.filter((p) => p._id !== postID));
+    }
+}

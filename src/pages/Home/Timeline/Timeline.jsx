@@ -8,7 +8,7 @@ import { useTimelineContext } from "../../../contexts/timeline";
 import useTimeline from "./useTimeline";
 
 export default function Timeline() {
-    const { timeline, setTimeline } = useTimelineContext();
+    const { timeline } = useTimelineContext();
 
     // Fetches timeline from server and updates timeline context
     const { loading, error } = useTimeline();
@@ -34,17 +34,10 @@ export default function Timeline() {
             {timeline.map((post) => {
                 return (
                     <PostProvider key={post._id}>
-                        <PostCard
-                            post={post}
-                            removePostFromTimeline={removePostFromTimeline}
-                        />
+                        <PostCard post={post} />
                     </PostProvider>
                 );
             })}
         </>
     );
-
-    function removePostFromTimeline(postID) {
-        setTimeline((prev) => prev.filter((p) => p._id !== postID));
-    }
 }
