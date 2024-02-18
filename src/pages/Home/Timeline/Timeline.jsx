@@ -3,6 +3,7 @@ import Spinner from "../../../components/Spinner";
 import PostCard from "../Post/PostCard";
 import { useEffect, useState } from "react";
 import CreatePostBox from "./CreatePostBox";
+import PostProvider from "../../../contexts/post";
 
 export default function Timeline() {
     const [timeline, setTimeline] = useState([]);
@@ -38,11 +39,12 @@ export default function Timeline() {
             <div className="flex flex-col items-center justify-start min-h-screen">
                 {timeline.map((post) => {
                     return (
-                        <PostCard
-                            post={post}
-                            key={post._id}
-                            removePostFromTimeline={removePostFromTimeline}
-                        />
+                        <PostProvider key={post._id}>
+                            <PostCard
+                                post={post}
+                                removePostFromTimeline={removePostFromTimeline}
+                            />
+                        </PostProvider>
                     );
                 })}
             </div>
