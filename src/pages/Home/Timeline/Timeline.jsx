@@ -1,8 +1,14 @@
-import useAuthFetch from "../../../hooks/useAuthFetch";
+import { useEffect } from "react";
+
+// COMPONENTS
 import Spinner from "../../../components/Spinner";
 import PostCard from "../Post/PostCard";
-import { useEffect } from "react";
 import CreatePostBox from "./CreatePostBox";
+
+// HOOKS
+import useAuthFetch from "../../../hooks/useAuthFetch";
+
+// CONTEXTS
 import PostProvider from "../../../contexts/post";
 import { useTimelineContext } from "../../../contexts/timeline";
 

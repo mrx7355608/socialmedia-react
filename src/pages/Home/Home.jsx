@@ -1,6 +1,9 @@
+// COMPONENTS
 import FriendBar from "../../components/Friends/FriendBar";
-import TimelineProvider from "../../contexts/timeline";
 import Timeline from "./Timeline/Timeline";
+
+// CONTEXT
+import TimelineProvider from "../../contexts/timeline";
 
 export default function Home() {
     return (

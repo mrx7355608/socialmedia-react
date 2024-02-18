@@ -1,6 +1,6 @@
+import { useState } from "react";
 import Spinner from "../../../components/Spinner";
 import { useUserContext } from "../../../contexts/user";
-import { useState } from "react";
 import { funcProp } from "../../../utils/propTypes";
 
 export default function CreatePostBox({ updateTimeline }) {
