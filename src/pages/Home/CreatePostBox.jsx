@@ -2,7 +2,6 @@ import { useState } from "react";
 import Spinner from "../../components/Spinner";
 import { useUserContext } from "../../contexts/user";
 import { useTimelineContext } from "../../contexts/timeline";
-import { funcProp } from "../../utils/propTypes";
 
 export default function CreatePostBox() {
     const { user } = useUserContext();
@@ -76,7 +75,3 @@ export default function CreatePostBox() {
         }
     }
 }
-
-CreatePostBox.propTypes = {
-    updateTimeline: funcProp,
-};

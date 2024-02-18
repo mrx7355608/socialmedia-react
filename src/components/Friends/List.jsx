@@ -1,4 +1,4 @@
-import { arrayProp } from "../../utils/propTypes";
+import { arrayPropOptional } from "../../utils/propTypes";
 import UserPictureAndName from "../UserProfilePictureAndName";
 
 export default function List({ content }) {
@@ -13,5 +13,5 @@ export default function List({ content }) {
 }
 
 List.propTypes = {
-    content: arrayProp,
+    content: arrayPropOptional,
 };
