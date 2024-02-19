@@ -2,8 +2,8 @@ import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
 import PostCardMenu from "./PostCardMenu";
 import { usePostContext } from "../../../contexts/post";
 import AuthorAndPubilshData from "./AuthorAndPubilshData";
-import CommentsList from "../CommentsSection/List";
 import { useEffect, useState } from "react";
+import CommentsSection from "../CommentsSection/CommentsSection";
 
 export default function PostCard({ post }) {
     const { setPost } = usePostContext();
@@ -60,7 +60,7 @@ export default function PostCard({ post }) {
             <PostCardMenu />
 
             {/* Comments section modal */}
-            <CommentsList
+            <CommentsSection
                 showComments={showComments}
                 setShowComments={setShowComments}
             />
