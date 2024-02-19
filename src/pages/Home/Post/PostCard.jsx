@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 import CommentsSection from "../CommentsSection/CommentsSection";
 import EditPostModal from "./EditPostModal";
 
-export default function PostCard({ post }) {
-    const { setPost } = usePostContext();
+export default function PostCard({ post: postData }) {
+    const { post, setPost } = usePostContext();
     const [showComments, setShowComments] = useState(false);
 
     useEffect(() => {
-        if (post) {
-            setPost(post);
+        if (postData) {
+            setPost(postData);
         }
-    }, [post, setPost]);
+    }, [postData, setPost]);
 
     return (
         <div className="relative flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg mb-4 w-full shadow-lg">
@@ -22,7 +22,7 @@ export default function PostCard({ post }) {
             <AuthorAndPubilshData />
 
             {/* Post content */}
-            <p className="text-gray-300 mt-5">{post.content}</p>
+            <p className="text-gray-300 mt-5">{post?.content}</p>
 
             {/* No. of likes and comments on post */}
             {/* <p className="mt-7 text-gray-500 text-sm font-medium">
