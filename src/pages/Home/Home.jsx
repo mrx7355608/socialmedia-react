@@ -12,8 +12,8 @@ export default function Home() {
             <FriendBar />
 
             <div className="flex flex-col items-center justify-start min-h-screen">
-                <CreatePostBox />
                 <TimelineProvider>
+                    <CreatePostBox />
                     <Timeline />
                 </TimelineProvider>
             </div>

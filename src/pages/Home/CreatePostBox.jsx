@@ -6,6 +6,7 @@ import { useTimelineContext } from "../../contexts/timeline";
 export default function CreatePostBox() {
     const { user } = useUserContext();
     const { timeline, setTimeline } = useTimelineContext();
+
     const [content, setContent] = useState("");
     const [apiError, setApiError] = useState("");
     const [loading, setLoading] = useState(false);
