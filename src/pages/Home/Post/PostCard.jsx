@@ -5,6 +5,7 @@ import AuthorAndPubilshData from "./AuthorAndPubilshData";
 import { useEffect, useState } from "react";
 import CommentsSection from "../CommentsSection/CommentsSection";
 import EditPostModal from "./EditPostModal";
+import DeletePostModal from "./DeletePostModal";
 
 export default function PostCard({ post: postData }) {
     const { post, setPost } = usePostContext();
@@ -66,8 +67,9 @@ export default function PostCard({ post: postData }) {
                 setShowComments={setShowComments}
             />
 
-            {/* Edit post modal */}
+            {/* Edit and delete post modal */}
             <EditPostModal />
+            <DeletePostModal />
         </div>
     );
 }
