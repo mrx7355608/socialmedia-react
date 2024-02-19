@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePostContext } from "../../../contexts/post";
 import Spinner from "../../../components/Spinner";
 
 export default function EditPostModal() {
     const { post, setPost } = usePostContext();
 
-    const [editContent, setEditContent] = useState(post?.content);
+    const [editContent, setEditContent] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (post) {
+            setEditContent(post.content);
+        }
+    }, [post]);
 
     return (
         <dialog id={`edit_post_${post?._id}`} className="modal">

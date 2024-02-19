@@ -9,7 +9,7 @@ export default function PostCardMenu() {
 
     return (
         <>
-            {user._id === post?.author._id ? (
+            {user?._id === post?.author._id ? (
                 <div className="dropdown absolute top-1 right-2">
                     <div
                         tabIndex={0}
