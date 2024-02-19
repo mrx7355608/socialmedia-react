@@ -14,13 +14,13 @@ export default function Login() {
     });
 
     return (
-        <div className="flex flex-col lg:flex-row w-3/4 gap-0 items-center justify-center py-8">
+        <div className="w-full p-6 flex flex-col lg:flex-row lg:w-3/4 gap-0 items-center justify-center py-8">
             <form
                 method="post"
                 className="flex-1 p-0 mt-5"
                 onSubmit={onSubmitHandler}
             >
-                <h1 className="text-3xl font-bold text-gray-200 mb-12">
+                <h1 className="text-2xl lg:text-3xl font-bold text-gray-200 mb-12">
                     Login to your account
                 </h1>
                 {apiError && (
@@ -42,13 +42,13 @@ export default function Login() {
                     className="input input-bordered w-full bg-transparent border-2 mb-1"
                     name="password"
                 />
-                <p className="text-right text-sm mb-5 hover:underline hover:cursor-pointer">
+                <p className="text-sm lg:text-md text-right text-sm mb-5 hover:underline hover:cursor-pointer">
                     Forgot Password?
                 </p>
                 <button className="btn btn-primary w-full font-medium rounded-full">
                     {loading ? <Spinner /> : "Login"}
                 </button>
-                <p className="text-gray-400 w-full text-center mt-4">
+                <p className="text-sm lg:text-md text-gray-400 w-full text-center mt-4">
                     Don&#39;t have an account?{" "}
                     <Link
                         to="/auth/signup"

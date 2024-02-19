@@ -32,7 +32,7 @@ export default function PendingRequests() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-start w-1/3 mx-auto">
+        <div className="flex flex-col items-center justify-start p-3 w-full lg:w-1/3 mx-auto">
             <h1 className="font-bold text-gray-200 text-left text-3xl p-4 my-4 mb-7">
                 Pending Requests
             </h1>

@@ -14,7 +14,7 @@ export default function PendingRequestsList() {
 
     return (
         <div className="hidden w-full p-3 lg:flex flex-col gap-3 mb-6">
-            <h1 className="text-gray-200 text-lg font-bold">
+            <h1 className="text-gray-200 text-md lg:text-lg font-bold">
                 Pending Requests
             </h1>
             <hr />

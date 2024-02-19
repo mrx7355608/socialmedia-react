@@ -1,6 +1,6 @@
 export default function UserPictureAndName({ user }) {
     return (
-        <div className="p-3 rounded-lg">
+        <div className="p-3 rounded-lg w-full">
             <img
                 src={user?.profilePicture}
                 alt="user profile picture"

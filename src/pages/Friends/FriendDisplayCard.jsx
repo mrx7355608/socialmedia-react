@@ -17,7 +17,7 @@ export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {
                     alt="profile picture"
                     className="w-12 h-12 rounded-full object-cover inline mr-3"
                 />
-                <p className="text-gray-300 font-medium text-lg mb-0">
+                <p className="text-md font-bold lg:text-lg text-gray-300 mb-0">
                     {friend.fullname}
                 </p>
             </div>

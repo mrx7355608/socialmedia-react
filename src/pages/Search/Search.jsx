@@ -27,8 +27,8 @@ export default function Search() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-start w-1/2 mx-auto">
-            <h1 className="font-bold text-gray-200 text-left text-2xl p-4">
+        <div className="flex flex-col items-center justify-start w-full p-4 lg:w-1/2 mx-auto">
+            <h1 className="font-bold text-gray-200 text-left text-2xl p-2 mb-8 mt-6">
                 Showing results for {searchParams.get("name")}
             </h1>
             {resp.map((friend) => {

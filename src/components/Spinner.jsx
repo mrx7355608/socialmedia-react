@@ -1,3 +1,3 @@
 export default function Spinner() {
-    return <span className="loading loading-spinner text-error"></span>;
+    return <span className="loading loading-spinner"></span>;
 }
