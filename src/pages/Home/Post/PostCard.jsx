@@ -4,6 +4,7 @@ import { usePostContext } from "../../../contexts/post";
 import AuthorAndPubilshData from "./AuthorAndPubilshData";
 import { useEffect, useState } from "react";
 import CommentsSection from "../CommentsSection/CommentsSection";
+import EditPostModal from "./EditPostModal";
 
 export default function PostCard({ post }) {
     const { setPost } = usePostContext();
@@ -64,6 +65,9 @@ export default function PostCard({ post }) {
                 showComments={showComments}
                 setShowComments={setShowComments}
             />
+
+            {/* Edit post modal */}
+            <EditPostModal />
         </div>
     );
 }
