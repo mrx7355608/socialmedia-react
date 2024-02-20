@@ -82,6 +82,7 @@ export default function EditPostModal() {
             }
         } catch (err) {
             setError("An un-exepected error occurred");
+            setLoading(false);
         }
     }
 
