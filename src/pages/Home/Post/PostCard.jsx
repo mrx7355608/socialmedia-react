@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import CommentsSection from "../CommentsSection/CommentsSection";
 import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
+import CommentsProvider from "../../../contexts/comments";
 
 export default function PostCard({ post: postData }) {
     const { post, setPost } = usePostContext();
@@ -62,10 +63,12 @@ export default function PostCard({ post: postData }) {
             <PostCardMenu />
 
             {/* Comments section modal */}
-            <CommentsSection
-                showComments={showComments}
-                setShowComments={setShowComments}
-            />
+            <CommentsProvider>
+                <CommentsSection
+                    showComments={showComments}
+                    setShowComments={setShowComments}
+                />
+            </CommentsProvider>
 
             {/* Edit and delete post modal */}
             <EditPostModal />
