@@ -1,17 +1,21 @@
-// import CommentBubble from "./SingleComment";
+import { useEffect, useState } from "react";
+import { usePostContext } from "../../../contexts/post";
+import { useCommentsContext } from "../../../contexts/comments";
+
 import CreateComment from "./Create";
 import Spinner from "../../../components/Spinner";
-import { booleanProp, funcProp, stringProp } from "../../../utils/propTypes";
-import { usePostContext } from "../../../contexts/post";
-import { useEffect, useState } from "react";
 import CommentsList from "./List";
+
+import { booleanProp, funcProp, stringProp } from "../../../utils/propTypes";
 
 export default function CommentsSection({ showComments, setShowComments }) {
     const { post } = usePostContext();
-    const [comments, setComments] = useState([]);
+    const { setComments } = useCommentsContext();
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    // Fetch comments from server and update comments context
     useEffect(() => {
         if (showComments) {
             setLoading(true);
@@ -24,7 +28,7 @@ export default function CommentsSection({ showComments, setShowComments }) {
                 .catch(() => setError("An un-expected error occurred"))
                 .finally(() => setLoading(false));
         }
-    }, [showComments, post?._id]);
+    }, [showComments, post?._id, setComments]);
 
     return (
         <>
@@ -55,13 +59,10 @@ export default function CommentsSection({ showComments, setShowComments }) {
                     ) : error ? (
                         <ShowError errorMessage={error} />
                     ) : (
-                        <CommentsList
-                            comments={comments}
-                            setComments={setComments}
-                        />
+                        <CommentsList />
                     )}
                     {/* Input for creating comments */}
-                    <CreateComment setComments={setComments} />
+                    <CreateComment />
                 </div>
             </dialog>
         </>

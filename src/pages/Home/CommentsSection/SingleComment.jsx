@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useUserContext } from "../../../contexts/user";
-import { stringProp, funcProp } from "../../../utils/propTypes";
+import { stringProp } from "../../../utils/propTypes";
+import DeleteCommentButton from "./DeleteCommentButton";
 
-export default function SingleComment({ comment, setComments }) {
+export default function SingleComment({ comment }) {
     const { user } = useUserContext();
-    const [isDeleting, setIsDeleting] = useState(false);
-    const [deletingError, setDeletingError] = useState("");
 
     return (
         <div className="flex gap-5 items-center mt-4">
@@ -40,51 +38,12 @@ export default function SingleComment({ comment, setComments }) {
                         <span className="mr-3 hover:underline hover:cursor-pointer">
                             Edit
                         </span>
-                        {isDeleting ? (
-                            <span className="hover:underline hover:cursor-pointer">
-                                Deleting...
-                            </span>
-                        ) : deletingError ? (
-                            <span className="text-red-400">
-                                {deletingError}
-                            </span>
-                        ) : (
-                            <span
-                                onClick={deleteComment}
-                                className="hover:underline hover:cursor-pointer"
-                            >
-                                Delete
-                            </span>
-                        )}
+                        <DeleteCommentButton comment={comment} />
                     </div>
                 ) : null}
             </div>
         </div>
     );
-
-    async function deleteComment() {
-        const url = `http://localhost:8000/comments/${comment._id}`;
-        const options = {
-            method: "DELETE",
-            credentials: "include",
-        };
-        try {
-            setIsDeleting(true);
-            const response = await fetch(url, options);
-            setIsDeleting(false);
-
-            if (response.ok) {
-                setComments((prev) => {
-                    return prev.filter((c) => comment._id !== c._id);
-                });
-            } else {
-                const result = await response.json();
-                setDeletingError(result.error);
-            }
-        } catch (err) {
-            setIsDeleting(false);
-        }
-    }
 }
 
 SingleComment.propTypes = {
@@ -97,5 +56,4 @@ SingleComment.propTypes = {
             fullname: stringProp,
         },
     },
-    setComments: funcProp,
 };

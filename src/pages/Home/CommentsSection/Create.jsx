@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useUserContext } from "../../../contexts/user";
 import { usePostContext } from "../../../contexts/post";
+import { useCommentsContext } from "../../../contexts/comments";
 import Spinner from "../../../components/Spinner";
 
-export default function CreateComment({ setComments }) {
+export default function CreateComment() {
     const { user } = useUserContext();
     const { post } = usePostContext();
+    const { setComments } = useCommentsContext();
     const [newComment, setNewComment] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -76,7 +78,3 @@ export default function CreateComment({ setComments }) {
         }
     }
 }
-
-CreateComment.propTypes = {
-    setComments: () => null,
-};
