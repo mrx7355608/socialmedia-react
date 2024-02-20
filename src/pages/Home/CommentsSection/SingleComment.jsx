@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { useUserContext } from "../../../contexts/user";
 import { stringProp } from "../../../utils/propTypes";
 import DeleteCommentButton from "./DeleteCommentButton";
 
 export default function SingleComment({ comment }) {
     const { user } = useUserContext();
+    const [inEditMode, setInEditMode] = useState(false);
+    const [editedComment, setEditedComment] = useState(comment.text);
+    const [commentState, setCommentState] = useState(comment);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingError, setEditingError] = useState("");
 
     return (
         <div className="flex gap-5 items-center mt-4">
@@ -31,12 +37,40 @@ export default function SingleComment({ comment }) {
                     <p className="font-medium text-gray-300">
                         {comment.author.fullname}
                     </p>
-                    <p className="text-gray-300">{comment.text}</p>
+                    {inEditMode ? (
+                        <form onSubmit={onSubmitHandler}>
+                            <input
+                                type="text"
+                                className="input input-bordered bg-transparent w-full"
+                                name="text"
+                                value={editedComment}
+                                onChange={onChangeHandler}
+                            />
+                            {/* To prevent the user from spamming enter button
+                                and submitting the form
+                             */}
+                            {!isEditing && (
+                                <button
+                                    type="submit"
+                                    className="hidden"
+                                ></button>
+                            )}
+                        </form>
+                    ) : (
+                        <p className="text-gray-300">{commentState.text}</p>
+                    )}
                 </div>
                 {user?._id === comment.author._id ? (
                     <div className="text-sm ml-1 mt-1">
-                        <span className="mr-3 hover:underline hover:cursor-pointer">
-                            Edit
+                        <span
+                            onClick={toggleEditMode}
+                            className="mr-3 hover:underline hover:cursor-pointer"
+                        >
+                            {inEditMode
+                                ? isEditing
+                                    ? "Editing..."
+                                    : "Cancel"
+                                : "Edit"}
                         </span>
                         <DeleteCommentButton comment={comment} />
                     </div>
@@ -44,6 +78,43 @@ export default function SingleComment({ comment }) {
             </div>
         </div>
     );
+
+    function toggleEditMode() {
+        setInEditMode(!inEditMode);
+    }
+
+    function onChangeHandler(e) {
+        setEditedComment(e.target.value);
+    }
+
+    async function onSubmitHandler(e) {
+        e.preventDefault();
+        const url = `http://localhost:8000/comments/${comment._id}`;
+        const options = {
+            method: "PATCH",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text: editedComment }),
+        };
+        try {
+            setIsEditing(true);
+            const response = await fetch(url, options);
+            const result = await response.json();
+            setIsEditing(false);
+
+            if (result.ok) {
+                console.log(result.data);
+                setCommentState(result.data);
+                setInEditMode(false);
+            } else {
+                setEditingError(result.error);
+            }
+        } catch (err) {
+            setIsEditing(false);
+        }
+    }
 }
 
 SingleComment.propTypes = {
