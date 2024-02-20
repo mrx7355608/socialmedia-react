@@ -16,8 +16,12 @@ export default function EditPostModal() {
     }, [post]);
 
     return (
-        <dialog id={`edit_post_${post?._id}`} className="modal">
-            <div className="modal-box">
+        <dialog
+            id={`edit_post_${post?._id}`}
+            className="modal mx-auto"
+            style={{ width: "95vw" }}
+        >
+            <div className="modal-box w-full">
                 <h3 className="font-bold text-xl text-center mb-10">
                     Edit Post
                 </h3>

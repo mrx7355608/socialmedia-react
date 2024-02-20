@@ -8,7 +8,7 @@ import TimelineProvider from "../../contexts/timeline";
 
 export default function Home() {
     return (
-        <div className="px-3 py-0 w-full lg:w-1/3 mx-auto mt-5">
+        <div className="px-3 py-0 w-full lg:w-1/3 mx-auto mt-5 overflow-hidden">
             <FriendBar />
 
             <div className="flex flex-col items-center justify-start min-h-screen">

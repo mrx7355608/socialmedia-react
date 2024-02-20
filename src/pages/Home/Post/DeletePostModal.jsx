@@ -9,7 +9,11 @@ export default function DeletePostModal() {
     const [loading, setLoading] = useState(false);
 
     return (
-        <dialog id={`delete_post_${post?._id}`} className="modal">
+        <dialog
+            id={`delete_post_${post?._id}`}
+            className="modal mx-auto"
+            style={{ width: "95vw" }}
+        >
             <div className="modal-box">
                 <h3 className="font-bold text-xl text-center mb-10">
                     Delete Post

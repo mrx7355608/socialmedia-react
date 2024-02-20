@@ -32,9 +32,13 @@ export default function CommentsSection({ showComments, setShowComments }) {
 
     return (
         <>
-            <dialog id={`my_modal_${post?._id}`} className="modal p-0">
+            <dialog
+                id={`my_modal_${post?._id}`}
+                className="modal p-0 mx-auto"
+                style={{ width: "95vw" }}
+            >
                 <div
-                    className="modal-box w-full lg:w-11/12 max-w-4xl p-0 relative"
+                    className="modal-box w-full lg:w-11/12 lg:max-w-4xl p-0 relative"
                     style={{ height: "90vh" }}
                 >
                     <h3 className="font-bold text-xl text-center mb-9 mt-5">
