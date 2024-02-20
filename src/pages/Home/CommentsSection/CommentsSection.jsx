@@ -55,7 +55,10 @@ export default function CommentsSection({ showComments, setShowComments }) {
                     ) : error ? (
                         <ShowError errorMessage={error} />
                     ) : (
-                        <CommentsList comments={comments} />
+                        <CommentsList
+                            comments={comments}
+                            setComments={setComments}
+                        />
                     )}
                     {/* Input for creating comments */}
                     <CreateComment setComments={setComments} />

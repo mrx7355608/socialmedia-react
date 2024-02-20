@@ -1,12 +1,18 @@
-import { arrayProp } from "../../../utils/propTypes";
+import { arrayProp, funcProp } from "../../../utils/propTypes";
 import SingleComment from "./SingleComment";
 
-export default function CommentsList({ comments }) {
+export default function CommentsList({ comments, setComments }) {
     return (
         <>
             <div className="p-4 overflow-y-auto" style={{ height: "73%" }}>
                 {comments.map((cmnt) => {
-                    return <SingleComment comment={cmnt} key={cmnt._id} />;
+                    return (
+                        <SingleComment
+                            setComments={setComments}
+                            comment={cmnt}
+                            key={cmnt._id}
+                        />
+                    );
                 })}
             </div>
         </>
@@ -15,4 +21,5 @@ export default function CommentsList({ comments }) {
 
 CommentsList.propTypes = {
     comments: arrayProp,
+    setComments: funcProp,
 };
