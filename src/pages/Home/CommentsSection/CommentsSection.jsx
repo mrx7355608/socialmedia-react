@@ -58,7 +58,7 @@ export default function CommentsSection({ showComments, setShowComments }) {
                         <CommentsList comments={comments} />
                     )}
                     {/* Input for creating comments */}
-                    <CreateComment />
+                    <CreateComment setComments={setComments} />
                 </div>
             </dialog>
         </>
