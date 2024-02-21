@@ -22,7 +22,9 @@ export default function MainLayout() {
             <Navbar />
             <MobileMenu />
             <Sidebar />
-            <Outlet />
+            <div className="mt-12 pt-1">
+                <Outlet />
+            </div>
         </React.Suspense>
     );
 }

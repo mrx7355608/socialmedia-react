@@ -18,13 +18,9 @@ export default function MobileMenu() {
             path: "/pending-requests",
             iconURL: "/pending.png",
         },
-        {
-            path: "/settings",
-            iconURL: "/settings.png",
-        },
     ];
     return (
-        <div className="flex w-full gap-2 p-1 bg-gray-800 border-gray-700 border-t sticky lg:hidden">
+        <div className="flex w-full gap-2 p-1 bg-gray-800 border-gray-700 border-t fixed shadow-md z-20 lg:hidden">
             {links.map((link, index) => {
                 return (
                     <Link to={link.path} key={index} className="flex-1">
