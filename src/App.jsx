@@ -13,11 +13,13 @@ const PendingRequests = lazy(() =>
     import("./pages/Pending_Requests/PendingRequests")
 );
 const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
+const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <NotFound />,
         children: [
             {
                 index: true,
