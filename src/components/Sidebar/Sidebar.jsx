@@ -44,11 +44,6 @@ export default function Sidebar() {
             iconURL: "/profile.png",
             title: "Profile",
         },
-        {
-            path: "/settings",
-            iconURL: "/settings.png",
-            title: "Settings",
-        },
     ];
     return (
         <div className="hidden lg:flex fixed left-0 flex-col p-4 bg-gray-900 h-screen w-1/4">
