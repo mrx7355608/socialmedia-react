@@ -27,7 +27,7 @@ export default function DeleteCommentButton({ comment }) {
     );
 
     async function deleteComment() {
-        const url = `http://localhost:8000/comments/${comment._id}`;
+        const url = `/api/v1/comments/${comment._id}`;
         const options = {
             method: "DELETE",
             credentials: "include",

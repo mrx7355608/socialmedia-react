@@ -6,11 +6,7 @@ import List from "./List";
 import { arrayProp } from "../../utils/propTypes";
 
 export default function FriendList() {
-    const {
-        loading,
-        error,
-        resp: friends,
-    } = useAuthFetch("http://localhost:8000/friends");
+    const { loading, error, resp: friends } = useAuthFetch("/api/v1/friends");
 
     return (
         <div className="hidden w-full p-3 lg:flex flex-col gap-3 mb-6">

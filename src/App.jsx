@@ -60,7 +60,7 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:8000/user", {
+        fetch("/api/v1/user", {
             method: "GET",
             credentials: "include",
         })

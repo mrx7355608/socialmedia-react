@@ -45,7 +45,7 @@ export default function DeletePostModal() {
     }
 
     async function deletePost() {
-        const url = `http://localhost:8000/posts/${post._id}`;
+        const url = `/api/v1/posts/${post._id}`;
         const options = {
             method: "DELETE",
             credentials: "include",

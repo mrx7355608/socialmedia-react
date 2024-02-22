@@ -10,7 +10,7 @@ export default function Sidebar() {
 
     const logout = () => {
         setLoading(true);
-        fetch("http://localhost:8000/auth/logout", {
+        fetch("/api/v1/auth/logout", {
             method: "POST",
             credentials: "include",
         })

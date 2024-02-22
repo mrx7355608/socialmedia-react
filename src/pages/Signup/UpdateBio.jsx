@@ -11,7 +11,7 @@ export default function UpdateBio({ signedUpUser }) {
 
     const updateBio = async () => {
         setLoading(true);
-        const resp = await fetch("http://localhost:8000/user", {
+        const resp = await fetch("/api/v1/user", {
             method: "PATCH",
             credentials: "include",
             headers: {

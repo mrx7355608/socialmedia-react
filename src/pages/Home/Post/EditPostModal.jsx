@@ -57,7 +57,7 @@ export default function EditPostModal() {
             return setError("Nothing to edit");
         }
 
-        const url = `http://localhost:8000/posts/${post?._id}`;
+        const url = `/api/v1/posts/${post?._id}`;
         const options = {
             method: "PATCH",
             credentials: "include",

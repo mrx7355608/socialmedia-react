@@ -27,7 +27,7 @@ export default function RejectReqBtn({ requestID, updatePendingRequests }) {
 
     async function rejectRequest() {
         setLoading(true);
-        const url = `http://localhost:8000/friends/reject-request/${requestID}`;
+        const url = `/api/v1/friends/reject-request/${requestID}`;
         const options = {
             method: "PATCH",
             credentials: "include",

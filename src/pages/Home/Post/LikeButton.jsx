@@ -37,7 +37,7 @@ export default function LikeButton() {
     );
 
     async function likePost() {
-        const url = `http://localhost:8000/posts/like/${post?._id}`;
+        const url = `/api/v1/posts/like/${post?._id}`;
         const options = {
             method: "PATCH",
             credentials: "include",
@@ -59,7 +59,7 @@ export default function LikeButton() {
     }
 
     async function dislikePost() {
-        const url = `http://localhost:8000/posts/dislike/${post?._id}`;
+        const url = `/api/v1/posts/dislike/${post?._id}`;
         const options = {
             method: "PATCH",
             credentials: "include",

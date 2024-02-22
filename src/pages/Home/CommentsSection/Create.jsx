@@ -51,7 +51,7 @@ export default function CreateComment() {
         }
 
         // make request to server with new comment
-        const url = `http://localhost:8000/comments/${post._id}`;
+        const url = `/api/v1/comments/${post._id}`;
         const options = {
             method: "POST",
             credentials: "include",

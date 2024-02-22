@@ -6,7 +6,7 @@ import AddFriendCard from "./AddFriendCard";
 export default function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { loading, error, resp } = useAuthFetch(
-        `http://localhost:8000/user/search?name=${searchParams.get("name")}`,
+        `/api/v1/user/search?name=${searchParams.get("name")}`,
         [searchParams.get("name")]
     );
 

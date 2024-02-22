@@ -27,7 +27,7 @@ export default function AcceptReqBtn({ requestID, updatePendingRequests }) {
 
     async function acceptRequest() {
         setLoading(true);
-        const url = `http://localhost:8000/friends/accept-request/${requestID}`;
+        const url = `/api/v1/friends/accept-request/${requestID}`;
         const options = {
             method: "PATCH",
             credentials: "include",

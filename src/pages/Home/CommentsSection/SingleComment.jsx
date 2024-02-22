@@ -89,7 +89,7 @@ export default function SingleComment({ comment }) {
 
     async function onSubmitHandler(e) {
         e.preventDefault();
-        const url = `http://localhost:8000/comments/${comment._id}`;
+        const url = `/api/v1/comments/${comment._id}`;
         const options = {
             method: "PATCH",
             credentials: "include",

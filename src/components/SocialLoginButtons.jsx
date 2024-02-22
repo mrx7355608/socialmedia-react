@@ -1,6 +1,6 @@
 export default function SocialLoginButtons() {
     const continueWithGoogle = () => {
-        window.open("http://localhost:8000/auth/google", "_self");
+        window.open("/api/v1/auth/google", "_self");
     };
     return (
         <div className="flex-1 max-w-md">

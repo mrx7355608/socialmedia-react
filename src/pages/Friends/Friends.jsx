@@ -5,9 +5,7 @@ import FriendDisplayCard from "./FriendDisplayCard";
 
 export default function Friends() {
     const [myFriends, setMyFriends] = useState([]);
-    const { loading, error, resp } = useAuthFetch(
-        "http://localhost:8000/friends"
-    );
+    const { loading, error, resp } = useAuthFetch("/api/v1/friends");
 
     useEffect(() => {
         if (resp) {

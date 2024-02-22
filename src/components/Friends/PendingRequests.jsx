@@ -10,7 +10,7 @@ export default function PendingRequestsList() {
         loading,
         error,
         resp: pendingRequests,
-    } = useAuthFetch("http://localhost:8000/friends/pending-requests");
+    } = useAuthFetch("/api/v1/friends/pending-requests");
 
     return (
         <div className="hidden w-full p-3 lg:flex flex-col gap-3 mb-6">

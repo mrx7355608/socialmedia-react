@@ -8,7 +8,7 @@ export default function useTimeline() {
 
     useEffect(() => {
         setLoading(true);
-        const url = "http://localhost:8000/posts/timeline";
+        const url = "/api/v1/posts/timeline";
         const options = {
             method: "GET",
             credentials: "include",

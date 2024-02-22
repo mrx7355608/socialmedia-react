@@ -6,7 +6,7 @@ export default function useSignup() {
 
     const signup = async (signupData) => {
         setLoading(true);
-        const url = "http://localhost:8000/auth/signup";
+        const url = "/api/v1/auth/signup";
         const options = {
             method: "POST",
             headers: {

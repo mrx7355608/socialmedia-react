@@ -35,7 +35,7 @@ export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {
     );
 
     async function removeFriend() {
-        const url = `http://localhost:8000/friends/remove-friend/${friend._id}`;
+        const url = `/api/v1/friends/remove-friend/${friend._id}`;
         const options = {
             method: "PATCH",
             credentials: "include",

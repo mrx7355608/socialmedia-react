@@ -47,7 +47,7 @@ export default function CreatePostBox() {
     );
 
     async function createPost() {
-        const url = "http://localhost:8000/posts";
+        const url = "/api/v1/posts";
         const options = {
             method: "POST",
             credentials: "include",

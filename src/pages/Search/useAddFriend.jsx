@@ -6,7 +6,7 @@ export default function useAddFriend() {
 
     async function sendFriendRequest(userID) {
         setLoading(true);
-        const url = `http://localhost:8000/friends/send-request/${userID}`;
+        const url = `/api/v1/friends/send-request/${userID}`;
         const options = {
             method: "POST",
             credentials: "include",

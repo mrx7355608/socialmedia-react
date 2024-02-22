@@ -19,7 +19,7 @@ export default function CommentsSection({ showComments, setShowComments }) {
     useEffect(() => {
         if (showComments) {
             setLoading(true);
-            fetch(`http://localhost:8000/comments/${post?._id}`, {
+            fetch(`/api/v1/comments/${post?._id}`, {
                 method: "GET",
                 credentials: "include",
             })
