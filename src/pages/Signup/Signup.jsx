@@ -1,6 +1,5 @@
 import { useState } from "react";
 import UpdateProfilePicture from "./UpdateProfilePicture";
-import AddFriends from "./AddFriends";
 import UpdateBio from "./UpdateBio";
 import Form from "./Form";
 
@@ -19,9 +18,8 @@ export default function Signup() {
             changePage={changePage}
             signedUpUser={signedUpUser}
         />,
-        <AddFriends key={2} changePage={changePage} />,
         <UpdateBio
-            key={3}
+            key={2}
             changePage={changePage}
             signedUpUser={signedUpUser}
         />,
