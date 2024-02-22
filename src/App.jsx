@@ -14,7 +14,6 @@ const PendingRequests = lazy(() =>
 );
 const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
-const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 const router = createBrowserRouter([
     {
@@ -37,10 +36,6 @@ const router = createBrowserRouter([
             {
                 path: "friends",
                 element: <Friends />,
-            },
-            {
-                path: "profile",
-                element: <Profile />,
             },
         ],
     },

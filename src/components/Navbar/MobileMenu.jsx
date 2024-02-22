@@ -16,10 +16,6 @@ export default function MobileMenu() {
             iconURL: "/friends.png",
         },
         {
-            path: "/profile",
-            iconURL: "/profile.png",
-        },
-        {
             path: "/pending-requests",
             iconURL: "/pending.png",
         },
