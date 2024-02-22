@@ -12,7 +12,7 @@ export default function NotFound() {
             <img
                 src="/404.png"
                 alt="not found illustration by icons8"
-                className="w-3/4 mx-auto mt-5"
+                className="w-3/4 lg:w-56 mx-auto mt-5"
             />
             <Link to="/">
                 <button className="btn btn-outline btn-info mx-auto block mt-5">
