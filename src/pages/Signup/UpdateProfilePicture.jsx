@@ -12,7 +12,10 @@ export default function UpdateProfilePicture({ changePage, signedUpUser }) {
     const profileRef = useRef();
 
     return (
-        <div className="mx-auto flex items-center justify-center w-1/2 shadow-xl bg-gray-800 h-max p-6 rounded-lg">
+        <div
+            className="mx-auto flex items-center justify-center lg:w-1/2 shadow-xl bg-gray-800 h-max p-6 rounded-lg"
+            style={{ width: "95vw" }}
+        >
             <div className="flex flex-col w-full justify-center items-center">
                 <h1 className="text-3xl text-gray-200 font-bold mb-10 mt-4">
                     Change Profile picture
