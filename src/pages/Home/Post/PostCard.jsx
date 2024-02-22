@@ -7,6 +7,7 @@ import CommentsSection from "../CommentsSection/CommentsSection";
 import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
 import CommentsProvider from "../../../contexts/comments";
+import LikeButton from "./LikeButton";
 
 export default function PostCard({ post: postData }) {
     const { post, setPost } = usePostContext();
@@ -40,14 +41,7 @@ export default function PostCard({ post: postData }) {
 
             {/* Like and Comment button */}
             <div className="flex gap-2 w-full mt-4">
-                <button className="btn btn-ghost flex-1">
-                    <img
-                        src="/like.png"
-                        alt="like icon"
-                        className="inline w-5 h-5"
-                    />
-                    Like
-                </button>
+                <LikeButton />
                 <button
                     className="btn btn-ghost flex-1"
                     onClick={() => {
