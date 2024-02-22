@@ -22,6 +22,7 @@ export default function useSignup() {
             setLoading(false);
             if (apiResult.ok === false) {
                 setApiError(apiResult.error);
+                setTimeout(() => setApiError(""), 4000);
                 return null;
             }
             // return data of newly created user

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Spinner from "../../components/Spinner";
-import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../contexts/user";
 
 // eslint-disable-next-line
@@ -20,7 +19,7 @@ export default function UpdateBio({ signedUpUser }) {
             },
             body: JSON.stringify({ bio }),
         });
-        const result = await resp.json();
+        await resp.json();
         setLoading(false);
         setUser(signedUpUser);
     };
