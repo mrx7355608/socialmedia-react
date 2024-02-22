@@ -5,7 +5,7 @@ import { useUserContext } from "../../contexts/user";
 
 export default function MobileMenu() {
     const [loading, setLoading] = useState(false);
-    const { setUser } = useUserContext();
+    const { user, setUser } = useUserContext();
     const links = [
         {
             path: "/",
@@ -25,9 +25,9 @@ export default function MobileMenu() {
         },
     ];
     const activeClass =
-        "btn bg-gray-700 border-none w-full flex-1 outline-none";
+        "relative btn bg-gray-700 border-none w-full flex-1 outline-none";
     const notActiveClass =
-        "btn bg-transparent border-none w-full outline-none flex-1 hover:bg-gray-700";
+        "relative btn bg-transparent border-none w-full outline-none flex-1 hover:bg-gray-700";
 
     return (
         <div className="flex w-full gap-2 p-1 bg-gray-800 border-gray-700 border-t fixed shadow-md z-20 lg:hidden">
@@ -43,6 +43,12 @@ export default function MobileMenu() {
                         }}
                     >
                         <img src={link.iconURL} alt="link" className="w-5" />
+                        {link.path === "/pending-requests" &&
+                        user?.pending_requests.length > 0 ? (
+                            <div className="absolute top-0 right-1 badge badge-primary badge-sm">
+                                {user?.pending_requests.length}
+                            </div>
+                        ) : null}
                     </NavLink>
                 );
             })}

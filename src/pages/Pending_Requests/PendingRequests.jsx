@@ -2,8 +2,10 @@ import useAuthFetch from "../../hooks/useAuthFetch";
 import Spinner from "../../components/Spinner";
 import PendingRequestCard from "./PendingRequestCard";
 import { useEffect, useState } from "react";
+import { useUserContext } from "../../contexts/user";
 
 export default function PendingRequests() {
+    const { user, setUser } = useUserContext();
     const [myRequests, setMyPendingRequests] = useState([]);
     const { loading, error, resp } = useAuthFetch(
         "http://localhost:8000/friends/pending-requests"
@@ -50,5 +52,6 @@ export default function PendingRequests() {
 
     function updatePendingRequestsStateValue(newState) {
         setMyPendingRequests(newState);
+        setUser({ ...user, pending_requests: newState });
     }
 }
