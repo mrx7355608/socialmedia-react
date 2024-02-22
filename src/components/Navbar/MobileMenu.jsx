@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import Spinner from "../Spinner";
+import { useUserContext } from "../../contexts/user";
 
 export default function MobileMenu() {
+    const [loading, setLoading] = useState(false);
+    const { setUser } = useUserContext();
     const links = [
         {
             path: "/",
@@ -19,21 +24,57 @@ export default function MobileMenu() {
             iconURL: "/pending.png",
         },
     ];
+    const activeClass =
+        "btn bg-gray-700 border-none w-full outline-none flex-1";
+    const notActiveClass =
+        "btn bg-transparent border-none w-full outline-none flex-1 hover:bg-gray-700";
+
     return (
         <div className="flex w-full gap-2 p-1 bg-gray-800 border-gray-700 border-t fixed shadow-md z-20 lg:hidden">
             {links.map((link, index) => {
                 return (
-                    <Link to={link.path} key={index} className="flex-1">
-                        <button className="btn bg-transparent border-none w-full outline-none hover:bg-gray-700">
-                            <img
-                                src={link.iconURL}
-                                alt="link"
-                                className="w-5"
-                            />
-                        </button>
-                    </Link>
+                    <NavLink
+                        to={link.path}
+                        key={index}
+                        className={(navData) => {
+                            navData.isActive ? activeClass : notActiveClass;
+                        }}
+                    >
+                        <img src={link.iconURL} alt="link" className="w-5" />
+                    </NavLink>
                 );
             })}
+            {loading ? (
+                <button className="btn bg-transparent border-none outline-none hover:bg-gray-700 w-20">
+                    <Spinner />
+                </button>
+            ) : (
+                <button
+                    onClick={logout}
+                    className="btn bg-transparent border-none outline-none hover:bg-gray-700 w-20"
+                >
+                    <img
+                        src="/logout.png"
+                        alt="logout button"
+                        className="w-5"
+                    />
+                </button>
+            )}
         </div>
     );
+
+    function logout() {
+        setLoading(true);
+        fetch("http://localhost:8000/auth/logout", {
+            method: "POST",
+            credentials: "include",
+        })
+            .then((resp) => resp.json())
+            .then((data) => {
+                if (!data.ok) throw new Error(data.error);
+                setUser(null);
+            })
+            .catch((err) => console.log(err.message))
+            .finally(() => setLoading(false));
+    }
 }
