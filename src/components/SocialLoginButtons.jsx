@@ -15,15 +15,10 @@ export default function SocialLoginButtons() {
                 />
                 Continue with Google
             </button>
-            <button className="btn btn-outline w-full font-medium rounded-full my-4 relative hover:bg-gray-800 hover:text-gray-200">
-                <img
-                    src="/facebook.png"
-                    alt="fb-icon"
-                    className="w-7 absolute top-2.5 left-3"
-                />
-                Continue with Facebook
-            </button>
-            <button className="btn btn-outline w-full font-medium rounded-full relative hover:bg-gray-800 hover:text-gray-200">
+            <button
+                onClick={() => alert("This feature will be added soon")}
+                className="btn btn-outline w-full font-medium rounded-full relative hover:bg-gray-800 hover:text-gray-200"
+            >
                 <img
                     src="/guest.png"
                     alt="fb-icon"
