@@ -25,7 +25,7 @@ export default function MobileMenu() {
         },
     ];
     const activeClass =
-        "btn bg-gray-700 border-none w-full outline-none flex-1";
+        "btn bg-gray-700 border-none w-full flex-1 outline-none";
     const notActiveClass =
         "btn bg-transparent border-none w-full outline-none flex-1 hover:bg-gray-700";
 
@@ -37,7 +37,9 @@ export default function MobileMenu() {
                         to={link.path}
                         key={index}
                         className={(navData) => {
-                            navData.isActive ? activeClass : notActiveClass;
+                            return navData.isActive
+                                ? activeClass
+                                : notActiveClass;
                         }}
                     >
                         <img src={link.iconURL} alt="link" className="w-5" />
