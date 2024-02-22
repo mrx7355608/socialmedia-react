@@ -16,17 +16,17 @@ export default function Form({ changePage, setSignedUpUser }) {
     });
 
     return (
-        <div className="flex flex-col lg:flex-row w-3/4 gap-0 items-center justify-center py-8 mx-auto">
+        <div className="flex flex-col lg:flex-row w-full p-4 lg:w-3/4 gap-0 items-center justify-center mx-auto">
             <form
                 method="post"
                 className="flex-1 p-0 mt-5"
                 onSubmit={onSubmitHandler}
             >
-                <h1 className="text-3xl font-bold text-gray-200 mb-12">
+                <h1 className="text-2xl lg:text-3xl font-bold text-gray-200 mb-12">
                     Create your account
                 </h1>
                 {apiError && (
-                    <p className="text-red-900 font-medium p-3 bg-red-200 rounded-lg w-full mb-6">
+                    <p className="text-sm lg:text-md text-red-900 font-medium p-3 bg-red-200 rounded-lg w-full mb-6">
                         {apiError}
                     </p>
                 )}
@@ -71,7 +71,7 @@ export default function Form({ changePage, setSignedUpUser }) {
                 >
                     {loading ? <Spinner /> : "Signup"}
                 </button>
-                <p className="text-gray-400 w-full text-center mt-4">
+                <p className="text-sm lg:text-md text-gray-400 w-full text-center mt-4">
                     Already have an account?{" "}
                     <Link to="/auth/login" className="font-medium text-primary">
                         Login
