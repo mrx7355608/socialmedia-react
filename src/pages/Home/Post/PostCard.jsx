@@ -24,7 +24,14 @@ export default function PostCard({ post: postData }) {
             <AuthorAndPubilshData />
 
             {/* Post content */}
-            <p className="text-gray-300 mt-5">{post?.content}</p>
+            <p
+                className="text-gray-300 mt-5"
+                style={{
+                    whiteSpace: "pre-line",
+                }}
+            >
+                {post?.content}
+            </p>
 
             {/* No. of likes and comments on post */}
             {/* <p className="mt-7 text-gray-500 text-sm font-medium">
