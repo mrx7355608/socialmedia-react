@@ -8,7 +8,10 @@ export default function Navbar() {
     const navigateTo = useNavigate();
 
     return (
-        <div className="navbar px-4 lg:px-7 shadow-md z-10 sticky top-0">
+        <div
+            style={{ background: "#1D232A" }}
+            className="navbar px-4 lg:px-7 shadow-md z-10 sticky top-0"
+        >
             <div className="flex-1">
                 <img src="/logo.png" alt="logo" className="fit-cover w-10" />
                 <Link

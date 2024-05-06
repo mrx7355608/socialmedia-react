@@ -8,7 +8,7 @@ export default function PendingRequests() {
     const { user, setUser } = useUserContext();
     const [myRequests, setMyPendingRequests] = useState([]);
     const { loading, error, resp } = useAuthFetch(
-        "/api/v1/friends/pending-requests"
+        "/api/v1/friends/pending-requests",
     );
 
     useEffect(() => {
@@ -38,6 +38,11 @@ export default function PendingRequests() {
             <h1 className="font-bold text-gray-200 text-left text-3xl p-4 my-4 mb-7">
                 Pending Requests
             </h1>
+            {myRequests.length < 1 && (
+                <i className="text-gray-600 text-lg font-medium">
+                    No pending requests to show
+                </i>
+            )}
             {myRequests.map((req) => {
                 return (
                     <PendingRequestCard

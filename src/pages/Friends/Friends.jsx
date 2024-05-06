@@ -34,6 +34,11 @@ export default function Friends() {
             <h1 className="text-2xl font-bold text-gray-200 text-left lg:text-3xl p-4 my-4 mb-7">
                 Friends
             </h1>
+            {myFriends.length < 1 && (
+                <i className="text-gray-600 text-lg font-medium">
+                    No friends to show
+                </i>
+            )}
             {myFriends.map((frnd) => {
                 return (
                     <FriendDisplayCard
