@@ -20,18 +20,18 @@ export default function Login() {
                 className="flex-1 p-0 mt-5"
                 onSubmit={onSubmitHandler}
             >
-                <h1 className="text-2xl lg:text-3xl font-bold text-gray-200 mb-12">
+                <h1 className="text-2xl lg:text-3xl font-bold mb-12">
                     Login to your account
                 </h1>
                 {apiError && (
-                    <p className="text-red-900 font-medium p-3 bg-red-200 rounded-lg w-full mb-6">
+                    <p className="text-red-100 font-medium p-3 bg-red-900 rounded-lg w-full mb-6">
                         {apiError}
                     </p>
                 )}
                 <input
                     onChange={onChangeHandler}
                     type="email"
-                    className="input input-bordered w-full bg-transparent border-2 mb-4"
+                    className="input input-bordered w-full mb-4"
                     name="email"
                     placeholder="Email address"
                 />
@@ -39,7 +39,7 @@ export default function Login() {
                     onChange={onChangeHandler}
                     type="password"
                     placeholder="Password"
-                    className="input input-bordered w-full bg-transparent border-2 mb-1"
+                    className="input input-bordered w-full mb-1"
                     name="password"
                 />
                 <p className="text-sm lg:text-md text-right text-sm mb-5 hover:underline hover:cursor-pointer">

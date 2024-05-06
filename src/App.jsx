@@ -9,8 +9,8 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const Friends = lazy(() => import("./pages/Friends/Friends"));
-const PendingRequests = lazy(() =>
-    import("./pages/Pending_Requests/PendingRequests")
+const PendingRequests = lazy(
+    () => import("./pages/Pending_Requests/PendingRequests"),
 );
 const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
@@ -60,7 +60,7 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/api/v1/user", {
+        fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/user`, {
             method: "GET",
             credentials: "include",
         })

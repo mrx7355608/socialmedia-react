@@ -5,7 +5,7 @@ export default function useLogin() {
     const [apiError, setApiError] = useState("");
 
     async function loginUser(loginData) {
-        const url = "/api/v1/auth/login";
+        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/auth/login`;
         const options = {
             method: "POST",
             credentials: "include",

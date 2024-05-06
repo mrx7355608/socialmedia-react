@@ -10,7 +10,8 @@ export default function Sidebar() {
 
     const logout = () => {
         setLoading(true);
-        fetch("/api/v1/auth/logout", {
+        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/auth/logout`;
+        fetch(url, {
             method: "POST",
             credentials: "include",
         })
@@ -46,7 +47,7 @@ export default function Sidebar() {
         },
     ];
     return (
-        <div className="hidden lg:flex fixed left-0 flex-col p-4 bg-gray-900 h-screen w-1/4">
+        <div className="hidden lg:flex fixed left-0 flex-col p-4 h-screen w-1/4">
             <UserPictureAndName user={user} />
             {links.map((link, index) => {
                 return (

@@ -33,7 +33,7 @@ export default function useUpdateProfilePicture() {
         const uploadedPictureURL = await uploadToCloudinary(pictureFile);
 
         // Upload to server
-        const url = "/api/v1/user";
+        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/user`;
         const options = {
             method: "PATCH",
             credentials: "include",

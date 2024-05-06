@@ -8,7 +8,7 @@ export default function useTimeline() {
 
     useEffect(() => {
         setLoading(true);
-        const url = "/api/v1/posts/timeline";
+        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/posts/timeline`;
         const options = {
             method: "GET",
             credentials: "include",

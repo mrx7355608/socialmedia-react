@@ -12,7 +12,7 @@ export default function CreatePostBox() {
     const [loading, setLoading] = useState(false);
 
     return (
-        <div className="flex flex-col justify-start w-full p-4 bg-gray-800 rounded-lg mb-4">
+        <div className="flex flex-col justify-start w-full p-4 rounded-lg mb-4 bg-myGray">
             <div className="flex items-start w-full">
                 <img
                     src={user?.profilePicture}

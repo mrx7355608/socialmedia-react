@@ -2,7 +2,14 @@
 export default {
     content: ["./index.html", "./src/**/*.jsx"],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                myGray: "#242C35",
+            },
+        },
     },
     plugins: [require("daisyui")],
+    daisyui: {
+        themes: ["light", "dark", "synthwave"],
+    },
 };

@@ -26,7 +26,7 @@ export default function Form({ changePage, setSignedUpUser }) {
                     Create your account
                 </h1>
                 {apiError && (
-                    <p className="text-sm lg:text-md text-red-900 font-medium p-3 bg-red-200 rounded-lg w-full mb-6">
+                    <p className="text-md text-red-900 font-medium p-3 bg-red-200 rounded-lg w-full mb-6">
                         {apiError}
                     </p>
                 )}

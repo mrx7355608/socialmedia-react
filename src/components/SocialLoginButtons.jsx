@@ -6,7 +6,7 @@ export default function SocialLoginButtons() {
         <div className="flex-1 max-w-md">
             <button
                 onClick={continueWithGoogle}
-                className="btn btn-outline w-full font-medium rounded-full relative hover:bg-gray-800 hover:text-gray-200"
+                className="btn btn-neutral w-full font-medium rounded-full relative"
             >
                 <img
                     src="/google.png"
@@ -17,7 +17,7 @@ export default function SocialLoginButtons() {
             </button>
             <button
                 onClick={() => alert("This feature will be added soon")}
-                className="btn btn-outline w-full font-medium rounded-full relative hover:bg-gray-800 hover:text-gray-200"
+                className="mt-4 btn btn-neutral w-full font-medium rounded-full relative"
             >
                 <img
                     src="/guest.png"

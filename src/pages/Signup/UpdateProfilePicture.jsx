@@ -7,13 +7,13 @@ export default function UpdateProfilePicture({ changePage, signedUpUser }) {
     const { loading, apiError, uploadProfilePicture } =
         useUpdateProfilePicture();
     const [profilePicturePreview, setPreview] = useState(
-        signedUpUser.profilePicture
+        signedUpUser.profilePicture,
     );
     const profileRef = useRef();
 
     return (
         <div
-            className="mx-auto flex items-center justify-center lg:w-1/2 shadow-xl bg-gray-800 h-max p-6 rounded-lg"
+            className="mx-auto flex items-center justify-center lg:w-1/2 shadow-xl bg-myGray h-max p-6 rounded-lg"
             style={{ width: "95vw" }}
         >
             <div className="flex flex-col w-full justify-center items-center">

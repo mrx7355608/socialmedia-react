@@ -11,14 +11,17 @@ export default function UpdateBio({ signedUpUser }) {
 
     const updateBio = async () => {
         setLoading(true);
-        const resp = await fetch("/api/v1/user", {
-            method: "PATCH",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
+        const resp = await fetch(
+            `${import.meta.env.VITE_SERVER_URL}api/v1/user`,
+            {
+                method: "PATCH",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ bio }),
             },
-            body: JSON.stringify({ bio }),
-        });
+        );
         await resp.json();
         setLoading(false);
         setUser(signedUpUser);
@@ -26,7 +29,7 @@ export default function UpdateBio({ signedUpUser }) {
 
     return (
         <div
-            className="mx-auto flex items-center justify-center lg:w-1/2 shadow-xl bg-gray-800 h-max p-6 rounded-lg"
+            className="mx-auto flex items-center justify-center max-w-lg shadow-xl bg-myGray h-max p-6 rounded-lg"
             style={{ width: "95vw" }}
         >
             <div className="w-full">

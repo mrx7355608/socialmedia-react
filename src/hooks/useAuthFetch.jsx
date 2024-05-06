@@ -5,6 +5,13 @@ export default function useAuthFetch(url, dependencyArr = []) {
     const [resp, setResp] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Remove the first / from the url because it's already
+    // included in the SERVER_URL
+    url = url.split("/");
+    url.shift();
+    url = url.join("/");
+    url = `${import.meta.env.VITE_SERVER_URL}${url}`;
+
     useEffect(() => {
         setLoading(true);
         fetch(url, {
