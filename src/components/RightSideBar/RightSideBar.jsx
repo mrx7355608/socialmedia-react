@@ -1,8 +1,7 @@
-import React from "react";
 import FriendList from "./FriendList";
 import PendingRequestsList from "./PendingRequests";
 
-export default function FriendBar() {
+export default function RightSideBar() {
     return (
         <div
             className="hidden fixed right-0 bottom-0 overflow-y-scroll lg:flex flex-col w-1/4"
