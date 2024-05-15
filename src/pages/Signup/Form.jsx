@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SocialLoginButtons from "../../components/SocialLoginButtons";
-import useSignup from "./useSignup";
+import useSignup from "../../hooks/useSignup";
 import Spinner from "../../components/spinners/Spinner";
 import { Link } from "react-router-dom";
 

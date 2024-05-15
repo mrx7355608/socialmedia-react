@@ -1,6 +1,6 @@
 import Spinner from "../../components/spinners/Spinner";
 import { stringProp } from "../../utils/propTypes";
-import useAddFriend from "./useAddFriend";
+import useAddFriend from "../../hooks/useAddFriend";
 import { SuccessToast, ErrorToast } from "../../components/Toasts";
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user";

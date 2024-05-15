@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import useUpdateProfilePicture from "./useUpdateProfilePicture";
+import useUpdateProfilePicture from "../../hooks/useUpdateProfilePicture";
 import Spinner from "../../components/spinners/Spinner";
 
 // eslint-disable-next-line
