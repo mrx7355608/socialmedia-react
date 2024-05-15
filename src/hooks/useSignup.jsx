@@ -5,30 +5,19 @@ export default function useSignup() {
     const [apiError, setApiError] = useState("");
 
     const signup = async (signupData) => {
-        setLoading(true);
-        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/auth/signup`;
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(signupData),
-            credentials: "include",
-        };
         try {
-            // Make request to server
-            const resp = await fetch(url, options);
-            const apiResult = await resp.json();
-            setLoading(false);
+            setLoading(true);
+            const apiResult = await signup(signupData);
+
             if (apiResult.ok === false) {
                 setApiError(apiResult.error);
                 setTimeout(() => setApiError(""), 4000);
                 return null;
             }
-            // return data of newly created user
             return apiResult.data;
         } catch (err) {
             setApiError("An un-expected error occured");
+        } finally {
             setLoading(false);
         }
     };
