@@ -1,10 +1,8 @@
-import React from "react";
-import MobileMenu from "../components/Navbar/MobileMenu";
-import Navbar from "../components/Navbar/Navbar";
-import Sidebar from "../components/Sidebar/Sidebar";
+import { useEffect, Suspense } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/user";
-import { useEffect } from "react";
+import { Navbar, MobileMenu } from "../components/navbar";
+import { Sidebar } from "../components/sidebar";
 import FullPageSpinner from "../components/spinners/FullPageSpinner";
 
 export default function MainLayout() {
@@ -18,13 +16,13 @@ export default function MainLayout() {
     }, [user]);
 
     return (
-        <React.Suspense fallback={<FullPageSpinner />}>
+        <Suspense fallback={<FullPageSpinner />}>
             <Navbar />
             <MobileMenu />
             <Sidebar />
             <div className="mt-12 pt-1">
                 <Outlet />
             </div>
-        </React.Suspense>
+        </Suspense>
     );
 }
