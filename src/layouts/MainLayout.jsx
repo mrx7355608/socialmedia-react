@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/user";
 import { useEffect } from "react";
-import FullPageSpinner from "../components/FullPageSpinner";
+import FullPageSpinner from "../components/spinners/FullPageSpinner";
 
 export default function MainLayout() {
     const { user } = useUserContext();

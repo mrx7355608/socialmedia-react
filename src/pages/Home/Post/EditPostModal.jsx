@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePostContext } from "../../../contexts/post";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../components/spinners/Spinner";
 
 export default function EditPostModal() {
     const { post, setPost } = usePostContext();

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import UserPictureAndName from "../UserProfilePictureAndName";
 import { useState } from "react";
-import Spinner from "../Spinner";
+import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 
 export default function Sidebar() {

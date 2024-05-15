@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import useUpdateProfilePicture from "./useUpdateProfilePicture";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 
 // eslint-disable-next-line
 export default function UpdateProfilePicture({ changePage, signedUpUser }) {
     const { loading, apiError, uploadProfilePicture } =
         useUpdateProfilePicture();
     const [profilePicturePreview, setPreview] = useState(
-        signedUpUser.profilePicture,
+        signedUpUser.profilePicture
     );
     const profileRef = useRef();
 

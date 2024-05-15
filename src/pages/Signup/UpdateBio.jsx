@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 
 // eslint-disable-next-line
@@ -20,7 +20,7 @@ export default function UpdateBio({ signedUpUser }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ bio }),
-            },
+            }
         );
         await resp.json();
         setLoading(false);

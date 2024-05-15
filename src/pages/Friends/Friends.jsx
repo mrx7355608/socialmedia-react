@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useAuthFetch from "../../hooks/useAuthFetch";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 import FriendDisplayCard from "./FriendDisplayCard";
 
 export default function Friends() {

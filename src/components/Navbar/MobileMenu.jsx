@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import Spinner from "../Spinner";
+import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 
 export default function MobileMenu() {

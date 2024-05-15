@@ -9,10 +9,12 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const Friends = lazy(() => import("./pages/Friends/Friends"));
-const PendingRequests = lazy(
-    () => import("./pages/Pending_Requests/PendingRequests"),
+const PendingRequests = lazy(() =>
+    import("./pages/Pending_Requests/PendingRequests")
 );
-const FullPageSpinner = lazy(() => import("./components/FullPageSpinner"));
+const FullPageSpinner = lazy(() =>
+    import("./components/spinners/FullPageSpinner")
+);
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 const router = createBrowserRouter([

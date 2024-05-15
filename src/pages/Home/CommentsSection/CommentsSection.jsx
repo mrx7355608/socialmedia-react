@@ -3,7 +3,7 @@ import { usePostContext } from "../../../contexts/post";
 import { useCommentsContext } from "../../../contexts/comments";
 
 import CreateComment from "./Create";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../components/spinners/Spinner";
 import CommentsList from "./List";
 
 import { booleanProp, funcProp, stringProp } from "../../../utils/propTypes";

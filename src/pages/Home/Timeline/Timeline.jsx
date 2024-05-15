@@ -1,5 +1,5 @@
 // COMPONENTS
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../components/spinners/Spinner";
 import PostCard from "../Post/PostCard";
 
 // CONTEXTS

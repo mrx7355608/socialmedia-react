@@ -1,7 +1,7 @@
 import SocialLoginButtons from "../../components/SocialLoginButtons";
 import { Link } from "react-router-dom";
 import useLogin from "./useLogin";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user";
 

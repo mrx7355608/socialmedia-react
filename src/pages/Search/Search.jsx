@@ -1,6 +1,6 @@
 import useAuthFetch from "../../hooks/useAuthFetch";
 import { useSearchParams } from "react-router-dom";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 import AddFriendCard from "./AddFriendCard";
 
 export default function Search() {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { funcProp, stringProp } from "../../utils/propTypes";
 import { ErrorToast } from "../../components/Toasts";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 
 export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {

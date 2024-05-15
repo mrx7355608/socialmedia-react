@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuthFetch from "../../hooks/useAuthFetch";
-import Spinner from "../Spinner";
+import Spinner from "../spinners/Spinner";
 import ErrorBox from "./ErrorBox";
 import List from "./List";
 import { arrayProp } from "../../utils/propTypes";

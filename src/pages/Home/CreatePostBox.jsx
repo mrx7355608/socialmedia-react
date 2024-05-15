@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 import { useTimelineContext } from "../../contexts/timeline";
 

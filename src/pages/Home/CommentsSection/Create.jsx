@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useUserContext } from "../../../contexts/user";
 import { usePostContext } from "../../../contexts/post";
 import { useCommentsContext } from "../../../contexts/comments";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../components/spinners/Spinner";
 
 export default function CreateComment() {
     const { user } = useUserContext();
