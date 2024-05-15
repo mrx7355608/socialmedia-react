@@ -1,30 +1,30 @@
 import { useState } from "react";
 import Spinner from "../../spinners/Spinner";
 import { useUserContext } from "../../../contexts/user";
+import { UserServices } from "../../../api/user";
+import { useNavigate } from "react-router-dom";
+
+const userServices = UserServices();
 
 // eslint-disable-next-line
 export default function UpdateBio({ signedUpUser }) {
     const [bio, setBio] = useState("");
     const [loading, setLoading] = useState(false);
-    // const navigateTo = useNavigate();
+    const [apiError, setApiError] = useState(false);
     const { setUser } = useUserContext();
+    const navTo = useNavigate();
 
     const updateBio = async () => {
-        setLoading(true);
-        const resp = await fetch(
-            `${import.meta.env.VITE_SERVER_URL}api/v1/user`,
-            {
-                method: "PATCH",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ bio }),
-            }
-        );
-        await resp.json();
-        setLoading(false);
-        setUser(signedUpUser);
+        try {
+            setLoading(true);
+            await userServices.updateBio(bio);
+            setUser(signedUpUser);
+        } catch (err) {
+            setApiError("An un-expected error occured");
+        } finally {
+            setLoading(false);
+            navTo("/");
+        }
     };
 
     return (
@@ -42,6 +42,7 @@ export default function UpdateBio({ signedUpUser }) {
                     rows={4}
                     onChange={(e) => setBio(e.target.value)}
                 ></textarea>
+                {apiError && <p className="text-red-500">{apiError}</p>}
                 <button className="btn btn-primary" onClick={updateBio}>
                     {loading ? <Spinner /> : "Complete"}
                 </button>
