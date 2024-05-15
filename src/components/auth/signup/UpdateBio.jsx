@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Spinner from "../../components/spinners/Spinner";
-import { useUserContext } from "../../contexts/user";
+import Spinner from "../../spinners/Spinner";
+import { useUserContext } from "../../../contexts/user";
 
 // eslint-disable-next-line
 export default function UpdateBio({ signedUpUser }) {

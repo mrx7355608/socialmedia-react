@@ -1,11 +1,11 @@
 import { useState } from "react";
-import SocialLoginButtons from "../../components/SocialLoginButtons";
-import useSignup from "../../hooks/useSignup";
-import Spinner from "../../components/spinners/Spinner";
+import SocialLoginButtons from "../../SocialLoginButtons";
+import useSignup from "../../../hooks/useSignup";
+import Spinner from "../../spinners/Spinner";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line
-export default function Form({ changePage, setSignedUpUser }) {
+export default function SignupForm({ changePage, setSignedUpUser }) {
     const { loading, apiError, signup } = useSignup();
     const [signupData, setSignupData] = useState({
         firstname: "",

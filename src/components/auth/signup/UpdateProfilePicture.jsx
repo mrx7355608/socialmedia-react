@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
-import useUpdateProfilePicture from "../../hooks/useUpdateProfilePicture";
-import Spinner from "../../components/spinners/Spinner";
+import useUpdateProfilePicture from "../../../hooks/useUpdateProfilePicture";
+import Spinner from "../../spinners/Spinner";
+import { stringProp } from "../../../utils/propTypes";
 
 // eslint-disable-next-line
 export default function UpdateProfilePicture({ changePage, signedUpUser }) {
@@ -65,3 +66,9 @@ export default function UpdateProfilePicture({ changePage, signedUpUser }) {
         }
     }
 }
+
+UpdateProfilePicture.propTypes = {
+    signedUpUser: {
+        profilePicture: stringProp,
+    },
+};

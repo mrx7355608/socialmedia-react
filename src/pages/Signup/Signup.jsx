@@ -1,14 +1,16 @@
 import { useState } from "react";
-import UpdateProfilePicture from "./UpdateProfilePicture";
-import UpdateBio from "./UpdateBio";
-import Form from "./Form";
+import {
+    SignupForm,
+    UpdateBio,
+    UpdateProfilePicture,
+} from "../../components/auth/signup";
 
 export default function Signup() {
     const [signedUpUser, setSignedUpUser] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
 
     const elems = [
-        <Form
+        <SignupForm
             key={0}
             changePage={changePage}
             setSignedUpUser={setSignedUpUser}
