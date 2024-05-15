@@ -5,7 +5,7 @@ import PostCard from "../Post/PostCard";
 // CONTEXTS
 import PostProvider from "../../../contexts/post";
 import { useTimelineContext } from "../../../contexts/timeline";
-import useTimeline from "./useTimeline";
+import useTimeline from "../../../hooks/useTimeline";
 
 export default function Timeline() {
     const { timeline } = useTimelineContext();

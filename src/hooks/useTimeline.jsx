@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTimelineContext } from "../../../contexts/timeline";
+import { useTimelineContext } from "../contexts/timeline";
 
 export default function useTimeline() {
     const [loading, setLoading] = useState(false);
