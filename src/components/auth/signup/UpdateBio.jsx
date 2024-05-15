@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Spinner from "../../spinners/Spinner";
 import { useUserContext } from "../../../contexts/user";
-import { UserServices } from "../../../api/user";
+import UserServices from "../../../api/user";
 import { useNavigate } from "react-router-dom";
 
 const userServices = UserServices();
@@ -17,7 +17,7 @@ export default function UpdateBio({ signedUpUser }) {
     const updateBio = async () => {
         try {
             setLoading(true);
-            await userServices.updateBio(bio);
+            await userServices.update({ bio });
             setUser(signedUpUser);
         } catch (err) {
             setApiError("An un-expected error occured");

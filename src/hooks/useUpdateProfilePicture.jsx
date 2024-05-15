@@ -1,35 +1,26 @@
 import { useState } from "react";
+import UserServices from "../api/user";
+import CloudinaryServices from "../api/cloudinary";
 
 export default function useUpdateProfilePicture() {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
+    const userServices = UserServices();
+    const cloudinaryServices = CloudinaryServices();
 
     /*
      *********************************
       UPLOAD IMAGE FILE TO CLOUDINARY
      *********************************
      */
-
-    async function uploadToCloudinary(pictureFile) {
-        setLoading(true);
-
-        // Append image and upload_preset in formdata
-        const cloudName = "doemiclic";
-        const fd = new FormData();
-        fd.append("upload_preset", "socialmedia");
-        fd.append("file", pictureFile);
-
-        // Make request to cloudinary
-        const cloudinaryUploadUrl = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    async function uploadToCloudinary(file) {
         try {
-            const response = await fetch(cloudinaryUploadUrl, {
-                method: "POST",
-                body: fd,
-            });
-            const result = await response.json();
+            setLoading(true);
+            const result = await cloudinaryServices.upload(file);
             return result.secure_url;
         } catch (err) {
             setApiError("An un-expected error occured");
+        } finally {
             setLoading(false);
         }
     }
@@ -44,29 +35,22 @@ export default function useUpdateProfilePicture() {
             return setApiError("No image selected");
         }
 
-        // Get uploaded image url from cloudinary
         const uploadedPictureURL = await uploadToCloudinary(pictureFile);
-        // Save url on server
-        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/user`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ profilePicture: uploadedPictureURL }),
-        };
+
         try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            setLoading(false);
-            if (result.ok === false) {
-                setApiError(result.error);
+            const apiResult = await userServices.update({
+                profilePicture: uploadedPictureURL,
+            });
+
+            if (apiResult.ok === false) {
+                setApiError(apiResult.error);
                 return null;
+            } else {
+                return apiResult.ok;
             }
-            return result.ok;
         } catch (err) {
             setApiError("An un-expected error occured");
+        } finally {
             setLoading(false);
         }
     }

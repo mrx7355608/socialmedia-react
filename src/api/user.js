@@ -1,16 +1,14 @@
 import { axiosAgent } from "../utils/axiosAgent";
 
-export function UserServices() {
-    const updateBio = async (bio) => {
-        const response = await axiosAgent.patch(
-            "/",
-            { bio },
-            { withCredentials: true }
-        );
+export default function UserServices() {
+    const update = async (data) => {
+        const response = await axiosAgent.patch("/api/v1/user", data, {
+            withCredentials: true,
+        });
         return response.data;
     };
 
     return {
-        updateBio,
+        update,
     };
 }
