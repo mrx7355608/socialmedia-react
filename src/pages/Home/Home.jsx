@@ -1,6 +1,6 @@
 // COMPONENTS
-import RightSideBar from "../../components/RightSideBar/RightSideBar";
-import Timeline from "./Timeline/Timeline";
+import RightSideBar from "./RightSideBar/RightSideBar";
+import Timeline from "./Timeline";
 import { PostForm } from "../../components/posts";
 
 // CONTEXT
