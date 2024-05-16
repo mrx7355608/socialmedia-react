@@ -12,28 +12,18 @@ export default function Search() {
 
     const { loading, error, resp } = useAuthFetch(url, [query]);
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center mx-auto w-1/2 min-h-screen">
-                <Spinner />
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="flex items-center justify-center mx-auto w-1/2 min-h-screen">
-                <p className="text-red-400 text-lg">{error}</p>
-            </div>
-        );
-    }
-
     return (
         <div className="flex flex-col items-center justify-start w-full p-4 lg:w-1/2 mx-auto">
-            <h1 className="font-bold text-gray-200 text-left text-2xl p-2 mb-8 mt-6">
+            <h1 className="font-bold text-gray-200 text-left text-3xl p-2 mb-8 mt-6">
                 Showing results for {searchParams.get("name")}
             </h1>
-            <SearchList searchResults={resp} />
+            {loading && (
+                <div className="flex items-center justify-center mx-auto w-1/2 min-h-screen">
+                    <Spinner />
+                </div>
+            )}
+            {error && <p className="text-red-400 text-lg">{error}</p>}
+            {resp && <SearchList searchResults={resp} />}
         </div>
     );
 }
