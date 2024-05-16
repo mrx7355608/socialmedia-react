@@ -1,4 +1,4 @@
-import { stringProp } from "../../utils/propTypes";
+import { stringProp } from "../../../utils/propTypes";
 
 export default function ErrorBox({ error }) {
     return (

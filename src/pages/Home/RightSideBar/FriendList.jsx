@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import useAuthFetch from "../../hooks/useAuthFetch";
-import Spinner from "../spinners/Spinner";
+import useAuthFetch from "../../../hooks/useAuthFetch";
+import Spinner from "../../../components/spinners/Spinner";
 import ErrorBox from "./ErrorBox";
 import List from "./List";
-import { arrayProp } from "../../utils/propTypes";
+import { arrayProp } from "../../../utils/propTypes";
 
 export default function FriendList() {
     const { loading, error, resp: friends } = useAuthFetch("/api/v1/friends");

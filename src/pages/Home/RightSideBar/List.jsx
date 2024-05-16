@@ -1,5 +1,5 @@
-import { arrayPropOptional } from "../../utils/propTypes";
-import UserPictureAndName from "../UserProfilePictureAndName";
+import { arrayPropOptional } from "../../../utils/propTypes";
+import UserPictureAndName from "../../../components/UserProfilePictureAndName";
 
 export default function List({ content }) {
     return (
