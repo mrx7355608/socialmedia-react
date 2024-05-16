@@ -1,12 +1,14 @@
 import { useState } from "react";
 import SocialLoginButtons from "../../SocialLoginButtons";
-import useSignup from "../../../hooks/useSignup";
 import Spinner from "../../spinners/Spinner";
 import { Link } from "react-router-dom";
+import { AuthServices } from "../../../api/auth";
 
 // eslint-disable-next-line
 export default function SignupForm({ changePage, setSignedUpUser }) {
-    const { loading, apiError, signup } = useSignup();
+    const authServices = AuthServices();
+    const [loading, setLoading] = useState(false);
+    const [apiError, setApiError] = useState("");
     const [signupData, setSignupData] = useState({
         firstname: "",
         lastname: "",
@@ -89,10 +91,21 @@ export default function SignupForm({ changePage, setSignedUpUser }) {
     }
     async function onSubmitHandler(e) {
         e.preventDefault();
-        const signedUpUserData = await signup(signupData);
-        if (signedUpUserData) {
-            setSignedUpUser(signedUpUserData);
+        try {
+            setLoading(true);
+            const apiResult = await authServices.signup(signupData);
+
+            if (apiResult.ok === false) {
+                setApiError(apiResult.error);
+                setTimeout(() => setApiError(""), 4000);
+                return null;
+            }
+            setSignedUpUser(apiResult.data);
             changePage();
+        } catch (err) {
+            setApiError("An un-expected error occured");
+        } finally {
+            setLoading(false);
         }
     }
 }
