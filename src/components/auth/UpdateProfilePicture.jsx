@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import useUpdateProfilePicture from "../../../hooks/useUpdateProfilePicture";
-import Spinner from "../../spinners/Spinner";
-import { stringProp } from "../../../utils/propTypes";
+import useUpdateProfilePicture from "../../hooks/useUpdateProfilePicture";
+import Spinner from "../spinners/Spinner";
+import { stringProp } from "../../utils/propTypes";
 
 // eslint-disable-next-line
 export default function UpdateProfilePicture({ changePage, signedUpUser }) {

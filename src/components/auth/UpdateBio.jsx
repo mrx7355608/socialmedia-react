@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Spinner from "../../spinners/Spinner";
-import { useUserContext } from "../../../contexts/user";
-import UserServices from "../../../api/user";
+import Spinner from "../spinners/Spinner";
+import { useUserContext } from "../../contexts/user";
+import UserServices from "../../api/user";
 import { useNavigate } from "react-router-dom";
 
 const userServices = UserServices();

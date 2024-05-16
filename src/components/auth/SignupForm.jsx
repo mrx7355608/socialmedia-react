@@ -1,8 +1,8 @@
 import { useState } from "react";
-import SocialLoginButtons from "../../SocialLoginButtons";
-import Spinner from "../../spinners/Spinner";
+import SocialLoginButtons from "../SocialLoginButtons";
+import Spinner from "../spinners/Spinner";
 import { Link } from "react-router-dom";
-import { AuthServices } from "../../../api/auth";
+import { AuthServices } from "../../api/auth";
 
 // eslint-disable-next-line
 export default function SignupForm({ changePage, setSignedUpUser }) {
