@@ -1,5 +1,5 @@
 import Spinner from "../../components/spinners/Spinner";
-import { SuccessToast, ErrorToast } from "../../components/Toasts";
+import { SuccessToast, ErrorToast } from "../toasts";
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user";
 import { stringProp } from "../../utils/propTypes";

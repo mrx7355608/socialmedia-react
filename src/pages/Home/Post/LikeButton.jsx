@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { usePostContext } from "../../../contexts/post";
 import { useUserContext } from "../../../contexts/user";
-import { ErrorToast } from "../../../components/Toasts";
+import { ErrorToast } from "../../../components/toasts";
 
 export default function LikeButton() {
     const { post, setPost } = usePostContext();

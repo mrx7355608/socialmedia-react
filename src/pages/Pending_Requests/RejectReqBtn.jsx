@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Spinner from "../../components/spinners/Spinner";
-import { ErrorToast } from "../../components/Toasts";
+import { ErrorToast } from "../../components/toasts";
 import { funcProp, stringProp } from "../../utils/propTypes";
 
 export default function RejectReqBtn({ requestID, updatePendingRequests }) {

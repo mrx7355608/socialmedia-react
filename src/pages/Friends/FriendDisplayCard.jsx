@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { funcProp, stringProp } from "../../utils/propTypes";
-import { ErrorToast } from "../../components/Toasts";
+import { ErrorToast } from "../../components/toasts";
 import Spinner from "../../components/spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 

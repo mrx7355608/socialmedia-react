@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Spinner from "../../components/spinners/Spinner";
 import { funcProp, stringProp } from "../../utils/propTypes";
-import { ErrorToast } from "../../components/Toasts";
+import { ErrorToast } from "../../components/toasts";
 
 export default function AcceptReqBtn({ requestID, updatePendingRequests }) {
     const [loading, setLoading] = useState(false);
