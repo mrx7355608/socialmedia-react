@@ -9,7 +9,7 @@ export default function UserServices() {
     };
 
     const sendFriendRequest = async (friendID) => {
-        const url = `/api/vi/user/friends/send-request/${friendID}`;
+        const url = `/api/v1/friends/send-request/${friendID}`;
         const response = await axiosAgent.post(url, null, {
             withCredentials: true,
         });
