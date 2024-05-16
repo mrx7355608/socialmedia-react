@@ -5,7 +5,7 @@ export default function SuccessToast({ success }) {
     return (
         <div className="toast toast-top toast-end top-32 lg:top-14">
             <div className="alert alert-success bg-green-400">
-                <FaCheck size={23} />
+                <FaCheck size={20} />
                 <span>{success}</span>
             </div>
         </div>
