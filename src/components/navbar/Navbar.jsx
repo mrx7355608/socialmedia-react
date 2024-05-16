@@ -52,6 +52,8 @@ export default function Navbar() {
 
     function onSubmitHandler(e) {
         e.preventDefault();
-        navigateTo(`/search?name=${query}`);
+        if (query.trim()) {
+            navigateTo(`/search?name=${query}`);
+        }
     }
 }
