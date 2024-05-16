@@ -1,14 +1,16 @@
 import useAuthFetch from "../../hooks/useAuthFetch";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../components/spinners/Spinner";
-import AddFriendCard from "./AddFriendCard";
+import SearchList from "../../components/search/SearchList";
 
 export default function Search() {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { loading, error, resp } = useAuthFetch(
-        `/api/v1/user/search?name=${searchParams.get("name")}`,
-        [searchParams.get("name")]
-    );
+    // eslint-disable-next-line
+    const [searchParams, _setSearchParams] = useSearchParams();
+
+    const query = searchParams.get("name");
+    const url = `/api/v1/user/search?name=${query}`;
+
+    const { loading, error, resp } = useAuthFetch(url, [query]);
 
     if (loading) {
         return (
@@ -31,9 +33,7 @@ export default function Search() {
             <h1 className="font-bold text-gray-200 text-left text-2xl p-2 mb-8 mt-6">
                 Showing results for {searchParams.get("name")}
             </h1>
-            {resp.map((friend) => {
-                return <AddFriendCard friend={friend} key={friend._id} />;
-            })}
+            <SearchList searchResults={resp} />
         </div>
     );
 }

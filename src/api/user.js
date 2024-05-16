@@ -8,7 +8,16 @@ export default function UserServices() {
         return response.data;
     };
 
+    const sendFriendRequest = async (friendID) => {
+        const url = `/api/vi/user/friends/send-request/${friendID}`;
+        const response = await axiosAgent.post(url, null, {
+            withCredentials: true,
+        });
+        return response.data;
+    };
+
     return {
         update,
+        sendFriendRequest,
     };
 }
