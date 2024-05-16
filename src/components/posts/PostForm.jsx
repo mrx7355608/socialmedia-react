@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Spinner from "../../components/spinners/Spinner";
+import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 import { useTimelineContext } from "../../contexts/timeline";
 
-export default function CreatePostBox() {
+export default function PostForm() {
     const { user } = useUserContext();
     const { timeline, setTimeline } = useTimelineContext();
 

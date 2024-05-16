@@ -1,7 +1,7 @@
 // COMPONENTS
 import RightSideBar from "../../components/RightSideBar/RightSideBar";
 import Timeline from "./Timeline/Timeline";
-import CreatePostBox from "./CreatePostBox";
+import { PostForm } from "../../components/posts";
 
 // CONTEXT
 import TimelineProvider from "../../contexts/timeline";
@@ -13,7 +13,7 @@ export default function Home() {
 
             <div className="flex flex-col items-center justify-start min-h-screen">
                 <TimelineProvider>
-                    <CreatePostBox />
+                    <PostForm />
                     <Timeline />
                 </TimelineProvider>
             </div>

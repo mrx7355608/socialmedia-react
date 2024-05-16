@@ -13,14 +13,14 @@ export default function MainLayout() {
         if (!user) {
             navigateTo("/auth/login");
         }
-    }, [user]);
+    }, [user, navigateTo]);
 
     return (
         <Suspense fallback={<FullPageSpinner />}>
             <Navbar />
             <MobileMenu />
             <Sidebar />
-            <div className="mt-12 pt-1">
+            <div className="mt-12 lg:mt-0 pt-1">
                 <Outlet />
             </div>
         </Suspense>

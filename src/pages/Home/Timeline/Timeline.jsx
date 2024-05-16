@@ -1,11 +1,11 @@
 // COMPONENTS
 import Spinner from "../../../components/spinners/Spinner";
-import PostCard from "../Post/PostCard";
 
 // CONTEXTS
 import PostProvider from "../../../contexts/post";
 import { useTimelineContext } from "../../../contexts/timeline";
 import useTimeline from "../../../hooks/useTimeline";
+import { PostItem } from "../../../components/posts";
 
 export default function Timeline() {
     const { timeline } = useTimelineContext();
@@ -31,13 +31,14 @@ export default function Timeline() {
 
     return (
         <>
-            {timeline.map((post) => {
-                return (
-                    <PostProvider key={post._id}>
-                        <PostCard post={post} />
-                    </PostProvider>
-                );
-            })}
+            {timeline &&
+                timeline.map((post) => {
+                    return (
+                        <PostProvider key={post._id}>
+                            <PostItem postData={post} />
+                        </PostProvider>
+                    );
+                })}
         </>
     );
 }

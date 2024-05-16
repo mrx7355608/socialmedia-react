@@ -1,15 +1,17 @@
-import { arrayProp, dateProp, stringProp } from "../../../utils/propTypes";
-import PostCardMenu from "./PostCardMenu";
-import { usePostContext } from "../../../contexts/post";
-import AuthorAndPubilshData from "./AuthorAndPubilshData";
 import { useEffect, useState } from "react";
-import CommentsSection from "../CommentsSection/CommentsSection";
-import EditPostModal from "./EditPostModal";
-import DeletePostModal from "./DeletePostModal";
-import CommentsProvider from "../../../contexts/comments";
-import LikeButton from "./LikeButton";
+import { arrayProp, dateProp, stringProp } from "../../utils/propTypes";
+import { usePostContext } from "../../contexts/post";
+import CommentsProvider from "../../contexts/comments";
 
-export default function PostCard({ post: postData }) {
+import CommentsSection from "../../pages/Home/CommentsSection/CommentsSection";
+
+import PostMenu from "./PostMenu";
+import LikeButton from "./LikeButton";
+import CommentButton from "./CommentButton";
+import EditPostModal from "../modals/EditPostModal";
+import DeletePostModal from "../modals/DeletePostModal";
+
+export default function PostCard({ postData }) {
     const { post, setPost } = usePostContext();
     const [showComments, setShowComments] = useState(false);
 
@@ -19,19 +21,38 @@ export default function PostCard({ post: postData }) {
         }
     }, [postData, setPost]);
 
+    // Don't render anything until post context is not updated
+    if (!post) {
+        return;
+    }
+
     return (
         <div className="relative flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg mb-4 w-full shadow-lg">
-            {/* Post author and publishing details */}
-            <AuthorAndPubilshData />
+            {/* Author and publishing details */}
+            <div className="w-full flex items-center">
+                <img
+                    src={post.author.profilePicture}
+                    alt="post author picture"
+                    className="w-10 h-10 object-cover rounded-full inline mr-3"
+                />
+                <div>
+                    <p className="text-gray-300 font-medium">
+                        {post.author.fullname}
+                    </p>
+                    <p className="text-gray-500 font-medium text-xs">
+                        Posted on {new Date(post.createdAt).toDateString()}
+                    </p>
+                </div>
+            </div>
 
-            {/* Post content */}
+            {/* Content */}
             <p
                 className="text-gray-300 mt-5"
                 style={{
                     whiteSpace: "pre-line",
                 }}
             >
-                {post?.content}
+                {post.content}
             </p>
 
             {/* No. of likes and comments on post */}
@@ -42,26 +63,14 @@ export default function PostCard({ post: postData }) {
             {/* Like and Comment button */}
             <div className="flex gap-2 w-full mt-4">
                 <LikeButton />
-                <button
-                    className="btn btn-ghost flex-1"
-                    onClick={() => {
-                        setShowComments(true);
-                        document
-                            .getElementById(`my_modal_${post._id}`)
-                            .showModal();
-                    }}
-                >
-                    <img
-                        src="/comment.png"
-                        alt="like icon"
-                        className="inline w-5 h-5"
-                    />
-                    Comment
-                </button>
+                <CommentButton
+                    setShowComments={setShowComments}
+                    postID={post._id}
+                />
             </div>
 
             {/* Show a menu for  edit and delete buttons */}
-            <PostCardMenu />
+            <PostMenu />
 
             {/* Comments section modal */}
             <CommentsProvider>
@@ -79,7 +88,7 @@ export default function PostCard({ post: postData }) {
 }
 
 PostCard.propTypes = {
-    post: {
+    postData: {
         _id: stringProp,
         content: stringProp,
         author: {

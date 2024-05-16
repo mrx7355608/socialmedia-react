@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { usePostContext } from "../../../contexts/post";
-import { useUserContext } from "../../../contexts/user";
-import { ErrorToast } from "../../../components/toasts";
+import { usePostContext } from "../../contexts/post";
+import { useUserContext } from "../../contexts/user";
+import { ErrorToast } from "../toasts";
+import { PostServices } from "../../api/posts";
 
 export default function LikeButton() {
     const { post, setPost } = usePostContext();
     const { user } = useUserContext();
     const [error, setError] = useState("");
+    const postServices = PostServices();
 
     return (
         <>
-            {post?.likes.includes(user?._id) ? (
+            {isLikedPost() ? (
                 <button
                     className="btn btn-primary flex-1 text-white"
                     onClick={dislikePost}
@@ -23,7 +25,10 @@ export default function LikeButton() {
                     Liked
                 </button>
             ) : (
-                <button className="btn btn-ghost flex-1" onClick={likePost}>
+                <button
+                    className="btn btn-ghost flex-1"
+                    onClick={onClickHandler}
+                >
                     <img
                         src="/like.png"
                         alt="like icon"
@@ -36,16 +41,13 @@ export default function LikeButton() {
         </>
     );
 
-    async function likePost() {
-        const url = `/api/v1/posts/like/${post?._id}`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-        };
+    function isLikedPost() {
+        return post?.likes.includes(user?._id);
+    }
 
+    async function onClickHandler() {
         try {
-            const response = await fetch(url, options);
-            const result = await response.json();
+            const result = await postServices.like(post?._id);
             if (result.ok === false) {
                 setError(result.error);
                 setTimeout(() => setError(""), 4000);
@@ -59,15 +61,8 @@ export default function LikeButton() {
     }
 
     async function dislikePost() {
-        const url = `/api/v1/posts/dislike/${post?._id}`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-        };
-
         try {
-            const response = await fetch(url, options);
-            const result = await response.json();
+            const result = await postServices.dislike(post?._id);
             if (result.ok === false) {
                 setError(result.error);
                 setTimeout(() => setError(""), 4000);

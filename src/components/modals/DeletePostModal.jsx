@@ -1,7 +1,7 @@
-import { usePostContext } from "../../../contexts/post";
-import { useTimelineContext } from "../../../contexts/timeline";
+import { usePostContext } from "../../contexts/post";
+import { useTimelineContext } from "../../contexts/timeline";
 import { useState } from "react";
-import Spinner from "../../../components/spinners/Spinner";
+import Spinner from "../spinners/Spinner";
 
 export default function DeletePostModal() {
     const { post } = usePostContext();

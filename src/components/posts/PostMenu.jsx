@@ -1,7 +1,5 @@
-import EditPostButton from "./EditPostButton";
-import DeletePostButton from "./DeletePostButton";
-import { useUserContext } from "../../../contexts/user";
-import { usePostContext } from "../../../contexts/post";
+import { useUserContext } from "../../contexts/user";
+import { usePostContext } from "../../contexts/post";
 
 export default function PostCardMenu() {
     const { user } = useUserContext();
@@ -9,7 +7,7 @@ export default function PostCardMenu() {
 
     return (
         <>
-            {user?._id === post?.author._id ? (
+            {isUserAuthorOfPost() ? (
                 <div className="dropdown absolute top-1 right-2">
                     <div
                         tabIndex={0}
@@ -27,14 +25,29 @@ export default function PostCardMenu() {
                         className="dropdown-content z-[1] menu p-2 shadow-md bg-gray-700 rounded-box w-52"
                     >
                         <li>
-                            <EditPostButton />
+                            <div onClick={showEditPostModal}>Edit</div>
                         </li>
                         <li>
-                            <DeletePostButton />
+                            <div
+                                onClick={showDeletePostModal}
+                                className="text-red-400"
+                            >
+                                Delete
+                            </div>
                         </li>
                     </ul>
                 </div>
             ) : null}
         </>
     );
+
+    function isUserAuthorOfPost() {
+        return user?._id === post?.author._id;
+    }
+    function showEditPostModal() {
+        document.getElementById(`edit_post_${post?._id}`).showModal();
+    }
+    function showDeletePostModal() {
+        document.getElementById(`delete_post_${post?._id}`).showModal();
+    }
 }
