@@ -41,9 +41,11 @@ export default function AddFriendButton({ userID }) {
                 setTimeout(() => setShowSuccessToast(false), 4000);
             } else {
                 setApiError(response.error);
+                setTimeout(() => setApiError(""), 4000);
             }
         } catch (err) {
             setApiError("An un-exepcted error occured");
+            setTimeout(() => setApiError(""), 4000);
         } finally {
             setLoading(false);
         }
