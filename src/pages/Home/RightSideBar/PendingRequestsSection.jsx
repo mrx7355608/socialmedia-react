@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import useAuthFetch from "../../../hooks/useAuthFetch";
 import Spinner from "../../../components/spinners/Spinner";
-import ErrorBox from "./ErrorBox";
-import List from "./List";
+import SectionList from "./SectionList";
 import { arrayProp } from "../../../utils/propTypes";
 
-export default function PendingRequestsList() {
+export default function PendingRequestsSection() {
     const {
         loading,
         error,
@@ -19,8 +18,12 @@ export default function PendingRequestsList() {
             </h1>
             <hr />
             {loading && <Spinner />}
-            <ErrorBox error={error} />
-            <List content={pendingRequests} />
+            {error && (
+                <p className="font-medium text-red-900 bg-red-200 w-full p-3 rounded-lg">
+                    {error}
+                </p>
+            )}
+            {pendingRequests && <SectionList data={pendingRequests} />}
             {!loading && <ViewMoreButton pendingRequests={pendingRequests} />}
         </div>
     );

@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import useAuthFetch from "../../../hooks/useAuthFetch";
 import Spinner from "../../../components/spinners/Spinner";
-import ErrorBox from "./ErrorBox";
-import List from "./List";
+import SectionList from "./SectionList";
 import { arrayProp } from "../../../utils/propTypes";
 
-export default function FriendList() {
+export default function FriendsSection() {
     const { loading, error, resp: friends } = useAuthFetch("/api/v1/friends");
 
     return (
@@ -13,8 +12,12 @@ export default function FriendList() {
             <h1 className="text-gray-200 text-lg font-bold">Friends</h1>
             <hr />
             {loading && <Spinner />}
-            <ErrorBox error={error} />
-            <List content={friends} />
+            {error && (
+                <p className="font-medium text-red-900 bg-red-200 w-full p-3 rounded-lg">
+                    {error}
+                </p>
+            )}
+            {friends && <SectionList data={friends} />}
             {!loading && <ViewMoreButton friends={friends} />}
         </div>
     );
