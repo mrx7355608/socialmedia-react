@@ -3,6 +3,7 @@ import { useUserContext } from "../../contexts/user";
 import { usePostContext } from "../../contexts/post";
 import { useCommentsContext } from "../../contexts/comments";
 import Spinner from "../spinners/Spinner";
+import CommentsServices from "../../api/comments";
 
 export default function CommentForm() {
     const { user } = useUserContext();
@@ -10,6 +11,7 @@ export default function CommentForm() {
     const { setComments } = useCommentsContext();
     const [newComment, setNewComment] = useState("");
     const [loading, setLoading] = useState(false);
+    const commentsServices = CommentsServices();
 
     return (
         <form onSubmit={onSubmitHandler} className="w-full">
@@ -45,35 +47,25 @@ export default function CommentForm() {
     }
 
     async function onSubmitHandler(e) {
-        e.preventDefault();
-        if (!newComment.trim()) {
-            return;
-        }
-
-        // make request to server with new comment
-        const url = `/api/v1/comments/${post._id}`;
-        const options = {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({ text: newComment }),
-        };
-
         try {
+            e.preventDefault();
+            if (!newComment.trim()) {
+                return;
+            }
+
             setLoading(true);
             setNewComment("");
-            const response = await fetch(url, options);
-            const result = await response.json();
-            setLoading(false);
-
-            if (result.ok) {
+            const response = await commentsServices.create(post._id, {
+                text: newComment,
+            });
+            if (response.ok) {
                 setComments((prev) => {
-                    return [result.data, ...prev];
+                    return [response.data, ...prev];
                 });
             }
         } catch (err) {
+            return;
+        } finally {
             setLoading(false);
         }
     }

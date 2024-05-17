@@ -3,8 +3,7 @@ import { usePostContext } from "../../contexts/post";
 import { useCommentsContext } from "../../contexts/comments";
 import { booleanProp, funcProp } from "../../utils/propTypes";
 import Spinner from "../spinners/Spinner";
-import CommentForm from "../comments/CommentForm";
-import CommentsList from "../comments/CommentsList";
+import { CommentForm, CommentsList } from "../comments";
 
 export default function CommentsSectionModal({
     showComments, // used to fetch comments only when comments modal is visible
