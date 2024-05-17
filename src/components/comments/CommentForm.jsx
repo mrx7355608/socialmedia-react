@@ -28,15 +28,9 @@ export default function CommentForm() {
                     onChange={onChangeHandler}
                     value={newComment}
                 />
-                {loading ? (
-                    <button className="btn btn-success">
-                        <Spinner />
-                    </button>
-                ) : (
-                    <button type="submit" className="btn btn-success">
-                        Post
-                    </button>
-                )}
+                <button type="submit" className="btn btn-success">
+                    {loading ? <Spinner /> : "Post"}
+                </button>
             </div>
         </form>
     );
@@ -49,12 +43,10 @@ export default function CommentForm() {
     async function onSubmitHandler(e) {
         try {
             e.preventDefault();
-            if (!newComment.trim()) {
+            if (!newComment.trim() || loading === true) {
                 return;
             }
-
             setLoading(true);
-            setNewComment("");
             const response = await commentsServices.create(post._id, {
                 text: newComment,
             });
@@ -67,6 +59,7 @@ export default function CommentForm() {
             return;
         } finally {
             setLoading(false);
+            setNewComment("");
         }
     }
 }

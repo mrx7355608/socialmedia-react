@@ -8,7 +8,7 @@ export default function CommentsList() {
         <>
             <div className="p-4 overflow-y-auto" style={{ height: "73%" }}>
                 {comments.map((cmnt) => {
-                    return <CommentItem comment={cmnt} key={cmnt._id} />;
+                    return <CommentItem cmnt={cmnt} key={cmnt._id} />;
                 })}
             </div>
         </>

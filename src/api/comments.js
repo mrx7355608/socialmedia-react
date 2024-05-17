@@ -7,9 +7,9 @@ export default function CommentsServices() {
         return response.data;
     };
 
-    const edit = async (commentID) => {
+    const edit = async (commentID, data) => {
         const url = `/api/v1/comments/${commentID}`;
-        const response = await axiosAgent.patch(url);
+        const response = await axiosAgent.patch(url, data);
         return response.data;
     };
 

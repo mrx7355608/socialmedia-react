@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user";
 import { stringProp } from "../../utils/propTypes";
-import DeleteCommentButton from "./DeleteCommentButton";
+import EditCommentForm from "./EditCommentForm";
 
-export default function CommentItem({ comment }) {
+export default function CommentItem({ cmnt }) {
     const { user } = useUserContext();
     const [inEditMode, setInEditMode] = useState(false);
-    const [editedComment, setEditedComment] = useState(comment.text);
-    const [commentState, setCommentState] = useState(comment);
-    const [isEditing, setIsEditing] = useState(false);
+    const [comment, setComment] = useState(cmnt);
     // eslint-disable-next-line
     const [_editingError, setEditingError] = useState("");
 
     return (
         <div className="flex gap-5 items-center mt-4">
+            {/* Comment's author profile picture */}
             <div className="avatar">
                 <div className="w-10 rounded-full">
                     <img
@@ -22,6 +21,7 @@ export default function CommentItem({ comment }) {
                     />
                 </div>
             </div>
+
             <div
                 className="flex flex-col"
                 style={{
@@ -29,6 +29,7 @@ export default function CommentItem({ comment }) {
                     maxWidth: "400px",
                 }}
             >
+                {/* Comment bubble */}
                 <div
                     className="chat-bubble before:content-none rounded-lg"
                     style={{
@@ -39,86 +40,64 @@ export default function CommentItem({ comment }) {
                         {comment.author.fullname}
                     </p>
                     {inEditMode ? (
-                        <form onSubmit={onSubmitHandler}>
-                            <input
-                                type="text"
-                                className="input input-bordered bg-transparent w-full"
-                                name="text"
-                                value={editedComment}
-                                onChange={onChangeHandler}
-                            />
-                            {/* To prevent the user from spamming enter button
-                                and submitting the form
-                             */}
-                            {!isEditing && (
-                                <button
-                                    type="submit"
-                                    className="hidden"
-                                ></button>
-                            )}
-                        </form>
+                        <EditCommentForm
+                            commentID={cmnt._id}
+                            closeEditMode={closeEditMode}
+                            setComment={setComment}
+                            oldCommentText={cmnt.text}
+                        />
                     ) : (
-                        <p className="text-gray-300">{commentState.text}</p>
+                        <p className="text-gray-300">{comment.text}</p>
                     )}
                 </div>
-                {user?._id === comment.author._id ? (
-                    <div className="text-sm ml-1 mt-1">
+                {/* Menu */}
+                <div className="ml-2">
+                    {inEditMode ? (
                         <span
-                            onClick={toggleEditMode}
-                            className="mr-3 hover:underline hover:cursor-pointer"
+                            className="text-sm mr-3 cursor-pointer hover:underline"
+                            onClick={closeEditMode}
                         >
-                            {inEditMode
-                                ? isEditing
-                                    ? "Editing..."
-                                    : "Cancel"
-                                : "Edit"}
+                            Cancel
                         </span>
-                        <DeleteCommentButton comment={comment} />
-                    </div>
-                ) : null}
+                    ) : (
+                        <span
+                            className="text-sm mr-3 cursor-pointer hover:underline"
+                            onClick={openEditMode}
+                        >
+                            Edit
+                        </span>
+                    )}
+                </div>
+                {/* {inEditMode ? (
+                        <EditCommentForm />
+                    ) : (
+                        <p className="text-gray-300">{commentState.text}</p>
+                    )} */}
+                {/* {isAuthor() && (
+                                            <CommentMenu
+                        openEditMode={openEditMode}
+                        closeEditMode={closeEditMode}
+                    />
+                )} */}
             </div>
         </div>
     );
 
-    function toggleEditMode() {
-        setInEditMode(!inEditMode);
+    function openEditMode() {
+        setInEditMode(true);
     }
 
-    function onChangeHandler(e) {
-        setEditedComment(e.target.value);
+    function closeEditMode() {
+        setInEditMode(false);
     }
 
-    async function onSubmitHandler(e) {
-        e.preventDefault();
-        const url = `/api/v1/comments/${comment._id}`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ text: editedComment }),
-        };
-        try {
-            setIsEditing(true);
-            const response = await fetch(url, options);
-            const result = await response.json();
-            setIsEditing(false);
-
-            if (result.ok) {
-                setCommentState(result.data);
-                setInEditMode(false);
-            } else {
-                setEditingError(result.error);
-            }
-        } catch (err) {
-            setIsEditing(false);
-        }
+    function isAuthor() {
+        return user?._id === comment.author._id;
     }
 }
 
 CommentItem.propTypes = {
-    comment: {
+    cmnt: {
         _id: stringProp,
         text: stringProp,
         author: {
