@@ -12,7 +12,7 @@ export default function PostForm() {
     const [loading, setLoading] = useState(false);
 
     return (
-        <div className="flex flex-col justify-start w-full p-4 rounded-lg mb-4 bg-myGray">
+        <section className="flex flex-col justify-start w-full p-4 rounded-lg mb-4 bg-myGray">
             <div className="flex items-start w-full">
                 <img
                     src={user?.profilePicture}
@@ -43,7 +43,7 @@ export default function PostForm() {
                     Post
                 </button>
             )}
-        </div>
+        </section>
     );
 
     async function createPost() {

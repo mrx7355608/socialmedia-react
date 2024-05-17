@@ -8,7 +8,7 @@ export default function Navbar() {
     const navigateTo = useNavigate();
 
     return (
-        <div
+        <nav
             style={{ background: "#1D232A" }}
             className="navbar px-4 lg:px-7 shadow-md z-10 sticky top-0"
         >
@@ -47,7 +47,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-        </div>
+        </nav>
     );
 
     function onSubmitHandler(e) {
