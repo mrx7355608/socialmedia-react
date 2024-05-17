@@ -105,7 +105,6 @@ export default function CommentItem({ comment }) {
             setIsEditing(false);
 
             if (result.ok) {
-                console.log(result.data);
                 setCommentState(result.data);
                 setInEditMode(false);
             } else {

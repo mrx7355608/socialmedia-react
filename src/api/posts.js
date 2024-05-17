@@ -4,8 +4,7 @@ export function PostServices() {
     const like = async (postID) => {
         const response = await axiosAgent.patch(
             `/api/v1/posts/like/${postID}`,
-            null,
-            { withCredentials: true }
+            null
         );
         return response.data;
     };
@@ -13,8 +12,7 @@ export function PostServices() {
     const dislike = async (postID) => {
         const response = await axiosAgent.patch(
             `/api/v1/posts/dislike/${postID}`,
-            null,
-            { withCredentials: true }
+            null
         );
         return response.data;
     };
