@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { funcProp, stringProp } from "../../utils/propTypes";
+import { booleanProp, funcProp, stringProp } from "../../utils/propTypes";
 import CommentsServices from "../../api/comments";
+import { ErrorToast } from "../../components/toasts";
 
-export default function EditCommentForm({
-    commentID,
-    oldCommentText,
-    closeEditMode,
-    setComment,
-}) {
-    const [editedComment, setEditedComment] = useState(oldCommentText);
-    const [loading, setLoading] = useState(false);
+export default function EditCommentForm({ sharedStates, setSharedStates }) {
+    const [editedComment, setEditedComment] = useState(sharedStates.comment);
+    const [apiError, setApiError] = useState("");
     const commentServices = CommentsServices();
 
     return (
@@ -24,6 +20,7 @@ export default function EditCommentForm({
                 />
                 <button type="submit" className="hidden"></button>
             </form>
+            {apiError && <ErrorToast error={apiError} />}
         </div>
     );
 
@@ -33,29 +30,62 @@ export default function EditCommentForm({
 
     async function onSubmitHandler(e) {
         e.preventDefault();
-        if (loading || !editedComment.trim()) {
+        if (!editedComment.trim() || sharedStates.isEditing) {
             return;
         }
 
         try {
-            setLoading(true);
-            const response = await commentServices.edit(commentID, {
-                text: editedComment,
-            });
-            if (response.ok) {
-                closeEditMode();
-                setComment(response.data.text);
+            setSharedStates({ ...sharedStates, isEditing: true });
+            const response = await commentServices.edit(
+                sharedStates.commentID,
+                {
+                    text: editedComment,
+                }
+            );
+            if (response.ok === false) {
+                setSharedStates({
+                    ...sharedStates,
+                    isEditing: false,
+                    inEditMode: false,
+                });
+                return setApiError(response.error);
             }
+            setSharedStates({
+                ...sharedStates,
+                isEditing: false,
+                inEditMode: false,
+                comment: response.data.text,
+            });
         } catch (err) {
-            console.log(err.message);
-        } finally {
-            setLoading(false);
+            setApiError("An un-expected error occured");
+            setSharedStates({
+                ...sharedStates,
+                isEditing: false,
+                inEditMode: false,
+            });
         }
+
+        /*
+         
+        Code below was not working for some unknown reasons
+
+         finally {
+             setSharedStates({
+                 ...sharedStates,
+                 isEditing: false,
+                 inEditMode: false,
+             });
+         }
+        */
     }
 }
 EditCommentForm.propTypes = {
-    commentID: stringProp,
-    oldCommentText: stringProp,
     closeEditMode: funcProp,
-    setComment: funcProp,
+    sharedStates: {
+        isEditing: booleanProp,
+        inEditMode: booleanProp,
+        comment: stringProp,
+        commentID: stringProp,
+    },
+    setSharedStates: funcProp,
 };

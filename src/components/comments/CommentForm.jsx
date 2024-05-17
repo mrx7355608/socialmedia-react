@@ -17,7 +17,7 @@ export default function CommentForm() {
         <form onSubmit={onSubmitHandler} className="w-full">
             <div className="flex items-center justify-center p-3 absolute bottom-0 left-0 w-full">
                 <img
-                    alt="Tailwind CSS chat bubble component"
+                    alt=""
                     src={user?.profilePicture}
                     className="rounded-full object-cover w-10 h-10"
                 />
