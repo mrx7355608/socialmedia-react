@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import UserPictureAndName from "../UserProfilePictureAndName";
 import { useState } from "react";
 import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
@@ -48,7 +47,16 @@ export default function Sidebar() {
     ];
     return (
         <div className="hidden lg:flex fixed left-0 flex-col p-4 h-screen w-1/4">
-            <UserPictureAndName user={user} />
+            <div className="p-3 rounded-lg w-full">
+                <img
+                    src={user?.profilePicture}
+                    alt=""
+                    className="w-8 h-8 fit-cover inline mr-3 rounded-full border border-gray-300 object-cover"
+                />
+                <span className="text-gray-300 font-medium">
+                    {user?.fullname}
+                </span>
+            </div>
             {links.map((link, index) => {
                 return (
                     <Link to={link.path} key={index}>

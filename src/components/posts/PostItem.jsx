@@ -27,7 +27,7 @@ export default function PostCard({ postData }) {
     }
 
     return (
-        <article className="relative flex flex-col items-start justify-start bg-gray-800 p-4 rounded-lg w-full shadow-lg">
+        <article className="relative flex flex-col items-start justify-start bg-myGray p-4 rounded-lg w-full shadow-lg">
             {/* Author and publishing details */}
             <div className="w-full flex items-center">
                 <img
