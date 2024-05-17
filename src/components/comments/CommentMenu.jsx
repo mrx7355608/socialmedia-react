@@ -1,8 +1,18 @@
+import { useState } from "react";
+import { ErrorToast } from "../toasts";
+import CommentsServices from "../../api/comments";
+import { useCommentsContext } from "../../contexts/comments";
 import { booleanProp, funcProp } from "../../utils/propTypes";
 
 export default function CommentMenu({ sharedStates, setSharedStates }) {
+    const commentsServices = CommentsServices();
+    const { setComments } = useCommentsContext();
+    const [apiError, setApiError] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+
     return (
         <div className="ml-2 mt-1 text-sm">
+            {/* EDIT BUTTON */}
             {sharedStates.inEditMode ? (
                 sharedStates.isEditing ? (
                     <span className="mr-3 cursor-pointer hover:underline">
@@ -25,7 +35,20 @@ export default function CommentMenu({ sharedStates, setSharedStates }) {
                 </span>
             )}
 
-            <span className="cursor-pointer hover:underline">Delete</span>
+            {/* DELETE BUTTON */}
+            {isDeleting ? (
+                <span className="cursor-pointer hover:underline">
+                    Deleting...
+                </span>
+            ) : (
+                <span
+                    className="cursor-pointer hover:underline"
+                    onClick={deleteComment}
+                >
+                    Delete
+                </span>
+            )}
+            {apiError && <ErrorToast error={apiError} />}
         </div>
     );
 
@@ -34,6 +57,29 @@ export default function CommentMenu({ sharedStates, setSharedStates }) {
     }
     function closeEditMode() {
         setSharedStates({ ...sharedStates, inEditMode: false });
+    }
+    async function deleteComment() {
+        try {
+            // make request on server
+            setIsDeleting(true);
+            const response = await commentsServices.remove(
+                sharedStates.commentID
+            );
+
+            // If there's an error, the server will not return 204 (no content)
+            // So the response will be defined
+            if (response) {
+                return setApiError(response.error);
+            }
+            // filter out this comment from comments context
+            setComments((prev) =>
+                prev.filter((c) => c._id !== sharedStates.commentID)
+            );
+        } catch (err) {
+            setApiError("An un-expected error occured");
+        } finally {
+            setIsDeleting(true);
+        }
     }
 }
 

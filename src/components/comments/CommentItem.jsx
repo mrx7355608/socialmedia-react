@@ -6,6 +6,7 @@ import EditCommentForm from "./EditCommentForm";
 
 export default function CommentItem({ cmnt }) {
     const { user } = useUserContext();
+
     const [sharedStates, setSharedStates] = useState({
         isEditing: false,
         inEditMode: false,
