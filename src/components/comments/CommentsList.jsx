@@ -1,8 +1,8 @@
-import { useCommentsContext } from "../../contexts/comments";
+import useCommentsStore from "../../store/comments.store";
 import CommentItem from "./CommentItem";
 
 export default function CommentsList() {
-    const { comments } = useCommentsContext();
+    const comments = useCommentsStore((state) => state.comments);
 
     return (
         <>

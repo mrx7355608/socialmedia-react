@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { ErrorToast } from "../toasts";
 import CommentsServices from "../../api/comments";
-import { useCommentsContext } from "../../contexts/comments";
 import { booleanProp, funcProp } from "../../utils/propTypes";
+import useCommentsStore from "../../store/comments.store";
 
 export default function CommentMenu({ sharedStates, setSharedStates }) {
     const commentsServices = CommentsServices();
-    const { setComments } = useCommentsContext();
     const [apiError, setApiError] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
+    const filterComment = useCommentsStore((state) => state.filterComment);
 
     return (
         <div className="ml-2 mt-1 text-sm">
@@ -72,9 +72,7 @@ export default function CommentMenu({ sharedStates, setSharedStates }) {
                 return setApiError(response.error);
             }
             // filter out this comment from comments context
-            setComments((prev) =>
-                prev.filter((c) => c._id !== sharedStates.commentID)
-            );
+            filterComment(sharedStates.commentID);
         } catch (err) {
             setApiError("An un-expected error occured");
         } finally {

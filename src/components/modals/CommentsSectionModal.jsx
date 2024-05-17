@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { FaRegComment } from "react-icons/fa";
 import { stringProp } from "../../utils/propTypes";
 import { CommentForm, CommentsList } from "../comments";
-import { useCommentsContext } from "../../contexts/comments";
+import useCommentsStore from "../../store/comments.store";
 
 export default function CommentsSectionModal({ postID }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const { setComments } = useCommentsContext();
+    const setComments = useCommentsStore((state) => state.setComments);
 
     const getComments = () => {
         setLoading(true);

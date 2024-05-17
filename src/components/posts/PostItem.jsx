@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { arrayProp, dateProp, stringProp } from "../../utils/propTypes";
 import { usePostContext } from "../../contexts/post";
-import CommentsProvider from "../../contexts/comments";
 import { CommentsSectionModal } from "../modals";
 
 import PostMenu from "./PostMenu";
@@ -52,17 +51,10 @@ export default function PostCard({ postData }) {
                 {post.content}
             </p>
 
-            {/* No. of likes and comments on post */}
-            {/* <p className="mt-7 text-gray-500 text-sm font-medium">
-                {post.likes.length} Likes {post.comments.length} Comments
-            </p> */}
-
             {/* Like and Comment button */}
             <div className="flex gap-2 w-full mt-4">
                 <LikeButton />
-                <CommentsProvider>
-                    <CommentsSectionModal postID={post._id} />
-                </CommentsProvider>
+                <CommentsSectionModal postID={post._id} />
             </div>
 
             {/* Show a menu for  edit and delete buttons */}
