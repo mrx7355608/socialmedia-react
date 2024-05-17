@@ -1,5 +1,5 @@
-import { useCommentsContext } from "../../../contexts/comments";
-import SingleComment from "./SingleComment";
+import { useCommentsContext } from "../../contexts/comments";
+import SingleComment from "./CommentItem";
 
 export default function CommentsList() {
     const { comments } = useCommentsContext();

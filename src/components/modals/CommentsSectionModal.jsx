@@ -1,39 +1,43 @@
 import { useEffect, useState } from "react";
-import { usePostContext } from "../../../contexts/post";
-import { useCommentsContext } from "../../../contexts/comments";
+import { usePostContext } from "../../contexts/post";
+import { useCommentsContext } from "../../contexts/comments";
+import { booleanProp, funcProp } from "../../utils/propTypes";
+import Spinner from "../spinners/Spinner";
+import CommentForm from "../comments/CommentForm";
+import CommentsList from "../comments/CommentsList";
 
-import CreateComment from "./Create";
-import Spinner from "../../../components/spinners/Spinner";
-import CommentsList from "./List";
-
-import { booleanProp, funcProp, stringProp } from "../../../utils/propTypes";
-
-export default function CommentsSection({ showComments, setShowComments }) {
+export default function CommentsSectionModal({
+    showComments, // used to fetch comments only when comments modal is visible
+    setShowComments,
+}) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const { post } = usePostContext();
     const { setComments } = useCommentsContext();
 
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const getComments = () => {
+        setLoading(true);
+        fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/comments/${post._id}`, {
+            method: "GET",
+            credentials: "include",
+        })
+            .then((resp) => resp.json())
+            .then((result) => setComments(result.data))
+            .catch(() => setError("An un-expected error occurred"))
+            .finally(() => setLoading(false));
+    };
 
     // Fetch comments from server and update comments context
     useEffect(() => {
         if (showComments) {
-            setLoading(true);
-            fetch(`/api/v1/comments/${post?._id}`, {
-                method: "GET",
-                credentials: "include",
-            })
-                .then((resp) => resp.json())
-                .then((result) => setComments(result.data))
-                .catch(() => setError("An un-expected error occurred"))
-                .finally(() => setLoading(false));
+            getComments();
         }
-    }, [showComments, post?._id, setComments]);
+    }, [showComments]);
 
     return (
         <>
             <dialog
-                id={`my_modal_${post?._id}`}
+                id={`my_modal_${post._id}`}
                 className="modal p-0 mx-auto"
                 style={{ width: "95vw" }}
             >
@@ -61,34 +65,17 @@ export default function CommentsSection({ showComments, setShowComments }) {
                     {loading ? (
                         <Loading />
                     ) : error ? (
-                        <ShowError errorMessage={error} />
+                        <p className="text-red-400 text-lg mt-8">{error}</p>
                     ) : (
                         <CommentsList />
                     )}
                     {/* Input for creating comments */}
-                    <CreateComment />
+                    <CommentForm />
                 </div>
             </dialog>
         </>
     );
 }
-
-CommentsSection.propTypes = {
-    showComments: booleanProp,
-    setShowComments: funcProp,
-};
-
-function ShowError({ errorMessage }) {
-    return (
-        <div className="flex items-center justify-center mx-auto w-1/2 min-h-screen">
-            <p className="text-red-400 text-lg">{errorMessage}</p>
-        </div>
-    );
-}
-
-ShowError.propTypes = {
-    errorMessage: stringProp,
-};
 
 function Loading() {
     return (
@@ -97,3 +84,8 @@ function Loading() {
         </div>
     );
 }
+
+CommentsSectionModal.propTypes = {
+    showComments: booleanProp,
+    setShowComments: funcProp,
+};

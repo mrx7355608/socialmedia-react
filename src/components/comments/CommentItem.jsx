@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useUserContext } from "../../../contexts/user";
-import { stringProp } from "../../../utils/propTypes";
+import { useUserContext } from "../../contexts/user";
+import { stringProp } from "../../utils/propTypes";
 import DeleteCommentButton from "./DeleteCommentButton";
 
-export default function SingleComment({ comment }) {
+export default function CommentItem({ comment }) {
     const { user } = useUserContext();
     const [inEditMode, setInEditMode] = useState(false);
     const [editedComment, setEditedComment] = useState(comment.text);
@@ -117,7 +117,7 @@ export default function SingleComment({ comment }) {
     }
 }
 
-SingleComment.propTypes = {
+CommentItem.propTypes = {
     comment: {
         _id: stringProp,
         text: stringProp,

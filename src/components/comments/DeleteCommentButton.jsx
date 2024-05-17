@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { stringProp } from "../../../utils/propTypes";
-import { useCommentsContext } from "../../../contexts/comments";
+import { stringProp } from "../../utils/propTypes";
+import { useCommentsContext } from "../../contexts/comments";
 
 export default function DeleteCommentButton({ comment }) {
     const { setComments } = useCommentsContext();

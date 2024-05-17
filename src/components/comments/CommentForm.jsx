@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useUserContext } from "../../../contexts/user";
-import { usePostContext } from "../../../contexts/post";
-import { useCommentsContext } from "../../../contexts/comments";
-import Spinner from "../../../components/spinners/Spinner";
+import { useUserContext } from "../../contexts/user";
+import { usePostContext } from "../../contexts/post";
+import { useCommentsContext } from "../../contexts/comments";
+import Spinner from "../spinners/Spinner";
 
-export default function CreateComment() {
+export default function CommentForm() {
     const { user } = useUserContext();
     const { post } = usePostContext();
     const { setComments } = useCommentsContext();

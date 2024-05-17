@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { arrayProp, dateProp, stringProp } from "../../utils/propTypes";
 import { usePostContext } from "../../contexts/post";
 import CommentsProvider from "../../contexts/comments";
-
-import CommentsSection from "../../pages/Home/CommentsSection/CommentsSection";
+import { CommentsSectionModal } from "../modals";
 
 import PostMenu from "./PostMenu";
 import LikeButton from "./LikeButton";
@@ -74,7 +73,7 @@ export default function PostCard({ postData }) {
 
             {/* Comments section modal */}
             <CommentsProvider>
-                <CommentsSection
+                <CommentsSectionModal
                     showComments={showComments}
                     setShowComments={setShowComments}
                 />
