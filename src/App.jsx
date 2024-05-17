@@ -3,6 +3,7 @@ import { useState, useEffect, lazy } from "react";
 import { useUserContext } from "./contexts/user";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
+import ErrorPage from "./pages/ErrorPage";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
-        errorElement: <NotFound />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
                 element: <Signup />,
             },
         ],
+    },
+    {
+        path: "*",
+        element: <NotFound />,
     },
 ]);
 

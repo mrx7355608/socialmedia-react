@@ -8,7 +8,7 @@ export default function PostCardMenu() {
     return (
         <>
             {isUserAuthorOfPost() ? (
-                <div className="dropdown absolute top-1 right-2">
+                <div className="dropdown dropdown-end absolute top-1 right-2">
                     <div
                         tabIndex={0}
                         role="button"
