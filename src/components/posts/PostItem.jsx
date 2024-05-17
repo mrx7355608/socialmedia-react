@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { arrayProp, dateProp, stringProp } from "../../utils/propTypes";
 import { usePostContext } from "../../contexts/post";
 import CommentsProvider from "../../contexts/comments";
@@ -6,13 +6,11 @@ import { CommentsSectionModal } from "../modals";
 
 import PostMenu from "./PostMenu";
 import LikeButton from "./LikeButton";
-import CommentButton from "./CommentButton";
 import EditPostModal from "../modals/EditPostModal";
 import DeletePostModal from "../modals/DeletePostModal";
 
 export default function PostCard({ postData }) {
     const { post, setPost } = usePostContext();
-    const [showComments, setShowComments] = useState(false);
 
     useEffect(() => {
         if (postData) {
@@ -62,22 +60,13 @@ export default function PostCard({ postData }) {
             {/* Like and Comment button */}
             <div className="flex gap-2 w-full mt-4">
                 <LikeButton />
-                <CommentButton
-                    setShowComments={setShowComments}
-                    postID={post._id}
-                />
+                <CommentsProvider>
+                    <CommentsSectionModal postID={post._id} />
+                </CommentsProvider>
             </div>
 
             {/* Show a menu for  edit and delete buttons */}
             <PostMenu />
-
-            {/* Comments section modal */}
-            <CommentsProvider>
-                <CommentsSectionModal
-                    showComments={showComments}
-                    setShowComments={setShowComments}
-                />
-            </CommentsProvider>
 
             {/* Edit and delete post modal */}
             <EditPostModal />

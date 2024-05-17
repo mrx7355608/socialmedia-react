@@ -9,7 +9,8 @@ export default function CommentItem({ comment }) {
     const [editedComment, setEditedComment] = useState(comment.text);
     const [commentState, setCommentState] = useState(comment);
     const [isEditing, setIsEditing] = useState(false);
-    const [editingError, setEditingError] = useState("");
+    // eslint-disable-next-line
+    const [_editingError, setEditingError] = useState("");
 
     return (
         <div className="flex gap-5 items-center mt-4">

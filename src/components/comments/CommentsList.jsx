@@ -1,5 +1,5 @@
 import { useCommentsContext } from "../../contexts/comments";
-import SingleComment from "./CommentItem";
+import CommentItem from "./CommentItem";
 
 export default function CommentsList() {
     const { comments } = useCommentsContext();
@@ -8,7 +8,7 @@ export default function CommentsList() {
         <>
             <div className="p-4 overflow-y-auto" style={{ height: "73%" }}>
                 {comments.map((cmnt) => {
-                    return <SingleComment comment={cmnt} key={cmnt._id} />;
+                    return <CommentItem comment={cmnt} key={cmnt._id} />;
                 })}
             </div>
         </>
