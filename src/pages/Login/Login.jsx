@@ -1,4 +1,4 @@
-import SocialLoginButtons from "../../components/SocialLoginButtons";
+import SocialLoginButtons from "../../components/auth/SocialLoginButtons";
 import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
 import Spinner from "../../components/spinners/Spinner";
