@@ -3,38 +3,36 @@ import { usePostContext } from "../../contexts/post";
 import { useUserContext } from "../../contexts/user";
 import { ErrorToast } from "../toasts";
 import { PostServices } from "../../api/posts";
+import { BiLike, BiSolidLike } from "react-icons/bi";
+import Spinner from "../spinners/Spinner";
 
 export default function LikeButton() {
     const { post, setPost } = usePostContext();
     const { user } = useUserContext();
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState({
+        like: false,
+        dislike: false,
+    });
     const postServices = PostServices();
 
     return (
         <>
             {isLikedPost() ? (
                 <button
-                    className="btn btn-primary flex-1 text-white"
+                    className="btn btn-info btn-outline flex-1"
                     onClick={dislikePost}
                 >
-                    <img
-                        src="/like.png"
-                        alt="like icon"
-                        className="inline w-5 h-5"
-                    />
-                    Liked
+                    <BiSolidLike size={20} />
+                    {loading.dislike ? <Spinner /> : "Liked"}
                 </button>
             ) : (
                 <button
                     className="btn btn-ghost flex-1"
                     onClick={onClickHandler}
                 >
-                    <img
-                        src="/like.png"
-                        alt="like icon"
-                        className="inline w-5 h-5"
-                    />
-                    Like
+                    <BiLike size={20} />
+                    {loading.like ? <Spinner /> : "Like"}
                 </button>
             )}
             {error && <ErrorToast error={error} />}
@@ -47,6 +45,7 @@ export default function LikeButton() {
 
     async function onClickHandler() {
         try {
+            setLoading({ ...loading, like: true });
             const result = await postServices.like(post?._id);
             if (result.ok === false) {
                 setError(result.error);
@@ -57,11 +56,14 @@ export default function LikeButton() {
         } catch (err) {
             setError("An un-expected error occurred");
             setTimeout(() => setError(""), 4000);
+        } finally {
+            setLoading({ ...loading, like: false });
         }
     }
 
     async function dislikePost() {
         try {
+            setLoading({ ...loading, dislike: true });
             const result = await postServices.dislike(post?._id);
             if (result.ok === false) {
                 setError(result.error);
@@ -72,6 +74,8 @@ export default function LikeButton() {
         } catch (err) {
             setError("An un-expected error occurred");
             setTimeout(() => setError(""), 4000);
+        } finally {
+            setLoading({ ...loading, dislike: false });
         }
     }
 }
