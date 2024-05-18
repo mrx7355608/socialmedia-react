@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { useUserContext } from "../../contexts/user";
 import { usePostContext } from "../../contexts/post";
-import { useCommentsContext } from "../../contexts/comments";
 import Spinner from "../spinners/Spinner";
 import CommentsServices from "../../api/comments";
+import useCommentsStore from "../../store/comments.store";
 
 export default function CommentForm() {
     const { user } = useUserContext();
     const { post } = usePostContext();
-    const { setComments } = useCommentsContext();
     const [newComment, setNewComment] = useState("");
     const [loading, setLoading] = useState(false);
     const commentsServices = CommentsServices();
+
+    const comments = useCommentsStore((state) => state.comments);
+    const setComments = useCommentsStore((state) => state.setComments);
 
     return (
         <form onSubmit={onSubmitHandler} className="w-full">
@@ -51,9 +53,7 @@ export default function CommentForm() {
                 text: newComment,
             });
             if (response.ok) {
-                setComments((prev) => {
-                    return [response.data, ...prev];
-                });
+                setComments([response.data, ...comments]);
             }
         } catch (err) {
             return;

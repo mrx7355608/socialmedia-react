@@ -31,10 +31,7 @@ export function PostServices() {
     };
 
     const remove = async (postID) => {
-        const response = await axiosAgent.delete(
-            `/api/v1/posts/${postID}`,
-            null
-        );
+        const response = await axiosAgent.delete(`/api/v1/posts/${postID}`);
         return response ? response.data : null;
     };
 

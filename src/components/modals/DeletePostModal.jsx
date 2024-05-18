@@ -50,7 +50,7 @@ export default function DeletePostModal() {
         try {
             setLoading(true);
             const response = await postServices.remove(post?._id);
-            if (response == null) {
+            if (!response) {
                 removePostFromTimeline(post._id);
             } else {
                 alert(response.error);

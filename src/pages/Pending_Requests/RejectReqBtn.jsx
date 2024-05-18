@@ -31,14 +31,15 @@ export default function RejectReqBtn({ requestID, updatePendingRequests }) {
         try {
             setLoading(true);
             const response = await friendServices.rejectRequest(requestID);
-
-            if (response.data.ok) {
-                updatePendingRequests(response.data.data);
+            if (response.ok) {
+                updatePendingRequests(response.data);
             } else {
-                setApiError(response.data.error);
+                setApiError(response.error);
+                setTimeout(() => setApiError(""), 4000);
             }
         } catch (err) {
             setApiError("An un-expected error occurred");
+            setTimeout(() => setApiError(""), 4000);
         } finally {
             setLoading(false);
         }

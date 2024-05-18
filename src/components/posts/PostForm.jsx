@@ -51,9 +51,7 @@ export default function PostForm() {
     async function createPost() {
         try {
             setLoading(true);
-            const response = await postServices.create({ content });
-            const result = await response.json();
-
+            const result = await postServices.create({ content });
             if (result.ok) {
                 // Update timeline state
                 setTimeline([result.data, ...timeline]);

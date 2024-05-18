@@ -9,7 +9,10 @@ export default function FriendServices() {
     };
 
     const rejectRequest = async (requestID) => {
-        const response = await axiosAgent.delete();
+        const response = await axiosAgent.patch(
+            `/api/v1/friends/reject-request/${requestID}`
+        );
+        return response.data;
     };
 
     const acceptRequest = async (requestID) => {

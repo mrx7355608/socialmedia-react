@@ -8,7 +8,7 @@ import LikeButton from "./LikeButton";
 import EditPostModal from "../modals/EditPostModal";
 import DeletePostModal from "../modals/DeletePostModal";
 
-export default function PostCard({ postData }) {
+export default function PostItem({ postData }) {
     const { post, setPost } = usePostContext();
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function PostCard({ postData }) {
     );
 }
 
-PostCard.propTypes = {
+PostItem.propTypes = {
     postData: {
         _id: stringProp,
         content: stringProp,
