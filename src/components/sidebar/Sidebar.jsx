@@ -2,26 +2,29 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
+import { AuthServices } from "../../api/auth";
+import { ErrorToast } from "../toasts";
 
 export default function Sidebar() {
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const { user, setUser } = useUserContext();
+    const authServices = AuthServices();
 
-    const logout = () => {
-        setLoading(true);
-        const url = `${import.meta.env.VITE_SERVER_URL}api/v1/auth/logout`;
-        fetch(url, {
-            method: "POST",
-            credentials: "include",
-        })
-            .then((resp) => resp.json())
-            .then((data) => {
-                if (!data.ok) throw new Error(data.error);
-                setUser(null);
-            })
-            .catch((err) => console.log(err.message))
-            .finally(() => setLoading(false));
-    };
+    async function logout() {
+        try {
+            setLoading(true);
+            const response = await authServices.logout();
+            if (!response.ok) {
+                return setError(response.data.error);
+            }
+            setUser(null);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const links = [
         {
@@ -84,6 +87,7 @@ export default function Sidebar() {
                     {loading ? <Spinner /> : "Logout"}
                 </span>
             </div>
+            {error && <ErrorToast error={error} />}
         </div>
     );
 }

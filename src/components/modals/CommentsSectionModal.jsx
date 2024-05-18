@@ -51,11 +51,13 @@ export default function CommentsSectionModal({ postID }) {
                     <h3 className="font-bold text-xl text-center mb-9 mt-5">
                         Comments
                     </h3>
+
                     {/* Modal close button */}
                     <MdClose
                         onClick={closeModal}
                         className="hover:cursor-pointer p-2 w-8 h-8 rounded-full hover:bg-gray-700 object-cover absolute top-5 right-6"
                     />
+
                     {/* List of comments */}
                     {loading ? (
                         <div className="flex items-center justify-center mx-auto h-1/2">
@@ -66,6 +68,7 @@ export default function CommentsSectionModal({ postID }) {
                     ) : (
                         <CommentsList />
                     )}
+
                     {/* Form for creating comments */}
                     <CommentForm />
                 </div>

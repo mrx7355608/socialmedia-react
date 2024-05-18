@@ -3,10 +3,12 @@ import { funcProp, stringProp } from "../../utils/propTypes";
 import { ErrorToast } from "../../components/toasts";
 import Spinner from "../../components/spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
+import FriendServices from "../../api/friends";
 
 export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
+    const friendServices = FriendServices();
     const { user, setUser } = useUserContext();
 
     return (
@@ -35,27 +37,20 @@ export default function FriendDisplayCard({ friend, updateFriendsStateValue }) {
     );
 
     async function removeFriend() {
-        const url = `/api/v1/friends/remove-friend/${friend._id}`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-        };
-
         try {
             setLoading(true);
-            const response = await fetch(url, options);
-            const result = await response.json();
-            setLoading(false);
+            const response = await friendServices.remove(friend._id);
 
-            if (result.ok) {
-                updateFriendsStateValue(result.data);
-                setUser({ ...user, friends: result.data });
+            if (response.ok) {
+                updateFriendsStateValue(response.data);
+                setUser({ ...user, friends: response.data });
             } else {
-                setApiError(result.error);
+                setApiError(response.data.error);
             }
         } catch (err) {
-            setLoading(false);
             setApiError("An un-expected error occurred");
+        } finally {
+            setLoading(false);
         }
     }
 }

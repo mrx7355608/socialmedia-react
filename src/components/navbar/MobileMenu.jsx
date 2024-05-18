@@ -2,9 +2,13 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
+import { AuthServices } from "../../api/auth";
+import { ErrorToast } from "../toasts";
 
 export default function MobileMenu() {
+    const authServices = AuthServices();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const { user, setUser } = useUserContext();
     const links = [
         {
@@ -64,21 +68,22 @@ export default function MobileMenu() {
                     />
                 </button>
             )}
+            {error && <ErrorToast error={error} />}
         </div>
     );
 
-    function logout() {
+    async function logout() {
         setLoading(true);
-        fetch("/api/v1/auth/logout", {
-            method: "POST",
-            credentials: "include",
-        })
-            .then((resp) => resp.json())
-            .then((data) => {
-                if (!data.ok) throw new Error(data.error);
-                setUser(null);
-            })
-            .catch((err) => console.log(err.message))
-            .finally(() => setLoading(false));
+        try {
+            const response = await authServices.logout();
+            if (!response.ok) {
+                return setError(response.data.error);
+            }
+            setUser(null);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePostContext } from "../../contexts/post";
 import Spinner from "../spinners/Spinner";
+import { PostServices } from "../../api/posts";
 
 export default function EditPostModal() {
     const { post, setPost } = usePostContext();
@@ -8,6 +9,7 @@ export default function EditPostModal() {
     const [editContent, setEditContent] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const postServices = PostServices();
 
     useEffect(() => {
         if (post) {
@@ -57,28 +59,19 @@ export default function EditPostModal() {
             return setError("Nothing to edit");
         }
 
-        const url = `/api/v1/posts/${post?._id}`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ content: editContent }),
-        };
-
         try {
             setLoading(true);
-            const response = await fetch(url, options);
-            const result = await response.json();
+            const response = await postServices.edit(post?._id, {
+                content: editContent,
+            });
             setLoading(false);
-            if (result.ok) {
-                setPost((prev) => {
-                    return { ...prev, content: result.data.content };
-                });
+            if (response.ok) {
                 closeEditPostModal();
+                setPost((prev) => {
+                    return { ...prev, content: response.data.content };
+                });
             } else {
-                setError(result.error);
+                setError(response.error);
             }
         } catch (err) {
             setError("An un-exepected error occurred");

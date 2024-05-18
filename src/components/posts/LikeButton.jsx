@@ -47,11 +47,11 @@ export default function LikeButton() {
         try {
             setLoading({ ...loading, like: true });
             const result = await postServices.like(post?._id);
-            if (result.ok === false) {
+            if (result.ok) {
+                setPost({ ...post, likes: result.data });
+            } else {
                 setError(result.error);
                 setTimeout(() => setError(""), 4000);
-            } else {
-                setPost({ ...post, likes: result.data });
             }
         } catch (err) {
             setError("An un-expected error occurred");

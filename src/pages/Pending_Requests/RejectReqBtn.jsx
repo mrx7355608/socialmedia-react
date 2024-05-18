@@ -2,10 +2,12 @@ import { useState } from "react";
 import Spinner from "../../components/spinners/Spinner";
 import { ErrorToast } from "../../components/toasts";
 import { funcProp, stringProp } from "../../utils/propTypes";
+import FriendServices from "../../api/friends";
 
 export default function RejectReqBtn({ requestID, updatePendingRequests }) {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
+    const friendServices = FriendServices();
 
     return (
         <>
@@ -26,24 +28,18 @@ export default function RejectReqBtn({ requestID, updatePendingRequests }) {
     );
 
     async function rejectRequest() {
-        setLoading(true);
-        const url = `/api/v1/friends/reject-request/${requestID}`;
-        const options = {
-            method: "PATCH",
-            credentials: "include",
-        };
-
         try {
-            const response = await fetch(url, options);
-            const result = await response.json();
-            setLoading(false);
-            if (result.ok) {
-                updatePendingRequests(result.data);
+            setLoading(true);
+            const response = await friendServices.rejectRequest(requestID);
+
+            if (response.data.ok) {
+                updatePendingRequests(response.data.data);
             } else {
-                setApiError(result.error);
+                setApiError(response.data.error);
             }
         } catch (err) {
             setApiError("An un-expected error occurred");
+        } finally {
             setLoading(false);
         }
     }

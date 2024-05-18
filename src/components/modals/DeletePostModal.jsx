@@ -2,11 +2,13 @@ import { usePostContext } from "../../contexts/post";
 import { useTimelineContext } from "../../contexts/timeline";
 import { useState } from "react";
 import Spinner from "../spinners/Spinner";
+import { PostServices } from "../../api/posts";
 
 export default function DeletePostModal() {
     const { post } = usePostContext();
     const { setTimeline } = useTimelineContext();
     const [loading, setLoading] = useState(false);
+    const postServices = PostServices();
 
     return (
         <dialog
@@ -45,25 +47,17 @@ export default function DeletePostModal() {
     }
 
     async function deletePost() {
-        const url = `/api/v1/posts/${post._id}`;
-        const options = {
-            method: "DELETE",
-            credentials: "include",
-        };
-
         try {
             setLoading(true);
-            const response = await fetch(url, options);
-            setLoading(false);
-
-            if (response.ok) {
+            const response = await postServices.remove(post?._id);
+            if (response == null) {
                 removePostFromTimeline(post._id);
             } else {
-                const result = await response.json();
-                alert(result.error);
+                alert(response.error);
             }
         } catch (err) {
             alert("An un-expected error occurred");
+        } finally {
             setLoading(false);
         }
     }

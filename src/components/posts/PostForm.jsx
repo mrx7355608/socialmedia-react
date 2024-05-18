@@ -2,6 +2,7 @@ import { useState } from "react";
 import Spinner from "../spinners/Spinner";
 import { useUserContext } from "../../contexts/user";
 import { useTimelineContext } from "../../contexts/timeline";
+import { PostServices } from "../../api/posts";
 
 export default function PostForm() {
     const { user } = useUserContext();
@@ -10,6 +11,7 @@ export default function PostForm() {
     const [content, setContent] = useState("");
     const [apiError, setApiError] = useState("");
     const [loading, setLoading] = useState(false);
+    const postServices = PostServices();
 
     return (
         <section className="flex flex-col justify-start w-full p-4 rounded-lg mb-4 bg-myGray">
@@ -47,21 +49,11 @@ export default function PostForm() {
     );
 
     async function createPost() {
-        const url = "/api/v1/posts";
-        const options = {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ content }),
-        };
-
         try {
             setLoading(true);
-            const response = await fetch(url, options);
+            const response = await postServices.create({ content });
             const result = await response.json();
-            setLoading(false);
+
             if (result.ok) {
                 // Update timeline state
                 setTimeline([result.data, ...timeline]);
@@ -72,6 +64,7 @@ export default function PostForm() {
         } catch (err) {
             setApiError("An un-expected error occurred");
             setTimeout(() => setApiError(""), 4000);
+        } finally {
             setLoading(false);
         }
     }
