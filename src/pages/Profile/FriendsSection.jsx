@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import useAuthFetch from "../../hooks/useAuthFetch";
+import useFetch from "../../hooks/useFetch";
 import Spinner from "../../components/Spinner";
 
 export default function FriendsSection() {
-    const { loading, error, resp } = useAuthFetch("/api/v1/friends");
+    const { loading, error, resp } = useFetch("/api/v1/friends");
 
     return (
         <div className="p-3 w-full flex flex-wrap items-center justify-start lg:w-1/3 mx-auto">
