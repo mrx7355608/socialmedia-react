@@ -12,8 +12,11 @@ export default function FriendItem({ friend, filterFriendList }) {
     const friendServices = FriendServices();
 
     return (
-        <div className="">
-            <div className="flex items-center justify-between rounded-lg bg-transparent w-full">
+        <div
+            className="flex-1 bg-myGray p-4 rounded-lg"
+            style={{ minWidth: "250px" }}
+        >
+            <div className="flex items-center justify-between rounded-lg ">
                 <div className="flex items-center">
                     <img
                         src={friend.profilePicture}

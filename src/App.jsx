@@ -10,6 +10,7 @@ const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Search = lazy(() => import("./pages/Search"));
 const Friends = lazy(() => import("./pages/Friends"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 const PendingRequests = lazy(() => import("./pages/PendingRequests"));
 const FullPageSpinner = lazy(() =>
     import("./components/spinners/FullPageSpinner")
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "friends",
                 element: <Friends />,
+            },
+            {
+                path: "profile",
+                element: <Profile />,
             },
         ],
     },

@@ -6,7 +6,9 @@ export default function Friends() {
             <h1 className="text-2xl font-bold text-gray-200 text-left lg:text-3xl p-4 my-4 mb-7">
                 Friends
             </h1>
-            <FriendsContainer />
+            <div className="flex flex-col bg-myGray w-full p-5 gap-5 rounded-lg">
+                <FriendsContainer />
+            </div>
         </div>
     );
 }

@@ -17,7 +17,7 @@ export default function FriendsList({ resp }) {
     };
 
     return (
-        <div className="flex flex-col bg-myGray w-full p-5 gap-5 rounded-lg">
+        <>
             {friends.length > 0 ? (
                 friends.map((friend) => (
                     <FriendItem
@@ -29,7 +29,7 @@ export default function FriendsList({ resp }) {
             ) : (
                 <i className="text-gray-400">No friends to show</i>
             )}
-        </div>
+        </>
     );
 }
 FriendsList.propTypes = {
