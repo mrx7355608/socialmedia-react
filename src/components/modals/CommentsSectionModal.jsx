@@ -14,7 +14,7 @@ export default function CommentsSectionModal({ postID }) {
 
     const getComments = () => {
         setLoading(true);
-        fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/comments/${postID}`, {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/comments/${postID}`, {
             method: "GET",
             credentials: "include",
         })
