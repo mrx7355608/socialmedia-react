@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Spinner from "../../components/spinners/Spinner";
-import { ErrorToast } from "../../components/toasts";
+import Spinner from "../spinners/Spinner";
+import { ErrorToast } from "../toasts";
 import { funcProp, stringProp } from "../../utils/propTypes";
 import FriendServices from "../../api/friends";
 
-export default function RejectReqBtn({ requestID, updatePendingRequests }) {
+export default function RejectReqBtn({ requestID, removeRequestFromList }) {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
     const friendServices = FriendServices();
@@ -32,7 +32,7 @@ export default function RejectReqBtn({ requestID, updatePendingRequests }) {
             setLoading(true);
             const response = await friendServices.rejectRequest(requestID);
             if (response.ok) {
-                updatePendingRequests(response.data);
+                removeRequestFromList(requestID);
             } else {
                 setApiError(response.error);
                 setTimeout(() => setApiError(""), 4000);
@@ -48,5 +48,5 @@ export default function RejectReqBtn({ requestID, updatePendingRequests }) {
 
 RejectReqBtn.propTypes = {
     requestID: stringProp,
-    updatePendingRequests: funcProp,
+    removeRequestFromList: funcProp,
 };

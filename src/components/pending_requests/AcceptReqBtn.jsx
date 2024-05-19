@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Spinner from "../../components/spinners/Spinner";
+import Spinner from "../spinners/Spinner";
 import { funcProp, stringProp } from "../../utils/propTypes";
-import { ErrorToast } from "../../components/toasts";
+import { ErrorToast } from "../toasts";
 import FriendServices from "../../api/friends";
 
-export default function AcceptReqBtn({ requestID, updatePendingRequests }) {
+export default function AcceptReqBtn({ requestID, removeRequestFromList }) {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
     const friendServices = FriendServices();
@@ -32,10 +32,10 @@ export default function AcceptReqBtn({ requestID, updatePendingRequests }) {
             setLoading(true);
             const response = await friendServices.acceptRequest(requestID);
             setLoading(false);
-            if (response.data.ok) {
-                updatePendingRequests(response.data.data);
+            if (response.ok) {
+                removeRequestFromList(requestID);
             } else {
-                setApiError(response.data.error);
+                setApiError(response.error);
             }
         } catch (err) {
             setApiError("An un-expected error occurred");
@@ -47,5 +47,5 @@ export default function AcceptReqBtn({ requestID, updatePendingRequests }) {
 
 AcceptReqBtn.propTypes = {
     requestID: stringProp,
-    updatePendingRequests: funcProp,
+    removeRequestFromList: funcProp,
 };
