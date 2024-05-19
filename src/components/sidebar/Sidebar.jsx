@@ -49,7 +49,10 @@ export default function Sidebar() {
         },
     ];
     return (
-        <div className="hidden lg:flex fixed left-0 flex-col p-4 h-screen w-1/4">
+        <div
+            className="hidden lg:flex fixed left-0 flex-col gap-1 p-4 h-screen w-1/4"
+            style={{ background: "#1d232a" }}
+        >
             <div className="p-3 rounded-lg w-full">
                 <img
                     src={user?.profilePicture}
@@ -63,7 +66,7 @@ export default function Sidebar() {
             {links.map((link, index) => {
                 return (
                     <Link to={link.path} key={index}>
-                        <div className="bg-transparent flex items-center gap-3 w-full border-none w-full outline-none rounded-lg p-3 hover:bg-gray-800">
+                        <div className="bg-transparent flex items-center gap-3 w-full border-none w-full outline-none rounded-lg p-3 hover:bg-myGray">
                             <img
                                 src={link.iconURL}
                                 alt="link"
@@ -76,7 +79,7 @@ export default function Sidebar() {
             })}
             <div
                 onClick={logout}
-                className="flex items-center p-3 rounded-lg hover:bg-gray-800 hover:cursor-pointer"
+                className="flex items-center p-3 rounded-lg hover:bg-myGray hover:cursor-pointer"
             >
                 <img
                     src="/logout.png"
