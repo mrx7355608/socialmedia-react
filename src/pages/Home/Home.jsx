@@ -1,10 +1,6 @@
-// COMPONENTS
-import RightSideBar from "./RightSideBar/RightSideBar";
-import Timeline from "./Timeline";
 import { PostForm } from "../../components/posts";
-
-// CONTEXT
-import TimelineProvider from "../../contexts/timeline";
+import RightSideBar from "./RightSideBar";
+import PostsContainer from "../../containers/PostsContainer";
 
 export default function Home() {
     return (
@@ -12,10 +8,8 @@ export default function Home() {
             <RightSideBar />
 
             <div className="flex flex-col items-center justify-start min-h-screen">
-                <TimelineProvider>
-                    <PostForm />
-                    <Timeline />
-                </TimelineProvider>
+                <PostForm />
+                <PostsContainer endpoint="/api/v1/posts/timeline" />
             </div>
         </div>
     );

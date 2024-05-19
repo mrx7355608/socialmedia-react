@@ -1,6 +1,6 @@
-import { stringProp } from "../../../utils/propTypes";
+import { stringProp } from "../../utils/propTypes";
 
-export default function SectionItem({ user }) {
+export default function UserItem({ user }) {
     return (
         <div className="p-3 rounded-lg w-full">
             <img
@@ -13,9 +13,10 @@ export default function SectionItem({ user }) {
     );
 }
 
-SectionItem.propTypes = {
+UserItem.propTypes = {
     user: {
-        profilePicture: stringProp,
+        _id: stringProp,
         fullname: stringProp,
+        profilePicture: stringProp,
     },
 };
