@@ -1,4 +1,4 @@
-import useAuthFetch from "../../hooks/useAuthFetch";
+import useFetch from "../../hooks/useFetch";
 import Spinner from "../../components/spinners/Spinner";
 import PendingRequestCard from "./PendingRequestCard";
 import { useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import { useUserContext } from "../../contexts/user";
 export default function PendingRequests() {
     const { user, setUser } = useUserContext();
     const [myRequests, setMyPendingRequests] = useState([]);
-    const { loading, error, resp } = useAuthFetch(
+    const { loading, error, resp } = useFetch(
         "/api/v1/friends/pending-requests"
     );
 

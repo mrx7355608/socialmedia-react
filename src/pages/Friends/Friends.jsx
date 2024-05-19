@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import useAuthFetch from "../../hooks/useAuthFetch";
+import useFetch from "../../hooks/useFetch";
 import Spinner from "../../components/spinners/Spinner";
 import FriendDisplayCard from "./FriendDisplayCard";
 
 export default function Friends() {
     const [myFriends, setMyFriends] = useState([]);
-    const { loading, error, resp } = useAuthFetch("/api/v1/friends");
+    const { loading, error, resp } = useFetch("/api/v1/friends");
 
     useEffect(() => {
         if (resp) {
