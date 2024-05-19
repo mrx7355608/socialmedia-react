@@ -10,11 +10,10 @@ export default function useLogin() {
         try {
             setLoading(true);
             const response = await authServices.login(loginData);
-            const result = await response.json();
-            if (result.ok) {
-                return result.data;
+            if (response.ok) {
+                return response.data;
             }
-            setApiError(result.error);
+            setApiError(response.error);
             return false;
         } catch (err) {
             setApiError("An un-expected error occurred");
