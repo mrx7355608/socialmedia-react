@@ -1,6 +1,6 @@
-import { PostForm } from "../../components/posts";
-import RightSideBar from "./RightSideBar";
-import PostsContainer from "../../containers/PostsContainer";
+import { PostForm } from "../components/posts";
+import { RightSideBar } from "../components/sidebar";
+import PostsContainer from "../containers/PostsContainer";
 
 export default function Home() {
     return (

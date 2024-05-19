@@ -1,7 +1,7 @@
-import useFetch from "../../hooks/useFetch";
-import Spinner from "../../components/spinners/Spinner";
-import { ErrorMessage } from "../../components/error";
-import { PendingRequestsList } from "../../components/pending_requests";
+import useFetch from "../hooks/useFetch";
+import Spinner from "../components/spinners/Spinner";
+import { ErrorMessage } from "../components/error";
+import { PendingRequestsList } from "../components/pending_requests";
 
 export default function PendingRequests() {
     const { loading, error, resp } = useFetch(

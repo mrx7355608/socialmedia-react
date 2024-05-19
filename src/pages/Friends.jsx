@@ -1,4 +1,4 @@
-import FriendsContainer from "../../containers/FriendsContainer";
+import FriendsContainer from "../containers/FriendsContainer";
 
 export default function Friends() {
     return (

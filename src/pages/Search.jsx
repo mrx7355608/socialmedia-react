@@ -1,7 +1,7 @@
-import useFetch from "../../hooks/useFetch";
+import useFetch from "../hooks/useFetch";
 import { useSearchParams } from "react-router-dom";
-import Spinner from "../../components/spinners/Spinner";
-import SearchList from "../../components/search/SearchList";
+import Spinner from "../components/spinners/Spinner";
+import SearchList from "../components/search/SearchList";
 
 export default function Search() {
     // eslint-disable-next-line

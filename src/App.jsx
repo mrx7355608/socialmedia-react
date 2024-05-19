@@ -5,18 +5,16 @@ import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import ErrorPage from "./pages/ErrorPage";
 
-const Home = lazy(() => import("./pages/Home/Home"));
-const Login = lazy(() => import("./pages/Login/Login"));
-const Signup = lazy(() => import("./pages/Signup/Signup"));
-const Search = lazy(() => import("./pages/Search/Search"));
-const Friends = lazy(() => import("./pages/Friends/Friends"));
-const PendingRequests = lazy(() =>
-    import("./pages/Pending_Requests/PendingRequests")
-);
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const Search = lazy(() => import("./pages/Search"));
+const Friends = lazy(() => import("./pages/Friends"));
+const PendingRequests = lazy(() => import("./pages/PendingRequests"));
 const FullPageSpinner = lazy(() =>
     import("./components/spinners/FullPageSpinner")
 );
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const router = createBrowserRouter([
     {

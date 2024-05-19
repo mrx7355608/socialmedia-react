@@ -1,9 +1,9 @@
-import SocialLoginButtons from "../../components/auth/SocialLoginButtons";
+import SocialLoginButtons from "../components/auth/SocialLoginButtons";
 import { Link } from "react-router-dom";
-import useLogin from "../../hooks/useLogin";
-import Spinner from "../../components/spinners/Spinner";
+import useLogin from "../hooks/useLogin";
+import Spinner from "../components/spinners/Spinner";
 import { useState } from "react";
-import { useUserContext } from "../../contexts/user";
+import { useUserContext } from "../contexts/user";
 
 export default function Login() {
     const { loading, apiError, loginUser } = useLogin();
