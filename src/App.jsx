@@ -67,7 +67,7 @@ function App() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/user`, {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/api/v1/user`, {
             method: "GET",
             credentials: "include",
         })
