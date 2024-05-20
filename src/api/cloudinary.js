@@ -8,7 +8,9 @@ export default function CloudinaryServices() {
         fd.append("file", file);
 
         const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-        const response = await axiosAgent.post(url, fd);
+        const response = await axiosAgent.post(url, fd, {
+            withCredentials: false,
+        });
         return response.data;
     };
 

@@ -1,3 +1,4 @@
 import Sidebar from "./Sidebar";
+import RightSideBar from "./RightSideBar";
 
-export { Sidebar };
+export { Sidebar, RightSideBar };

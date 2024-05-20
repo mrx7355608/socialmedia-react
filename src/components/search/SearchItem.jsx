@@ -3,7 +3,7 @@ import AddFriendButton from "./AddFriendButton";
 
 export default function SearchItem({ searchedUser }) {
     return (
-        <div className="flex items-center justify-between p-3 rounded-lg bg-gray-800 w-full">
+        <div className="flex items-center justify-between p-3 bg-myGray rounded-lg w-full">
             <div className="flex">
                 <img
                     src={searchedUser.profilePicture}

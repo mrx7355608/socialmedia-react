@@ -3,7 +3,7 @@ import {
     SignupForm,
     UpdateBio,
     UpdateProfilePicture,
-} from "../../components/auth";
+} from "../components/auth";
 
 export default function Signup() {
     const [signedUpUser, setSignedUpUser] = useState(null);

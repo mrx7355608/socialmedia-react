@@ -14,7 +14,7 @@ export default function PostForm() {
     const postServices = PostServices();
 
     return (
-        <section className="flex flex-col justify-start w-full p-4 rounded-lg mb-4 bg-myGray">
+        <section className="flex flex-col justify-start w-full p-4 rounded-lg mb-4 bg-myGray max-w-md">
             <div className="flex items-start w-full">
                 <img
                     src={user?.profilePicture}

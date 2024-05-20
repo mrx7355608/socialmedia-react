@@ -1,7 +1,7 @@
-import useAuthFetch from "../../hooks/useAuthFetch";
+import useFetch from "../hooks/useFetch";
 import { useSearchParams } from "react-router-dom";
-import Spinner from "../../components/spinners/Spinner";
-import SearchList from "../../components/search/SearchList";
+import Spinner from "../components/spinners/Spinner";
+import SearchList from "../components/search/SearchList";
 
 export default function Search() {
     // eslint-disable-next-line
@@ -10,7 +10,7 @@ export default function Search() {
     const query = searchParams.get("name");
     const url = `/api/v1/user/search?name=${query}`;
 
-    const { loading, error, resp } = useAuthFetch(url, [query]);
+    const { loading, error, resp } = useFetch(url, [query]);
 
     return (
         <div className="flex flex-col items-center justify-start w-full p-4 lg:w-1/2 mx-auto">

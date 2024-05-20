@@ -23,7 +23,7 @@ export default function PostItem({ postData }) {
     }
 
     return (
-        <article className="relative flex flex-col items-start justify-start bg-myGray p-4 rounded-lg w-full shadow-lg">
+        <article className="relative flex flex-col items-start justify-start bg-myGray p-4 rounded-lg w-full shadow-lg w-full max-w-md">
             {/* Author and publishing details */}
             <div className="w-full flex items-center">
                 <img
