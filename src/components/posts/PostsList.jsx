@@ -4,7 +4,7 @@ import { arrayProp } from "../../utils/propTypes";
 
 export default function PostsList({ posts }) {
     return (
-        <div className="w-full">
+        <>
             {posts.map((post) => {
                 return (
                     <PostProvider key={post._id}>
@@ -12,7 +12,7 @@ export default function PostsList({ posts }) {
                     </PostProvider>
                 );
             })}
-        </div>
+        </>
     );
 }
 

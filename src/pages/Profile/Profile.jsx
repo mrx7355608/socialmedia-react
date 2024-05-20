@@ -77,7 +77,9 @@ export default function Profile() {
                     Your Posts
                 </h1>
             </div>
-            <PostsContainer endpoint="/api/v1/posts" />
+            <div className="flex w-full flex-col gap-4 items-start">
+                <PostsContainer endpoint="/api/v1/posts" />
+            </div>
         </div>
     );
 }
