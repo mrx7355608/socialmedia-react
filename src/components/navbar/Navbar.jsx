@@ -1,9 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useUserContext } from "../../contexts/user";
 import { useState } from "react";
 
 export default function Navbar() {
-    const { user } = useUserContext();
     const [query, setQuery] = useState("");
     const navigateTo = useNavigate();
 
