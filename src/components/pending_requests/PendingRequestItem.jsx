@@ -4,7 +4,7 @@ import RejectReqBtn from "./RejectReqBtn";
 
 export default function PendingRequestItem({ request, removeRequestFromList }) {
     return (
-        <div className="flex flex-col items-start justify-center p-4 rounded-lg bg-gray-800 shadow w-full mb-3">
+        <div className="flex flex-col items-start justify-center p-4 rounded-lg bg-myGray shadow w-full mb-3">
             <div className="flex items-center">
                 <img
                     src={request.profilePicture}

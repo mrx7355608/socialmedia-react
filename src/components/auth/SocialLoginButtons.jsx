@@ -18,17 +18,6 @@ export default function SocialLoginButtons() {
                 />
                 Continue with Google
             </button>
-            <button
-                onClick={() => alert("This feature will be added soon")}
-                className="mt-4 btn btn-neutral w-full font-medium rounded-full relative"
-            >
-                <img
-                    src="/guest.png"
-                    alt="fb-icon"
-                    className="w-5 absolute top-3 left-4"
-                />
-                Continue as guest
-            </button>
         </div>
     );
 }

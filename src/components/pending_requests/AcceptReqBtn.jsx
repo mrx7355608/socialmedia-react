@@ -12,7 +12,7 @@ export default function AcceptReqBtn({ requestID, removeRequestFromList }) {
     return (
         <>
             {loading ? (
-                <button className="flex-1 btn btn-accent">
+                <button className="flex-1 btn btn-primary">
                     <Spinner />
                 </button>
             ) : (
