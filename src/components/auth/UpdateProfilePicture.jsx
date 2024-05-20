@@ -1,14 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import useUpdateProfilePicture from "../../hooks/useUpdateProfilePicture";
+import UserServices from "../../api/user";
 import Spinner from "../spinners/Spinner";
-import { stringProp } from "../../utils/propTypes";
+import { funcProp, stringProp } from "../../utils/propTypes";
+import { useEffect, useRef, useState } from "react";
+import CloudinaryServices from "../../api/cloudinary";
+import { ErrorToast } from "../../components/toasts";
 
-// eslint-disable-next-line
 export default function UpdateProfilePicture({ changePage, signedUpUser }) {
-    const profileRef = useRef();
+    const [apiError, setApiError] = useState("");
+    const [loading, setLoading] = useState(false);
     const [profilePicturePreview, setPreview] = useState("");
-    const { loading, apiError, uploadProfilePicture } =
-        useUpdateProfilePicture();
+
+    const profileRef = useRef();
+    const userServices = UserServices();
+    const cloudinaryServices = CloudinaryServices();
 
     useEffect(() => {
         if (signedUpUser.profilePicture) {
@@ -25,16 +29,16 @@ export default function UpdateProfilePicture({ changePage, signedUpUser }) {
                 <h1 className="text-3xl text-gray-200 font-bold mb-10 mt-4">
                     Change Profile picture
                 </h1>
-                {apiError && (
-                    <p className="font-medium mb-5 w-full max-w-md p-3 rounded-lg bg-red-200 text-red-900">
-                        {apiError}
-                    </p>
-                )}
+                {apiError && <ErrorToast error={apiError} />}
+
+                {/* Profile picture preview */}
                 <img
                     src={profilePicturePreview}
                     alt="user profile picture"
                     className="w-28 h-28 rounded-full border-4 border-gray-400 object-cover"
                 />
+
+                {/* File input for selecting profile picture */}
                 <input
                     ref={profileRef}
                     type="file"
@@ -62,10 +66,27 @@ export default function UpdateProfilePicture({ changePage, signedUpUser }) {
     function onChangeHandler(e) {
         setPreview(URL.createObjectURL(e.target.files[0]));
     }
+
     async function changeProfilePicture() {
-        const newProfilePicture = profileRef.current.files[0];
-        const isUploaded = await uploadProfilePicture(newProfilePicture);
-        if (isUploaded) {
+        try {
+            const pictureFile = profileRef.current.files[0];
+            if (!pictureFile) {
+                return setApiError("No image selected");
+            }
+
+            setLoading(true);
+            const result = await cloudinaryServices.upload(pictureFile);
+            const apiResult = await userServices.update({
+                profilePicture: result.secure_url,
+            });
+
+            if (apiResult.ok === false) {
+                setApiError(apiResult.error);
+            }
+        } catch (err) {
+            setApiError("An un-expected error occured");
+        } finally {
+            setLoading(false);
             changePage();
         }
     }
@@ -75,4 +96,5 @@ UpdateProfilePicture.propTypes = {
     signedUpUser: {
         profilePicture: stringProp,
     },
+    changePage: funcProp,
 };
