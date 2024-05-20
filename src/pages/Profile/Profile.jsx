@@ -45,7 +45,10 @@ export default function Profile() {
                     <BioUpdateModal />
                 </div>
                 {user?.bio ? (
-                    <p className="text-gray-300 mt-5 bg-myGray p-4 rounded-lg">
+                    <p
+                        className="text-gray-300 mt-5 bg-myGray p-4 rounded-lg"
+                        style={{ whiteSpace: "break-spaces" }}
+                    >
                         {user.bio}
                     </p>
                 ) : (
