@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../contexts/user";
 import PostsContainer from "../../containers/PostsContainer";
 import FriendsContaienr from "../../containers/FriendsContainer";
+import BioUpdateModal from "../../components/modals/BioUpdateModal";
+import PictureUpdateModal from "../../components/modals/PictureUpdateModal";
 
 export default function Profile() {
     const { user } = useUserContext();
@@ -21,7 +23,7 @@ export default function Profile() {
                 <img
                     src={user?.profilePicture}
                     alt="user profile picture"
-                    className="w-20 h-20 fit-cover inline mr-3 rounded-full border border-gray-300 object-cover"
+                    className="inline w-20 h-20 fit-cover inline mr-3 rounded-full border border-gray-300 object-cover"
                 />
                 <div className="text-center mt-2 lg:mt-0 lg:text-left">
                     <p className="text-gray-300 font-medium text-lg">
@@ -32,6 +34,7 @@ export default function Profile() {
                         <i>{new Date(user.createdAt).toDateString()}</i>
                     </p>
                 </div>
+                <PictureUpdateModal />
             </div>
             {/* Bio */}
             <div className="lg:w-full">
@@ -39,10 +42,12 @@ export default function Profile() {
                     <h1 className="text-2xl font-medium text-white mr-5">
                         Your Bio
                     </h1>
-                    <button className="btn btn-xs btn-outline">Edit</button>
+                    <BioUpdateModal />
                 </div>
                 {user?.bio ? (
-                    <p className="text-gray-400 mt-5">{user.bio}</p>
+                    <p className="text-gray-300 mt-5 bg-myGray p-4 rounded-lg">
+                        {user.bio}
+                    </p>
                 ) : (
                     <i className="text-gray-400 text-md mt-5">
                         No bio provided
